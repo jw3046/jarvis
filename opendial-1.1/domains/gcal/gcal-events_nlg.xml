@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain>
+	<!-- Natural language generation models. The domain can produce new system 
+		utterance either when the current step is changed, or when a new system action 
+		is selected. -->
+
+
+	<model trigger="current_step">
+		<!--Model producing new system utterances when the current step is moved 
+			to a new step. -->
+
+		<!-- Asks for the event -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Event" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="What is your event?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Asks for the date -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Date" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+                                            value="When is the {Event}?" />
+				</effect>
+			</case>
+		</rule>
+
+                <!-- Asks for the last confirmation -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="LastConfirm" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="Shall I remind you later of the {Event} on {Date}?" />
+				</effect>
+			</case>
+                </rule>
+
+		<!-- Asks whether to create additional events -->
+		<rule>
+			<case>
+				<condition operator="or">
+					<if var="current_step" value="Final" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Have you made any more plans?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Closes the interaction -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Close" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="See you!" />
+				</effect>
+			</case>
+		</rule>
+
+
+	</model>
+
+
+	<model trigger="a_m">
+		<!-- Model producing new system utterances related to the last system action -->
+
+		<!-- grounding the event -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Event,{Event})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, {Event}." />
+				</effect>
+			</case>
+		</rule>
+
+                <!-- grounding the date -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Date,{Date})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+                                            value="OK, you're going to the {Event} on {Date}." />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- confirmation request for the event -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Confirm(Event,{Event})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="You have a {Event}. Is that correct?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- confirmation request for the date -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Confirm(Date,{Date1})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+                                            value="You are going to {Event} on {Date1}. Is that correct?" />
+				</effect>
+			</case>
+		</rule>
+
+                <!-- repetition request -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="AskRepeat" />
+					<if var="current_step" value="Event" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+                                            value="Sorry, could you repeat? The available events are
+                                            party, meeting, barbecue." />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="AskRepeat" />
+					<if var="current_step" value="Date" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="Sorry, could you repeat? Please state the month and day of
+					your event." />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m-prev" value="AskRepeat" />
+					<if var="a_m" value="AskRepeat" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="Sorry I couldn't understand you. Could you please repeat one more time?" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="AskRepeat" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Sorry, could you repeat?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Grounding the cancellation -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Cancel)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, your event is now cancelled." />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Grounding the event creation -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Create)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="OK, your event has been noted on your calendar." />
+				</effect>
+			</case>
+		</rule>
+
+		
+	</model>
+
+</domain>

@@ -5,33 +5,31 @@
 	this dialogue act.
 
 	The user dialogue act associated with each utterance is represented here as a list of 
-	basic acts (such as "Confirm" or "Inform(...)").  This representation allows us to 
-	capture the fact that an utterance such as "Yes, 3 tickets" contains both a confirmation
-	and a new information about the number of tickets. 
+	basic acts (such as "Confirm" or "Inform(...)").  Adapted from flight booking example.
 	-->
 
 	<model trigger="u_u">
-		<!-- This model takes the raw user utterance as input, and outputs the corresponding 
+	  <!-- This model takes the raw user utterance as input, and outputs the corresponding 
 	  dialogue acts from the user. This model uses simple shallow patterns to extract 
-	  domain-specific information (such as airports or dates) from the utterance. -->
+          domain-specific information from the utterance. We will make this more general later on
+          with SEMAFOR-->
 	  
 	  
-		<!-- Extracts booking information related to the departure or destination  -->
+		<!-- Extracts event type  -->
 		<rule>
 			<case>
 				<condition>
-					<if var="u_u" relation="contains" value="(to|from)? {Airport}" />
-					<if var="Airport" relation="in"
-						value="[Oslo,Bergen,Trondheim,Stavanger,Moss,
-								Sandefjord,Tromsø,Bodø,Kristiansand,Ålesund]" />
+					<if var="u_u" relation="contains" value="(*'s|a)? {EventName}" />
+					<if var="EventName" relation="in"
+						value="[party, meeting, barbecue]" />
 				</condition>
 				<effect>
-					<add var="a_u" value="Inform(Airport,{Airport})" />
+					<add var="a_u" value="Inform(EventName,{EventName})" />
 				</effect>
 			</case>
 		</rule>
 
-		<!-- Extracts booking information related to the flight dates.  -->
+		<!-- Extracts information related to the dates.  -->
 		<rule>
 			<case>
 				<condition>
@@ -57,42 +55,6 @@
 				</condition>
 				<effect>
 					<add var="a_u" value="Inform(Date,{Month},{Day})" />
-				</effect>
-			</case>
-		</rule>
-
-		<!-- Extracts booking information related to the number of tickets.  -->
-		<rule>
-			<case>
-				<condition>
-					<if var="u_u" relation="contains" value="(1|one|a single) (ticket)?" />
-				</condition>
-				<effect>
-					<add var="a_u" value="Inform(Number,1)" />
-				</effect>
-			</case>
-				<case>
-				<condition>
-					<if var="u_u" relation="contains" value="(2|two) (tickets)?" />
-				</condition>
-				<effect>
-					<add var="a_u" value="Inform(Number,2)" />
-				</effect>
-			</case>
-				<case>
-				<condition>
-					<if var="u_u" relation="contains" value="(3|three) (tickets)?" />
-				</condition>
-				<effect>
-					<add var="a_u" value="Inform(Number,3)" />
-				</effect>
-			</case>
-				<case>
-				<condition>
-					<if var="u_u" relation="contains" value="(4|four) (tickets)?" />
-				</condition>
-				<effect>
-					<add var="a_u" value="Inform(Number,4)" />
 				</effect>
 			</case>
 		</rule>
@@ -135,36 +97,27 @@
 	
 	<model trigger="a_u">
 		<!-- This model take the dialogue act fom the user and uses it to fill the corresponding
-	  slots (departure, destination, flight dates, number of tickets, etc.). -->
+	  slots (event, dates, etc.). -->
 	  
 	  
 		<!-- Fills the slots in accordance with the information in the dialogue act -->
 		<rule>
 			<case>
 				<condition>
-					<if var="current_step" value="(Destination|Departure)" />
-					<if var="a_u" relation="contains" value="Inform(Airport,{Airport})" />
+					<if var="current_step" value="Event" />
+                                        <if var="a_u" relation="contains" value="Inform(Event,{Event})" />
 				</condition>
 				<effect>
-					<set var="{current_step}" value="{Airport}" />
+					<set var="{current_step}" value="{Event}" />
 				</effect>
 			</case>
 			<case>
 				<condition>
-					<if var="current_step" value="(Date|ReturnDate)" />
+					<if var="current_step" value="Date" />
 					<if var="a_u" relation="contains" value="Inform(Date,{Month},{Day})" />
 				</condition>
 				<effect>
 					<set var="{current_step}" value="{Month} {Day}" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="current_step" value="NbTickets" />
-					<if var="a_u" relation="contains" value="Inform(Number,{Number})" />
-				</condition>
-				<effect>
-					<set var="NbTickets" value="{Number}" />
 				</effect>
 			</case>
 		</rule>
@@ -201,12 +154,9 @@
 		<rule priority="2">
 			<case>
 				<effect>
-					<set var="Destination" value="None" />
-					<set var="Destination" value="{Destination}" />
-					<set var="Departure" value="{Departure}" />
+					<set var="Event" value="None" />
+					<set var="Event" value="{Event}" />
 					<set var="Date" value="{Date}" />
-					<set var="ReturnDate" value="{ReturnDate}" />
-					<set var="NbTickets" value="{NbTickets}" />
 				</effect>
 			</case>
 		</rule>

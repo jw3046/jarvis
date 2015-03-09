@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain>
+	<!-- Dialogue management models, composed of three models: an action selection 
+		model to find the best system action to execute, a transition model that 
+		specifies how the selected action modifies the current dialogue state, and 
+		a prediction model for the prior distributions on the destinations, 
+		departures and next user dialogue act. -->
+
+
+	<model trigger="Event,Date">
+		<!-- This model specifies the utilities of various system actions, such 
+			as clarification requests (repetitions and confirmations) and 
+			grounding actions. -->
+
+		<!-- If the current step is to ask for the Event, specify the utilities 
+			of a confirmation request or a grounding action using the current value of 
+			the "Event" slot -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Event" />
+				</condition>
+				<effect util="5"> <set var="a_m" value="Ground(Event,{Event})" />
+				</effect>
+				<effect util="0.5">
+					<set var="a_m" value="Confirm(Event,{Event})" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- If the current step is to ask for the date, specify the utilities 
+			of a confirmation request or a grounding action using the current value of 
+			the "Date" slot --> <rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Date" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(Date,{Date})" />
+				</effect>
+				<effect util="0.5">
+					<set var="a_m" value="Confirm(Date,{Date})" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- If the current step is to ask whether to proceed with the event creation 
+			and the user answers no, specify the utility of grounding the cancel action. -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="MakeOffer" />
+					<if var="a_u" relation="contains" value="Disconfirm" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(Cancel)" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- If the current step is to ask for a last confirmation and the user 
+			answers yes, specifies the utility of grounding the event creation. -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="LastConfirm" />
+					<if var="a_u" relation="contains" value="Confirm" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(Create)" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="current_step" value="LastConfirm" />
+					<if var="a_u" relation="contains" value="Disconfirm" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(Cancel)" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- If the current step is to ask whether to create additional events and 
+			the user answers yes, specifies the utility of restarting the interaction. -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Final" />
+					<if var="a_u" relation="contains" value="Confirm" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(Restart)" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- If the current step is to ask whether to create additional events and 
+			the user answers no, specifies the utility of closing the interaction. -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Final" />
+					<if var="a_u" relation="contains" value="Disconfirm" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(Close)" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Specifies the utility of a repetition request -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_u" relation="!=" value="None" />
+				</condition>
+				<effect util="0.1">
+					<set var="a_m" value="AskRepeat" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Specifies the "base" utility of all possible actions, in the absence 
+			of any other information (allows to set an implicit threshold on the system 
+			confidence before selecting a particular action). -->
+		<rule>
+			<case>
+				<effect util="-4.5">
+					<set var="a_m" value="Ground(*)" />
+				</effect>
+				<effect util="-0.3">
+					<set var="a_m" value="Confirm(*)" />
+				</effect>
+				<effect util="-0.03">
+					<set var="a_m" value="AskRepeat" />
+				</effect>
+			</case>
+		</rule>
+		
+		
+		<!-- Records the next-to-last system action -->
+		<rule>
+			<case>
+				<effect>
+					<set var="a_m-prev" value="{a_m}" />
+				</effect>
+			</case>
+		</rule>
+
+	</model>
+	
+	
+
+
+	<model trigger="a_m">
+		<!-- Transition model that specifies how the selection of a particular 
+			system action affects the current dialogue state, in particular the current 
+			step in the dialogue. -->
+
+		<!-- Moves to the next step if a particular slot has been confirmed -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Event,*)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Event" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Date,*)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Date" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Cancel)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Final" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Create)" />
+				</condition>
+				<effect prob="1">
+					<set var="a_m" value="Create"/>
+					<set var="current_step" value="Final" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Restart)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Event" />
+					<set var="Event" value="None" />
+					<set var="Date" value="None" />
+					<set var="a_u" value="None" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Close)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Close" />
+				</effect>
+			</case>
+		</rule>
+
+
+                <!-- TODO: modify after updating jarvis.modules.CalendarUpdate -->
+		<!-- If the external module produces the system action MakeOffer(particular price),
+		registers the price in a separate variable and moves the current step. -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="MakeOffer({Price})" />
+				</condition>
+				<effect>
+					<set var="TotalCost" value="{Price}" />
+					<set var="current_step" value="MakeOffer" />
+				</effect>
+			</case>
+		<!-- If the number of tickets is grounded, update the total cost by multiplying the
+		price with the number of tickets. -->
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(NbTickets,*)" />
+				</condition>
+				<effect>
+					<set var="TotalCost" value="{TotalCost}*{NbTickets}" />
+				</effect>
+			</case>
+		</rule>
+                <!-- TODO////////////////////////////////////////////////////// -->
+
+	</model>
+	
+	<model trigger="a_m,current_step">
+		<!-- Specifies the prior distributions for the events and
+		responses to yes/no questions -->
+	
+		<!-- Prior probabilities for the destinations and departures -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Event" />
+				</condition>
+				<effect prob="0.5">
+					<set var="Destination^p" value="party" />
+				</effect>
+				<effect prob="0.35">
+					<set var="Destination^p" value="meeting" />
+				</effect>
+				<effect prob="0.15">
+					<set var="Destination^p" value="barbecue" />
+				</effect>
+    
+                            </case>
+		</rule>
+		
+		
+			<!-- Prediction rule on the next user dialogue act (the probabilities
+		are here quite low to account for a range of unexpected responses)   -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="(AskRepeat|None)"/>
+					<if var="a_u" relation="!=" value="None"/>
+					<if var="a_u" relation="!=" value="[Other]"/>
+				</condition>
+				<effect prob="0.5">
+					<set var="a_u^p" value="{a_u}"/>
+				</effect>
+			</case>
+			<case>
+				<condition operator="or">
+					<if var="a_m" value="Confirm(*)"/>
+					<if var="current_step" value="Return"/>
+					<if var="current_step" value="LastConfirm"/>
+					<if var="current_step" value="Final"/>
+				</condition>
+				<effect prob="0.4">
+					<set var="a_u^p" value="[Confirm]"/>
+				</effect>
+				<effect prob="0.4">
+					<set var="a_u^p" value="[Disconfirm]"/>
+				</effect>
+			</case>
+			<case>
+				<effect>
+					<set var="a_u^p" value="None"/>
+				</effect>
+			</case>
+		</rule>
+		
+	</model>
+
+</domain>
