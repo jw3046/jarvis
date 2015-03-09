@@ -1,0 +1,18 @@
+
+<domain>
+
+<model trigger="p_u">
+
+<rule>
+<case>
+<condition>
+<if var="p_u" value="(move,prep,to)" relation="contains"/>
+<if var="p_u" value="(to,pobj,left)" relation="contains"/>
+</condition>
+<effect>
+<set var="a_u" value="Move(Left)"/>
+</effect>
+</case>
+</rule>
+</model>
+</domain>

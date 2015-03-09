@@ -22,7 +22,7 @@ def getFirstPhrase(jsontext):
 
 
 if __name__ == '__main__':
-    jsontext = getJSON("I have a meeting this Sunday.")
+    jsontext = getJSON("Hello my friend.")
     mainidea = getFirstPhrase(jsontext)
     print mainidea
 

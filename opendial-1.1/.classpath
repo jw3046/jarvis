@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/java-json.jar"/>
+	<classpathentry kind="lib" path="lib/balloontip.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart.jar"/>
+	<classpathentry kind="lib" path="lib/jung.jar"/>
+	<classpathentry kind="lib" path="lib/junit.jar"/>
+	<classpathentry kind="lib" path="lib/qimessaging.jar"/>
+	<classpathentry kind="lib" path="lib/WSJ_8gau_13dCep_16k_40mel_130Hz_6800Hz.jar"/>
+	<classpathentry kind="lib" path="lib/sphinx4.jar"/>
+	<classpathentry kind="lib" path="lib/apache-hc.jar"/>
+	<classpathentry kind="lib" path="lib/marytts-lang-en-5.1.jar"/>
+	<classpathentry kind="lib" path="lib/marytts-runtime-5.1-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="lib/voice-cmu-slt-hsmm-5.1.jar"/>
+	<classpathentry kind="lib" path="lib/jcommon.jar"/>
+	<classpathentry kind="lib" path="lib/att-codekit.jar"/>
+	<classpathentry kind="lib" path="lib/javaFlacEncoder.jar"/>
+	<classpathentry kind="lib" path="lib/maltparser-1.8.jar"/>
+	<classpathentry kind="lib" path="lib/stanford-postagger.jar"/>
+	<classpathentry kind="lib" path="lib/liblinear.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
