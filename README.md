@@ -1,8 +1,8 @@
 # jarvis
 
 
-Our system uses SEMAFOR for frame-based parsing.
-Opendial for dialogue management and NLG.
+Our system uses SEMAFOR for frame-based parsing (NLU) and
+Opendial for NLU, DM and NLG.
 
 We will also use AT&T for ASR and TTS.
 
@@ -13,4 +13,8 @@ just use the API call to retrieve the frame parse results as a JSON.
 
 
 
+We will be using google calendar in the backend to keep track of user data.
+
+The python files will be rewritten in java. They are just temporary scripts to test
+out the functionality of our components.
 
