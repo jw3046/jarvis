@@ -18,3 +18,13 @@ We will be using google calendar in the backend to keep track of user data.
 The python files will be rewritten in java. They are just temporary scripts to test
 out the functionality of our components.
 
+
+To try out the java client library test:
+
+Build:
+javac -d bin -Djava.ext.dirs=google-api-java-client/libs/:calendar src/Jgcal.java
+
+Run:
+java -cp bin Jgcal
+
+
