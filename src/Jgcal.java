@@ -25,13 +25,20 @@ public class Jgcal
     // comse6998
     public static void main(String[] args){
         System.out.println("Hello GCal!");
+        try{
+            setUp();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 
-    public void setUp() throws IOException, GeneralSecurityException {
+    public static void setUp() throws IOException, GeneralSecurityException {
         HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         JacksonFactory jsonFactory = JacksonFactory.getDefaultInstance();
 
         // The clientId and clientSecret can be found in Google Developers Console
+        // TODO: change these (currently using from 'Ed bin' project)
         String clientId =
             "160872905476-colru9k1nvatot86m9opocqb6kvctmd4.apps.googleusercontent.com";
         String clientSecret = "HqCCvPrHzt52V5ve3sD5ZquQ";
