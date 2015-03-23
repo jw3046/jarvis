@@ -27,3 +27,12 @@ javac -d bin -Djava.ext.dirs=google-api-java-client/libs/:calendar src/Jgcal.jav
 Run:
 java -cp "google-api-java-client/libs/*:calendar/*:bin" Jgcal
 
+
+
+Similarly for the CalendarSample class. If you update resources/client_secrets.json
+don't forget to copy it into bin/cmdline
+
+cp resources/client_secrets.json bin/cmdline/client_secrets.json
+
+
+
