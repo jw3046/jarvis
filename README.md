@@ -6,6 +6,11 @@ Opendial for NLU, DM and NLG.
 
 We will also use AT&T for ASR and TTS.
 
+AT&T plugin can be started by adding the following line to the command line
+	-Dmodules=opendial.plugins.ATTSpeech -Dkey=gj0jyoofj3hn3v4stbwtzsuj5dio3ck7 -Dsecret=j9bfoadowuewg1mf87kepyfkso62k31k 
+
+-Dgrammar=path_to_your_grammar is optional and can be added after -Dsecret. 
+
 
 Notes:
 I tried downloading SEMAFOR, but it requires 8Gb to run the parser. Instead, we can
