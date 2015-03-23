@@ -21,7 +21,7 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // =================================================================                                                                   
 
-package opendial.modules.examples;
+package jarvis.modules.gcal;
 
 import java.util.Collection;
 
