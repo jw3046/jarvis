@@ -19,7 +19,7 @@ The python files will be rewritten in java. They are just temporary scripts to t
 out the functionality of our components.
 
 
-To try out the java client library test:
+To try out the google calendar authorization test, ie, login (JGcal class):
 
 Build:
 javac -d bin -Djava.ext.dirs=google-api-java-client/libs/:calendar src/Jgcal.java
@@ -29,13 +29,11 @@ java -cp "google-api-java-client/libs/*:calendar/*:bin" Jgcal
 
 
 
-Similarly for the CalendarSample class. If you update resources/client_secrets.json
-don't forget to copy it into bin/cmdline
+Similarly to try the CalendarSample class (from the google developers sample code)
 
 Build:
 javac -d bin -Djava.ext.dirs=google-api-java-client/libs/:calendar src/cmdline/*.java
-cp resources/client_secrets.json bin/cmdline/client_secrets.json
 
 Run:
-java -cp "google-api-java-client/libs/*:calendar/*:apache-tomcat-8.0.20/lib/*:bin" Jgcal
+java -cp "google-api-java-client/libs/*:calendar/*:apache-tomcat-8.0.20/lib/*:bin:resources" cmdline.CalendarSample
 
