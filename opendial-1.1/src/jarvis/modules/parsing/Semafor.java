@@ -10,6 +10,8 @@ import opendial.modules.Module;
 
 public class Semafor implements Module
 {
+    // test counter
+    static int calledCount = 0;
     // whether the module is paused or active
     boolean paused = true;
 
@@ -23,17 +25,30 @@ public class Semafor implements Module
      */
     public Semafor(DialogueSystem system) {
         this.system = system;
+        System.out.println("Semafor Created!");
     }
 
     /**
-     * Currently just prints to stdout.
+     * Currently just prints to stdout. Checks whether the updated variables
+     * contains the user utterance.
      *
      * @param state the current dialogue state
      * @param updatedVars the updated variables in the state
      */
     @Override
     public void trigger(DialogueState state, Collection<String> updatedVars) {
-        System.out.println("Semafor was triggered!");
+        if (updatedVars.contains("u_u") && state.hasChanceNode("u_u")) {
+            // do parsing if user utterance ("u_u") has been updated
+            String user_utterance = state.queryProb("u_u").toDiscrete().getBest().toString();
+            System.out.println(user_utterance);
+
+            // call semafor api
+            
+
+            // TODO:return parse results (user action, "a_u") to system
+            //system.addContent(new Assignment("a_u", "NewEvent(Party,tomorrow)"));
+        }
+        
     }
 
     /**
