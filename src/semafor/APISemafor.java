@@ -44,7 +44,7 @@ public class APISemafor {
   static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
   static final JsonFactory JSON_FACTORY = new JacksonFactory();
 
-  private static void run() throws Exception {
+  private static void run(String sentence) throws Exception {
       // build http request
     HttpRequestFactory requestFactory =
         HTTP_TRANSPORT.createRequestFactory(new HttpRequestInitializer() {
@@ -53,8 +53,9 @@ public class APISemafor {
             request.setParser(new JsonObjectParser(JSON_FACTORY));
           }
         });
-    GenericUrl url = new GenericUrl("http://demo.ark.cs.cmu.edu/parse/api/v1/parse?sentence="+
-            "Sam and I are seeing a movie this weekend.");
+    GenericUrl url = new GenericUrl(
+            "http://demo.ark.cs.cmu.edu/parse/api/v1/parse?sentence="+
+            sentence);
     HttpRequest request = requestFactory.buildGetRequest(url);
 
     // send request and parse response (JSON)
@@ -64,15 +65,17 @@ public class APISemafor {
     ParseResult parseResult = jsonResponse.getParse();
     List<ParseFrame> frames = parseResult.getFrames();
     
+    // Extract relevant information from parse results
     String conll = parseResult.getRawConll();
     System.out.println(conll);
     ArrayList<ConllEntry> conllTable = parseResult.getConll();
     for (ConllEntry row: conllTable){
         System.out.println(row);
     }
-
-    // Extract relevant information from parse results
-    
+    System.out.println(frames.size()+" frames");
+    for (ParseFrame frame: frames){
+        System.out.println(frame);
+    }
     // integrate with opendial and set "a_u" value to extracted information
 
   }
@@ -116,21 +119,15 @@ public class APISemafor {
       private String conll;
       @Key
       private String text;
-      //@Key
-      //private List<ParseRelation> relations;
       @Key
       private List<String> tokens;
-      //@Key
-      //private List<ParseEntity> entities;
       @Key
       private List<ParseFrame> frames;
 
       public String getRawConll(){return conll;}
       public ArrayList<ConllEntry> getConll(){return parseConll(conll);}
       public String getText(){return text;}
-      //public List<ParseRelation> getRelations(){return relations;}
       public List<String> getTokens(){return tokens;}
-      //public List<ParseEntity> getEntities(){return entities;}
       public List<ParseFrame> getFrames(){return frames;}
 
       public static ArrayList<ConllEntry> parseConll(String conll){
@@ -187,31 +184,29 @@ public class APISemafor {
       }
   }
 
-  public static class ParseRelation
-  {
-      // we currently don't use this result, so we leave it
-      /* the syntax of the json is:
-       * [string, string, [[string,string],[string,string]]]
-       */
-  }
-
-  public static class ParseEntity
-  {
-      // we currently don't use this result, so we leave it
-      /* the syntax of the json is:
-       * [string, string, [[int, int]]]
-       */
-  }
-
   public static class ParseFrame
   {
       @Key
-      private FrameElement target;
+      private FrameElement target; // frame to be filled
       @Key
-      private List<AnnotationSet> annotationSet;
+      private List<AnnotationSet> annotationSets; // elements filling the frame
 
       public FrameElement getTarget() {return target;}
-      public AnnotationSet getAnnotationSet() {return annotationSet.get(0);}
+      private AnnotationSet getAnnotationSet() {return annotationSets.get(0);}
+      public List<FrameElement> getElements() {
+          return getAnnotationSet().getFrameElements();
+      }
+      public double getScore(){return getAnnotationSet().getScore();}
+      public int getRank(){return getAnnotationSet().getRank();}
+
+      public String toString(){
+          String parseFrameString = "=====\n_TARGET_\n"+
+              target+"\n_ELEMENTS_\n";
+          for (FrameElement element: getElements()){
+              parseFrameString += element+"\n";
+          }
+          return parseFrameString+"=======\n";
+      }
   }
 
   public static class FrameElement
@@ -229,6 +224,10 @@ public class APISemafor {
       public int getEnd(){return end;}
       public String getName() {return name;}
       public String getText() {return text;}
+
+      public String toString(){
+          return name+": "+text+" ("+start+"-"+end+")";
+      }
   }
 
   public static class AnnotationSet
@@ -248,7 +247,7 @@ public class APISemafor {
   public static void main(String[] args) {
     try {
       try {
-        run();
+        run("Me and Kevin are going to see a movie tomorrow.");
         return;
       } catch (HttpResponseException e) {
         System.err.println(e.getMessage());
