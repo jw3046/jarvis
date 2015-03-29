@@ -14,10 +14,12 @@
  * the License.
  */
 
-package jarvis.modules.parsing;
+//package jarvis.modules.parsing;
+package semafor;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpResponseException;
@@ -31,8 +33,7 @@ import com.google.api.client.util.Key;
 import java.util.List;
 
 /**
- * Simple example for the <a href="http://www.dailymotion.com/doc/api/graph-api.html">Dailymotion
- * Graph API</a>.
+ * an api call to Semafor, JSON response parsed
  */
 public class APISemafor {
 
@@ -40,6 +41,7 @@ public class APISemafor {
   static final JsonFactory JSON_FACTORY = new JacksonFactory();
 
   private static void run() throws Exception {
+      // build http request
     HttpRequestFactory requestFactory =
         HTTP_TRANSPORT.createRequestFactory(new HttpRequestInitializer() {
             @Override
@@ -49,13 +51,23 @@ public class APISemafor {
         });
     GenericUrl url = new GenericUrl("http://demo.ark.cs.cmu.edu/parse/api/v1/parse?sentence="+
             "Sam and I are seeing a movie this weekend.");
-    //DailyMotionUrl url = new DailyMotionUrl("https://api.dailymotion.com/videos/");
     HttpRequest request = requestFactory.buildGetRequest(url);
 
-    //VideoFeed videoFeed = request.execute().parseAs(VideoFeed.class);
+    // send request and parse response (JSON)
     HttpResponse response = request.execute();
-    JSONObject parse_response = new JSONObject(response.getContent());
-    System.out.println(response.getContent());
+    SemaforParse parse = response.parseAs(SemaforParse.class);
+    //System.out.println(response.getContent());
+
+    // Extract relevant information from parse results
+    
+    // integrate with opendial and set "a_u" value to extracted information
+
+  }
+
+  /** Semafor Parsing Results*/
+  public static class SemaforParse
+  {
+
   }
 
   public static void main(String[] args) {

@@ -1,0 +1,337 @@
+{
+  "debug_info": {
+    "frame_parser_elapsed_seconds": 0.065041,
+    "dependency_parser_elapsed_seconds": 0.519972
+  },
+  "sentences": [
+    {
+      "conll": "1\tMy\t_\tPRP$\tPRP$\t_\t2\tposs\t_\t_\n2\troommate\t_\tNN\tNN\t_\t3\tnsubj\t_\t_\n3\tstole\t_\tVB\tVBD\t_\t0\tnull\t_\t_\n4\tall\t_\tDT\tDT\t_\t3\tdobj\t_\t_\n5\tof\t_\tIN\tIN\t_\t4\tprep\t_\t_\n6\tmy\t_\tPRP$\tPRP$\t_\t7\tposs\t_\t_\n7\tpizza\t_\tNN\tNN\t_\t5\tpobj\t_\t_\n8\tyesterday\t_\tNN\tNN\t_\t3\ttmod\t_\t_\n9\t.\t_\t.\t.\t_\t3\tpunct\t_\t_",
+      "text": "My roommate stole all of my pizza yesterday .",
+      "relations": [
+        [
+          "R1",
+          "poss",
+          [
+            [
+              "Arg1",
+              "T2"
+            ],
+            [
+              "Arg2",
+              "T1"
+            ]
+          ]
+        ],
+        [
+          "R2",
+          "nsubj",
+          [
+            [
+              "Arg1",
+              "T3"
+            ],
+            [
+              "Arg2",
+              "T2"
+            ]
+          ]
+        ],
+        [
+          "R3",
+          "dobj",
+          [
+            [
+              "Arg1",
+              "T3"
+            ],
+            [
+              "Arg2",
+              "T4"
+            ]
+          ]
+        ],
+        [
+          "R4",
+          "prep",
+          [
+            [
+              "Arg1",
+              "T4"
+            ],
+            [
+              "Arg2",
+              "T5"
+            ]
+          ]
+        ],
+        [
+          "R5",
+          "poss",
+          [
+            [
+              "Arg1",
+              "T7"
+            ],
+            [
+              "Arg2",
+              "T6"
+            ]
+          ]
+        ],
+        [
+          "R6",
+          "pobj",
+          [
+            [
+              "Arg1",
+              "T5"
+            ],
+            [
+              "Arg2",
+              "T7"
+            ]
+          ]
+        ],
+        [
+          "R7",
+          "tmod",
+          [
+            [
+              "Arg1",
+              "T3"
+            ],
+            [
+              "Arg2",
+              "T8"
+            ]
+          ]
+        ],
+        [
+          "R8",
+          "punct",
+          [
+            [
+              "Arg1",
+              "T3"
+            ],
+            [
+              "Arg2",
+              "T9"
+            ]
+          ]
+        ]
+      ],
+      "tokens": [
+        "My",
+        "roommate",
+        "stole",
+        "all",
+        "of",
+        "my",
+        "pizza",
+        "yesterday",
+        "."
+      ],
+      "entities": [
+        [
+          "T1",
+          "PRP$",
+          [
+            [
+              0,
+              2
+            ]
+          ]
+        ],
+        [
+          "T2",
+          "NN",
+          [
+            [
+              3,
+              11
+            ]
+          ]
+        ],
+        [
+          "T3",
+          "VBD",
+          [
+            [
+              12,
+              17
+            ]
+          ]
+        ],
+        [
+          "T4",
+          "DT",
+          [
+            [
+              18,
+              21
+            ]
+          ]
+        ],
+        [
+          "T5",
+          "IN",
+          [
+            [
+              22,
+              24
+            ]
+          ]
+        ],
+        [
+          "T6",
+          "PRP$",
+          [
+            [
+              25,
+              27
+            ]
+          ]
+        ],
+        [
+          "T7",
+          "NN",
+          [
+            [
+              28,
+              33
+            ]
+          ]
+        ],
+        [
+          "T8",
+          "NN",
+          [
+            [
+              34,
+              43
+            ]
+          ]
+        ],
+        [
+          "T9",
+          ".",
+          [
+            [
+              44,
+              45
+            ]
+          ]
+        ]
+      ],
+      "frames": [
+        {
+          "target": {
+            "start": 1,
+            "end": 2,
+            "name": "People_by_residence",
+            "text": "roommate"
+          },
+          "annotationSets": [
+            {
+              "frameElements": [
+                {
+                  "start": 0,
+                  "end": 1,
+                  "name": "Known_resident",
+                  "text": "My"
+                }
+              ],
+              "score": 12.40958761865833,
+              "rank": 0
+            }
+          ]
+        },
+        {
+          "target": {
+            "start": 2,
+            "end": 3,
+            "name": "Theft",
+            "text": "stole"
+          },
+          "annotationSets": [
+            {
+              "frameElements": [
+                {
+                  "start": 7,
+                  "end": 8,
+                  "name": "Time",
+                  "text": "yesterday"
+                },
+                {
+                  "start": 0,
+                  "end": 2,
+                  "name": "Perpetrator",
+                  "text": "My roommate"
+                },
+                {
+                  "start": 3,
+                  "end": 7,
+                  "name": "Goods",
+                  "text": "all of my pizza"
+                }
+              ],
+              "score": 48.49776149453681,
+              "rank": 0
+            }
+          ]
+        },
+        {
+          "target": {
+            "start": 3,
+            "end": 4,
+            "name": "Quantity",
+            "text": "all"
+          },
+          "annotationSets": [
+            {
+              "frameElements": [
+                {
+                  "start": 3,
+                  "end": 4,
+                  "name": "Quantity",
+                  "text": "all"
+                },
+                {
+                  "start": 4,
+                  "end": 7,
+                  "name": "Individuals",
+                  "text": "of my pizza"
+                }
+              ],
+              "score": 21.38353137375815,
+              "rank": 0
+            }
+          ]
+        },
+        {
+          "target": {
+            "start": 7,
+            "end": 8,
+            "name": "Calendric_unit",
+            "text": "yesterday"
+          },
+          "annotationSets": [
+            {
+              "frameElements": [
+                {
+                  "start": 7,
+                  "end": 8,
+                  "name": "Unit",
+                  "text": "yesterday"
+                }
+              ],
+              "score": 31.417863696591557,
+              "rank": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -43,12 +43,24 @@ public class Semafor implements Module
             System.out.println(user_utterance);
 
             // call semafor api
-            
+            try {
+                try {
+                    APISemafor.run();
+
 
             // TODO:return parse results (user action, "a_u") to system
             //system.addContent(new Assignment("a_u", "NewEvent(Party,tomorrow)"));
+
+
+
+                } catch (HttpResponseException e) {
+                    System.err.println(e.getMessage());
+                }
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
         }
-        
+        // end of trigger()
     }
 
     /**
