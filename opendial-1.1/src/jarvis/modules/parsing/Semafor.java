@@ -1,12 +1,14 @@
 
 package jarvis.modules.parsing;
 
-import java.util.Collection;
-
 import opendial.DialogueSystem;
 import opendial.arch.DialException;
 import opendial.state.DialogueState;
 import opendial.modules.Module;
+
+import com.google.api.client.http.HttpResponseException;
+
+import java.util.Collection;
 
 public class Semafor implements Module
 {
@@ -45,10 +47,16 @@ public class Semafor implements Module
             // call semafor api
             try {
                 try {
-                    APISemafor.run();
+                    // parse user utterance (dependency and frame-based)
+                    ParseResult parseResult = APISemafor.run(user_utterance);
+
+                    // interpret parse results, extract relevant information
+                    
+
+                    // set user action "a_u"
 
 
-            // TODO:return parse results (user action, "a_u") to system
+            // TODO:return interpreted parse results (user action, "a_u") to system, eg,
             //system.addContent(new Assignment("a_u", "NewEvent(Party,tomorrow)"));
 
 
