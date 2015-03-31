@@ -10,6 +10,7 @@ import opendial.modules.Module;
 import com.google.api.client.http.HttpResponseException;
 
 import java.util.Collection;
+import java.util.ArrayList;
 
 public class Semafor implements Module
 {
@@ -42,7 +43,8 @@ public class Semafor implements Module
     public void trigger(DialogueState state, Collection<String> updatedVars) {
         if (updatedVars.contains("u_u") && state.hasChanceNode("u_u")) {
             // do parsing if user utterance ("u_u") has been updated
-            String user_utterance = state.queryProb("u_u").toDiscrete().getBest().toString();
+            String user_utterance =
+                state.queryProb("u_u").toDiscrete().getBest().toString();
             System.out.println(user_utterance);
 
             // call semafor api
@@ -53,13 +55,23 @@ public class Semafor implements Module
 
                     // interpret parse results, extract relevant information
                     // TODO: change to UserAct class
-                    String userAct = ParseInterpreter.run(parseResult);
+                    ArrayList<UserAct> userActs =
+                        ParseInterpreter.run(parseResult);
 
-             // TODO:return interpreted parse results (user action, "a_u") to system, eg,
-            //system.addContent(new Assignment("a_u", "NewEvent(Party,tomorrow)"));
-            system.addContent(new Assignment("a_u",
-                        parseResult.getFrames().get(0).getTarget().toString()));
-
+                    for (UserAct ua: userActs){
+                        System.out.println(ua);
+                    }
+                    // TODO:return full list of interpreted results
+                    if (userActs.size()>0){
+                        Assignment assign =
+                            new Assignment("a_u", userActs.get(0).toString());
+                        system.addContent(assign);
+                    }
+                    else {
+                        // utterance not understood
+                        system.addContent(new Assignment("a_u", "_?_"));
+                    }
+                    
                 } catch (HttpResponseException e) {
                     System.err.println(e.getMessage());
                 }

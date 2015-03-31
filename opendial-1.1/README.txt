@@ -18,7 +18,7 @@ Implementation Blueprints:
 Define:
 
 w: {yes, no} --> yes/no response
-x: {Birthday, Anniversary, Graduation, Party, Event} --> type of event
+x: {birthday, anniversary, graduation, party, event} --> type of event
 y: {name, date, time, gift, dress, venue, ...} --> type of slot
 z: unbounded (depends on u_u parse results) --> actual value in slot
 
@@ -31,8 +31,7 @@ uncontrained user input
 a_u
 -----------------------------------
 Type(x)
-Inform(y, z)
-Correction(y, z)
+Inform(y,z)
 Acknowledge(w)
 
 ====================================
@@ -48,8 +47,8 @@ z
 ====================================
 a_m
 -----------------------------------
-Confirm(y, z)
-Ground(y, int, [[y, z],...])
+Confirm(y,z)
+Ground(y,int,[[y, z],...])
 Resolve(y,z,y,z)
 
 
