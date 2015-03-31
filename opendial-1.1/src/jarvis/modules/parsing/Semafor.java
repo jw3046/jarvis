@@ -1,6 +1,7 @@
 
 package jarvis.modules.parsing;
 
+import opendial.datastructs.Assignment;
 import opendial.DialogueSystem;
 import opendial.arch.DialException;
 import opendial.state.DialogueState;
@@ -51,15 +52,13 @@ public class Semafor implements Module
                     ParseResult parseResult = APISemafor.run(user_utterance);
 
                     // interpret parse results, extract relevant information
-                    
+                    // TODO: change to UserAct class
+                    String userAct = ParseInterpreter.run(parseResult);
 
-                    // set user action "a_u"
-
-
-            // TODO:return interpreted parse results (user action, "a_u") to system, eg,
+             // TODO:return interpreted parse results (user action, "a_u") to system, eg,
             //system.addContent(new Assignment("a_u", "NewEvent(Party,tomorrow)"));
-
-
+            system.addContent(new Assignment("a_u",
+                        parseResult.getFrames().get(0).getTarget().toString()));
 
                 } catch (HttpResponseException e) {
                     System.err.println(e.getMessage());
@@ -67,6 +66,13 @@ public class Semafor implements Module
             } catch (Throwable t) {
                 t.printStackTrace();
             }
+        }
+        else {
+            /*
+            System.out.println(state);
+            String user_act = state.queryProb("a_u").toDiscrete().getBest().toString();
+            System.out.println(user_act);
+            */
         }
         // end of trigger()
     }

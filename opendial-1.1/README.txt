@@ -61,3 +61,7 @@ slot-filling output based on a_m
 
 
 
+Notes:
+a_u = Acknowledge(w) can simply use the code in the flight_nlu example.
+
+
