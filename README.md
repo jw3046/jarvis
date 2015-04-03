@@ -42,3 +42,13 @@ javac -d bin -Djava.ext.dirs=google-api-java-client/libs/:calendar src/cmdline/*
 Run:
 java -cp "google-api-java-client/libs/*:calendar/*:apache-tomcat-8.0.20/lib/*:bin:resources" cmdline.CalendarSample
 
+
+Similarly to try the APISemafor class
+
+Build:
+javac -d bin -Djava.ext.dirs=google-api-java-client/libs/:calendar src/semafor/*.java 
+
+Run:
+java -cp google-api-java-client/libs/*:calendar/*:bin semafor.APISemafor
+
+

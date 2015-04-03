@@ -7,7 +7,11 @@
 		departures and next user dialogue act. -->
 
 
+<<<<<<< HEAD
 	<model trigger="CalendarAction,Place,Date,Event,Description">
+=======
+	<model trigger="CalendarAction,EventType,Date,ReturnDate,Location">
+>>>>>>> c52f7b222bdab87ba2b7e3ab83d7b802aebfcc0f
 		<!-- This model specifies the utilities of various system actions, such 
 			as clarification requests (repetitions and confirmations) and 
 			grounding actions. -->
@@ -29,12 +33,13 @@
 			</case>
 		</rule>
 
-		<!-- If the current step is to ask for the departure, specifies the utilities 
+		<!-- If the current step is to ask for the EventType, specifies the utilities 
 			of a confirmation request or a grounding action using the current value of 
-			the "Departure" slot -->
+			the "EventType" slot -->
 		<rule>
 			<case>
 				<condition>
+<<<<<<< HEAD
 					<if var="current_step" value="Place" />
 				</condition>
 				<effect util="5">
@@ -42,6 +47,15 @@
 				</effect>
 				<effect util="0.5">
 					<set var="a_m" value="Confirm(Place,{Place})" />
+=======
+					<if var="current_step" value="EventType" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(EventType,{EventType})" />
+				</effect>
+				<effect util="0.5">
+					<set var="a_m" value="Confirm(EventType,{EventType})" />
+>>>>>>> c52f7b222bdab87ba2b7e3ab83d7b802aebfcc0f
 				</effect>
 			</case>
 		</rule>
@@ -127,10 +141,11 @@
 
 		<!-- If the current step is to ask for the number of tickets, specifies 
 			the utilities of a confirmation request or a grounding action using the current 
-			value of the "NbTickets" slot -->
+			value of the "Location" slot -->
 		<rule>
 			<case>
 				<condition>
+<<<<<<< HEAD
 					<if var="current_step" value="Description" />
 				</condition>
 				<effect util="5">
@@ -138,6 +153,15 @@
 				</effect>
 				<effect util="0.5">
 					<set var="a_m" value="Confirm(Description,{Description})" />
+=======
+					<if var="current_step" value="Location" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(Location,{Location})" />
+				</effect>
+				<effect util="0.5">
+					<set var="a_m" value="Confirm(Location,{Location})" />
+>>>>>>> c52f7b222bdab87ba2b7e3ab83d7b802aebfcc0f
 				</effect>
 			</case>
 		</rule>
@@ -249,12 +273,20 @@
 					<if var="a_m" value="Ground(CalendarAction,*)" />
 				</condition>
 				<effect prob="1">
+<<<<<<< HEAD
 					<set var="current_step" value="Place" />
+=======
+					<set var="current_step" value="EventType" />
+>>>>>>> c52f7b222bdab87ba2b7e3ab83d7b802aebfcc0f
 				</effect>
 			</case>
 			<case>
 				<condition>
+<<<<<<< HEAD
 					<if var="a_m" value="Ground(Place,*)" />
+=======
+					<if var="a_m" value="Ground(EventType,*)" />
+>>>>>>> c52f7b222bdab87ba2b7e3ab83d7b802aebfcc0f
 				</condition>
 				<effect prob="1">
 					<set var="current_step" value="Date" />
@@ -298,7 +330,11 @@
 					<if var="a_m" value="Ground(MakeOffer)" />
 				</condition>
 				<effect prob="1">
+<<<<<<< HEAD
 					<set var="current_step" value="Description" />
+=======
+					<set var="current_step" value="Location" />
+>>>>>>> c52f7b222bdab87ba2b7e3ab83d7b802aebfcc0f
 				</effect>
 			</case>
 			<case>
@@ -311,7 +347,11 @@
 			</case>
 			<case>
 				<condition>
+<<<<<<< HEAD
 					<if var="a_m" value="Ground(Description,{Description})" />
+=======
+					<if var="a_m" value="Ground(Location,{Number})" />
+>>>>>>> c52f7b222bdab87ba2b7e3ab83d7b802aebfcc0f
 				</condition>
 				<effect prob="1">
 					<set var="current_step" value="LastConfirm" />
@@ -333,10 +373,10 @@
 				<effect prob="1">
 					<set var="current_step" value="CalendarAction" />
 					<set var="CalendarAction" value="None" />
-					<set var="Departure" value="None" />
+					<set var="EventType" value="None" />
 					<set var="Date" value="None" />
 					<set var="ReturnDate" value="None" />
-					<set var="NbTickets" value="None" />
+					<set var="Location" value="None" />
 					<set var="TotalCost" value="None" />
 					<set var="a_u" value="None" />
 				</effect>
@@ -368,10 +408,14 @@
 		price with the number of tickets. -->
 			<case>
 				<condition>
+<<<<<<< HEAD
 					<if var="a_m" value="Ground(Description,*)" />
+=======
+					<if var="a_m" value="Ground(Location,*)" />
+>>>>>>> c52f7b222bdab87ba2b7e3ab83d7b802aebfcc0f
 				</condition>
 				<effect>
-					<set var="TotalCost" value="{TotalCost}*{NbTickets}" />
+					<set var="TotalCost" value="{TotalCost}*{Location}" />
 				</effect>
 			</case>
 		</rule>

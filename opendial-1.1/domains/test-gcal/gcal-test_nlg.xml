@@ -21,14 +21,14 @@
 			</case>
 		</rule>
 
-		<!-- Asks for the departure -->
+		<!-- Asks for the EventType -->
 		<rule>
 			<case>
 				<condition>
-					<if var="current_step" value="Departure" />
+					<if var="current_step" value="EventType" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What is your departure?" />
+					<set var="u_m" value="What is your event?" />
 				</effect>
 			</case>
 		</rule>
@@ -41,7 +41,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="On which date do you want to travel to {CalendarAction}?" />
+						value="When is your event?" />
 				</effect>
 			</case>
 		</rule>
@@ -66,7 +66,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="On which date do you want to travel back to {Departure}?" />
+						value="On which date do you want to travel back to {EventType}?" />
 				</effect>
 			</case>
 		</rule>
@@ -75,10 +75,10 @@
 		<rule>
 			<case>
 				<condition>
-					<if var="current_step" value="NbTickets" />
+					<if var="current_step" value="Location" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="How many tickets should I order?" />
+					<set var="u_m" value="Where is it?" />
 				</effect>
 			</case>
 		</rule>
@@ -89,11 +89,11 @@
 				<condition>
 					<if var="current_step" value="LastConfirm" />
 					<if var="ReturnDate" value="NoReturn" />
-					<if var="NbTickets" value="1"/>
+					<if var="Location" value="1"/>
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="You are ordering one one-way ticket from {Departure}
+						value="You are ordering one one-way ticket from {EventType}
 					to {CalendarAction} on {Date} for a total cost of {TotalCost} EUR. 
 					Shall I confirm your order?" />
 				</effect>
@@ -101,11 +101,11 @@
 			<case>
 				<condition>
 					<if var="current_step" value="LastConfirm" />
-					<if var="NbTickets" value="1"/>
+					<if var="Location" value="1"/>
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="You are ordering one round-trip ticket from {Departure}
+						value="You are ordering one round-trip ticket from {EventType}
 					to {CalendarAction} on {Date} and returning on {ReturnDate}  for a total cost of 
 					{TotalCost} EUR. Shall I confirm your order?" />
 				</effect>
@@ -117,7 +117,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="You are ordering {NbTickets} one-way tickets from {Departure}
+						value="You are ordering {Location} one-way tickets from {EventType}
 					to {CalendarAction} on {Date} for a total cost of {TotalCost} EUR. 
 					Shall I confirm your order?" />
 				</effect>
@@ -128,7 +128,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="You are ordering {NbTickets} round-trip tickets from {Departure}
+						value="You are ordering {Location} round-trip tickets from {EventType}
 					to {CalendarAction} on {Date} and returning on {ReturnDate}  for a total cost of 
 					{TotalCost} EUR. Shall I confirm your order?" />
 				</effect>
@@ -178,11 +178,11 @@
 			</case>
 		</rule>
 
-		<!-- grounding the departure -->
+		<!-- grounding the EventType -->
 		<rule>
 			<case>
 				<condition>
-					<if var="a_m" value="Ground(Departure,{Depart})" />
+					<if var="a_m" value="Ground(EventType,{Depart})" />
 				</condition>
 				<effect util="1">
 					<set var="u_m" value="OK, flying from {Depart}." />
@@ -198,7 +198,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="OK, flying from {Departure} to {CalendarAction} on {Date}." />
+						value="OK, flying from {EventType} to {CalendarAction} on {Date}." />
 				</effect>
 			</case>
 		</rule>
@@ -207,7 +207,7 @@
 		<rule>
 			<case>
 				<condition>
-					<if var="a_m" value="Ground(NbTickets,{Number})" />
+					<if var="a_m" value="Ground(Location,{Number})" />
 				</condition>
 				<effect util="1">
 					<set var="u_m" value="OK, {Number} tickets." />
@@ -231,7 +231,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="OK, flying back from {CalendarAction} to {Departure} on {ReturnDate}." />
+						value="OK, flying back from {CalendarAction} to {EventType} on {ReturnDate}." />
 				</effect>
 			</case>
 		</rule>
@@ -248,11 +248,11 @@
 			</case>
 		</rule>
 
-		<!-- confirmation request for the departure -->
+		<!-- confirmation request for the EventType -->
 		<rule>
 			<case>
 				<condition>
-					<if var="a_m" value="Confirm(Departure,{Depart})" />
+					<if var="a_m" value="Confirm(EventType,{Depart})" />
 				</condition>
 				<effect util="1">
 					<set var="u_m" value="You want to fly from {Depart}. Is that correct?" />
@@ -289,7 +289,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="You want to fly back to {Departure} on {Date2}. Is that correct?" />
+						value="You want to fly back to {EventType} on {Date2}. Is that correct?" />
 				</effect>
 			</case>
 		</rule>
@@ -298,7 +298,7 @@
 		<rule>
 			<case>
 				<condition>
-					<if var="a_m" value="Confirm(NbTickets,{Number})" />
+					<if var="a_m" value="Confirm(Location,{Number})" />
 				</condition>
 				<effect util="1">
 					<set var="u_m" value="You want to order {Number} tickets. Is that correct?" />
@@ -311,7 +311,7 @@
 			<case>
 				<condition>
 					<if var="a_m" value="AskRepeat" />
-					<if var="current_step" value="(CalendarAction|Departure)" />
+					<if var="current_step" value="(CalendarAction|EventType)" />
 				</condition>
 				<effect util="1">
 					<set var="u_m"
@@ -359,7 +359,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="One-way flight tickets from {Departure} to {CalendarAction} 
+						value="One-way flight tickets from {EventType} to {CalendarAction} 
 					on {Date} cost {Price} EUR per person. Do you want me to order tickets?" />
 				</effect>
 			</case>
@@ -369,7 +369,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="Flight tickets from {Departure} to {CalendarAction} on {Date} and returning 
+						value="Flight tickets from {EventType} to {CalendarAction} on {Date} and returning 
 						on {ReturnDate} cost {Price} EUR per person. Do you want me to order tickets?" />
 				</effect>
 			</case>

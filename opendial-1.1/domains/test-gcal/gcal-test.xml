@@ -17,12 +17,12 @@
 		
 		<!-- Starting prompt -->
 		<variable id="u_m">
-			<value>Jarvis Initialized, Good Afternoon</value>
+			<value>Jarvis Initialized, Hello</value>
 		</variable>
 		
 		<!-- We start the dialogue by asking for the destination -->
 		<variable id="current_step">
-                    <value>CalendarAction</value>
+            <value>CalendarAction</value>
 		</variable>
 
 	</initialstate>

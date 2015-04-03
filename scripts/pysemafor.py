@@ -2,6 +2,68 @@
 import requests
 import json
 
+'''
+The format of the JSON from Semafor is:
+
+{
+    debug_info:
+        frame_parser_elapsed_seconds: float
+        dependency_parser_elapsed_seconds: float
+    sentences:
+        [
+            {
+                conll: string
+                text: string
+                relations:
+                    [
+                        [string, string, [[string,string],[string,string]]],
+                        ...
+                    ]
+                tokens:
+                    [
+                        string,
+                        ...
+                    ]
+                entities:
+                    [
+                        [string, string, [[int, int]]],
+                        ...
+                    ]
+                frames:
+                    [
+                        {
+                            target:
+                                {
+                                    start: int
+                                    end: int
+                                    name: string
+                                    text: string
+                                }
+                            annotationSets:
+                                [
+                                    {
+                                        frameElements:
+                                            [
+                                                {
+                                                    start: int
+                                                    end: int
+                                                    name: string
+                                                    text: string
+                                                },
+                                                ...
+                                            ]
+                                        score: float
+                                        rank: int
+                                    }
+                                ]
+                        },
+                        ...
+                    ]
+            }
+        ]
+}
+'''
+
 def getJSON(string):
     '''Returns the JSON SEMAFOR parse by making an api call to
     the official website. Note that both the frame-based parsing

@@ -20,7 +20,7 @@
 		<rule>
 			<case>
 				<condition>
-                                    <if var="u_u" relation="contains" value="(*'s|a) {Event} (is tomorrow|is next)" />
+                    <if var="u_u" relation="contains" value="(*'s|a) {Event} (is tomorrow|is next)" />
 				</condition>
 				<effect>
 					<add var="a_u" value="Inform(Event,{Event})" />
