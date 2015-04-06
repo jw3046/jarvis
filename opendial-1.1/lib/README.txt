@@ -74,4 +74,39 @@ xpp3-1.1.4c.jar
 
 Google Calendar jars:
 
+descriptor.json
+google-api-services-calendar-v3-rev119-1.19.1.jar
+google-api-services-calendar-v3-rev119-1.19.1.jar.properties
+google-api-services-calendar-v3-rev119-1.19.1-javadoc.jar
+google-api-services-calendar-v3-rev119-1.19.1-sources.jar
+
+
+Apache Tomcat jars:
+
+annotations-api.jar
+catalina-ant.jar
+catalina-ha.jar
+catalina.jar
+catalina-storeconfig.jar
+catalina-tribes.jar
+ecj-4.4.1.jar
+el-api.jar
+jasper-el.jar
+jasper.jar
+jsp-api.jar
+servlet-api.jar
+tomcat-api.jar
+tomcat-coyote.jar
+tomcat-dbcp.jar
+tomcat-i18n-es.jar
+tomcat-i18n-fr.jar
+tomcat-i18n-ja.jar
+tomcat-jdbc.jar
+tomcat-jni.jar
+tomcat-spdy.jar
+tomcat-util.jar
+tomcat-util-scan.jar
+tomcat-websocket.jar
+websocket-api.jar
+
 

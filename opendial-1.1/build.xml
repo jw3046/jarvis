@@ -9,13 +9,15 @@
 	<property name="javadoc" location="doc/javadoc" />
 	<property name="testreports" location="doc/testreports" />
 	<property name="build" location="bin" />
-	<property name="lib" location="lib" />
+        <property name="lib" location="lib" />
+        <property name="resources" location="resources" />
 
 	<path id="compile.classpath">
 		<fileset dir="${lib}">
 			<include name="*.jar" />
 		</fileset>
-		<pathelement path="${build}" />
+                <pathelement path="${build}" />
+                <pathelement path="${resources}" />
 	</path>
 
 	<!-- INITIALISATION -->

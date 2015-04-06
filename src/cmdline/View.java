@@ -69,12 +69,22 @@ public class View {
   }
 
   static void display(Event event) {
-    if (event.getStart() != null) {
-      System.out.println("Start Time: " + event.getStart());
-    }
-    if (event.getEnd() != null) {
-      System.out.println("End Time: " + event.getEnd());
-    }
+      if (event.getSummary() != null){
+          System.out.println("Summary: " + event.getSummary());
+      }
+      if (event.getDescription() != null){
+          System.out.println("Description: " + event.getDescription());
+      }
+      if (event.getExtendedProperties() != null){
+          System.out.println("Extended Description: " +
+                  event.getExtendedProperties());
+      }
+      if (event.getStart() != null) {
+          System.out.println("Start Time: " + event.getStart());
+      }
+      if (event.getEnd() != null) {
+          System.out.println("End Time: " + event.getEnd());
+      }
   }
 }
 

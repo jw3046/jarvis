@@ -39,8 +39,9 @@ public class ParseInterpreter
         // instead of empty List.
         
         // Uses simple string matching for now
-        // TODO: use parse results
         ArrayList<InformUA> extractedInfo = new ArrayList<InformUA>();
+        
+        // TODO: use parse results
         for (String token: parseResult.getTokens()){
             String word = token.toLowerCase();
             for (SlotType t: SlotType.values()){
@@ -49,6 +50,12 @@ public class ParseInterpreter
                 }
             }
         }
+
+        // Use parse results
+        //ArrayList<ConllEntry> dependencies = parseResult.getConll();
+        //List<ParseFrame> frames = parseResult.getFrames();
+
+
         return extractedInfo;
     }
 

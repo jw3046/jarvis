@@ -50,7 +50,8 @@ a_m
 Confirm(y,z)
 Ground(y,int,[[y, z],...])
 Resolve(y,z,y,z)
-
+AddEvent
+QueryEvent
 
 ====================================
 u_m

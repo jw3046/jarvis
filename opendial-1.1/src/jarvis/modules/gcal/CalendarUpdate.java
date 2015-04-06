@@ -24,28 +24,18 @@
 package jarvis.modules.gcal;
 
 import java.util.Collection;
+import java.io.IOException;
 
 import opendial.DialogueSystem;
 import opendial.arch.DialException;
-import opendial.arch.Logger;
 import opendial.datastructs.Assignment;
 import opendial.modules.Module;
 import opendial.state.DialogueState;
 
 /**
- * Example of simple external module used for the flight-booking dialogue domain.
- * The module monitors for two particular values for the system action:<ol>
- * <li>"FindOffer" checks the (faked) price of the user order and returns MakeOffer(price)
- * <li>"Book" simulates the booking of the user order.
- * </ol>
- * 
- * @author  Pierre Lison (plison@ifi.uio.no)
- * @version $Date:: 2014-12-05 20:40:21 #$ *
+ * Google Calendar module used for calender management domain (jarvis).
  */
 public class CalendarUpdate implements Module {
-
-	// logger
-	public static Logger log = new Logger("FlightBookingExample", Logger.Level.DEBUG);
 
 	// the dialogue system
 	DialogueSystem system;
@@ -53,13 +43,18 @@ public class CalendarUpdate implements Module {
 	// whether the module is paused or active
 	boolean paused = true;
 
+        // interface to google calendar
+        GCal gcal;
+
 	/**
-	 * Creates a new instance of the flight-booking module
+	 * Creates a new instance of the calendar updater module
 	 * 
 	 * @param system the dialogue system to which the module should be attached
 	 */
 	public CalendarUpdate(DialogueSystem system) {
 		this.system = system;
+                this.gcal = new GCal();
+                System.out.println("GCal created!");
 	}
 
 	/**
@@ -85,29 +80,36 @@ public class CalendarUpdate implements Module {
 		if (updatedVars.contains("a_m") && state.hasChanceNode("a_m")) {
 			String action = state.queryProb("a_m").toDiscrete().getBest().toString();
 			
-			if (action.equals("FindOffer")) {
-				String returndate = state.queryProb("ReturnDate").toDiscrete().getBest().toString();
+			if (action.equals("QueryEvent")) {
+                            /* TODO: implement event query
+				String returndate = state.queryProb("ReturnDate")
+                                    .toDiscrete().getBest().toString();
 				
-				// here, we fake the price estimation by making up numbers.  Obviously,
-				// the prices should be derived from a database in a real system.
+                                // find event in gcal
 				int price = (returndate.equals("NoReturn"))? 179 : 299;
 				String newAction="MakeOffer(" + price + ")";
 				system.addContent(new Assignment("a_m", newAction));
+                                */
 			}
-			else if (action.equals("Book")) {
+			else if (action.equals("AddEvent")) {
+                            // extract relevant fields from dialogue
 					
 				String departure = state.queryProb("Departure").toDiscrete().getBest().toString();
 				String destination = state.queryProb("Destination").toDiscrete().getBest().toString();
 				String date = state.queryProb("Date").toDiscrete().getBest().toString();
 				String returndate = state.queryProb("ReturnDate").toDiscrete().getBest().toString();
 				String nbtickets = state.queryProb("NbTickets").toDiscrete().getBest().toString();
-				
-				// In a real system, the system database should be modified here to 
-				// actually perform the booking.  Here, we just print a small message.
-				String info = "Booked " + nbtickets + " tickets from " + departure + " to " 
-						+ destination + " on " + date 
-						+ ((returndate.equals("NoReturn"))? " and return on " + returndate : "");
-				log.info(info);
+                                // add new event to gcal
+                                try {
+                                    this.gcal.addNewEvent();
+                                } catch (IOException ioEx){
+                                    // do nothing for now
+                                    System.out.println(ioEx);
+                                }
+
+                                // completion message
+				String info = "GCal Event added (not yet implemented)";
+                                System.out.println(info);
 			}
 		}
 

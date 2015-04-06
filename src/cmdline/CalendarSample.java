@@ -1,16 +1,3 @@
-/*
- * Copyright (c) 2010 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
 
 package cmdline;
 
@@ -43,21 +30,20 @@ import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.List;
 
-/**
- * @author Yaniv Inbar
- */
 public class CalendarSample {
 
   /**
    * Be sure to specify the name of your application. If the application name is {@code null} or
    * blank, the application will log a warning. Suggested format is "MyCompany-ProductName/1.0".
    */
-  private static final String APPLICATION_NAME = "";
+  private static final String APPLICATION_NAME = "Jarvis-GCal/0.1";
 
   /** Directory to store user credentials. */
   private static final java.io.File DATA_STORE_DIR =
-      new java.io.File(System.getProperty("user.home"), ".store/calendar_sample");
+      //new java.io.File(System.getProperty("user.home"), ".store/calendar_sample");
+      new java.io.File("store/calendar_sample");
 
   /**
    * Global instance of the {@link DataStoreFactory}. The best practice is to make it a single
@@ -73,7 +59,7 @@ public class CalendarSample {
 
   private static com.google.api.services.calendar.Calendar client;
 
-  static final java.util.List<Calendar> addedCalendarsUsingBatch = Lists.newArrayList();
+  static final List<Calendar> addedCalendarsUsingBatch = Lists.newArrayList();
 
   /** Authorizes the installed application to access user's protected data. */
   private static Credential authorize() throws Exception {
@@ -111,6 +97,7 @@ public class CalendarSample {
       client = new com.google.api.services.calendar.Calendar.Builder(
           httpTransport, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
 
+      /*
       // run commands
       showCalendars();
       addCalendarsUsingBatch();
@@ -120,6 +107,8 @@ public class CalendarSample {
       showEvents(calendar);
       deleteCalendarsUsingBatch();
       deleteCalendar(calendar);
+      */
+
 
     } catch (IOException e) {
       System.err.println(e.getMessage());

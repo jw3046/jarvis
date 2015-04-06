@@ -29,10 +29,12 @@
 	<!-- External module showing how to interface the dialogue system with an external 
 	database (used here to find the ticket prices and "book" the tickets) -->
         <settings>
-            <modules>jarvis.modules.gcal.CalendarUpdate</modules>
+            <modules>
+                jarvis.modules.parsing.Semafor,
+                jarvis.modules.gcal.CalendarUpdate
+            </modules>
 
             <!-- we use the following for NLU -->
-            <modules>jarvis.modules.parsing.Semafor</modules>
 	</settings>
 </domain>
 
