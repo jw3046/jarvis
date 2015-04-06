@@ -2,32 +2,32 @@
 <parameters>
 <variable id="theta_1">
 <distrib type="gaussian">
-<mean>17.4685</mean>
-<variance>273.3145</variance>
+<mean>15.9468</mean>
+<variance>99.8099</variance>
 </distrib>
 </variable>
 <variable id="theta_2">
 <distrib type="gaussian">
-<mean>1.8403</mean>
-<variance>150.4298</variance>
+<mean>14.5684</mean>
+<variance>86.8423</variance>
 </distrib>
 </variable>
 <variable id="theta_3">
 <distrib type="gaussian">
-<mean>16.09</mean>
-<variance>13.6594</variance>
+<mean>5.0697</mean>
+<variance>49.4301</variance>
 </distrib>
 </variable>
 <variable id="theta_4">
 <distrib type="gaussian">
-<mean>-7.6632</mean>
-<variance>16.0643</variance>
+<mean>4.2957</mean>
+<variance>46.2569</variance>
 </distrib>
 </variable>
 <variable id="theta_5">
 <distrib type="gaussian">
-<mean>-1.7446</mean>
-<variance>25.0684</variance>
+<mean>18.007</mean>
+<variance>10.1167</variance>
 </distrib>
 </variable>
 <variable id="theta_bloblo">

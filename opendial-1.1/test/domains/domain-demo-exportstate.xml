@@ -10,22 +10,20 @@
 <value>Move(Forward)</value>
 </variable>
 <variable id="u_u">
-<value prob="0.4211">what do you see</value>
-<value prob="0.0526">do you see it</value>
-<value prob="0.5263">None</value>
+<value prob="0.8662">what do you see</value>
+<value prob="0.1083">do you see it</value>
+<value prob="0.0255">None</value>
 </variable>
 <variable id="a_u^p">
-<value prob="0.12">Move(Right)</value>
-<value prob="0.12">Move(Right,Short)</value>
-<value prob="0.12">Move(Left,Short)</value>
-<value prob="0.06">Move(Forward,Short)</value>
-<value prob="0.06">Move(Turn)</value>
-<value prob="0.06">PickUp(AtFeet)</value>
-<value prob="0.03">Move(Left)</value>
-<value prob="0.03">Move(Backward)</value>
-<value prob="0.03">DoYouSee(BlueObj)</value>
-<value prob="0.03">DoYouSee(RedObj)</value>
-<value prob="0.34">None</value>
+<value prob="0.09">Move(Forward,Short)</value>
+<value prob="0.06">Move(Left)</value>
+<value prob="0.06">Move(Backward,Short)</value>
+<value prob="0.06">Move(Right,Short)</value>
+<value prob="0.03">WhatDoYouSee</value>
+<value prob="0.03">Move(Left,Short)</value>
+<value prob="0.02">Move(Forward)</value>
+<value prob="0.01">RepeatLast</value>
+<value prob="0.64">None</value>
 </variable>
 <variable id="a_m">
 <value>Describe([])</value>
@@ -37,8 +35,8 @@
 <value>[]</value>
 </variable>
 <variable id="a_u">
-<value prob="0.4737">WhatDoYouSee</value>
-<value prob="0.5263">None</value>
+<value prob="0.9745">WhatDoYouSee</value>
+<value prob="0.0255">None</value>
 </variable>
 <variable id="aha_conti">
 <distrib type="uniform">
@@ -54,16 +52,13 @@
 <value>Describe([])</value>
 </variable>
 <variable id="i_u">
-<value prob="0.1333">Move(Right)</value>
-<value prob="0.1333">Move(Right,Short)</value>
-<value prob="0.1333">Move(Left,Short)</value>
-<value prob="0.0667">Move(Forward,Short)</value>
-<value prob="0.0667">Move(Turn)</value>
-<value prob="0.0667">PickUp(AtFeet)</value>
-<value prob="0.0333">Move(Left)</value>
-<value prob="0.0333">Move(Backward)</value>
-<value prob="0.0333">DoYouSee(BlueObj)</value>
-<value prob="0.0333">DoYouSee(RedObj)</value>
-<value prob="0.2667">None</value>
+<value prob="0.1">Move(Forward,Short)</value>
+<value prob="0.0667">Move(Left)</value>
+<value prob="0.0667">Move(Backward,Short)</value>
+<value prob="0.0667">Move(Right,Short)</value>
+<value prob="0.0333">Move(Forward)</value>
+<value prob="0.0333">WhatDoYouSee</value>
+<value prob="0.0333">Move(Left,Short)</value>
+<value prob="0.6">None</value>
 </variable>
 </state>
