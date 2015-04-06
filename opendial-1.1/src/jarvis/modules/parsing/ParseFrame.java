@@ -11,8 +11,9 @@ public class ParseFrame
     @Key
     private List<AnnotationSet> annotationSets; // elements filling the frame
 
-    public FrameElement getTarget() {return target;}
     private AnnotationSet getAnnotationSet() {return annotationSets.get(0);}
+    
+    public FrameElement getTarget() {return target;}
     public List<FrameElement> getElements() {
         return getAnnotationSet().getFrameElements();
     }

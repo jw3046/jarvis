@@ -15,6 +15,15 @@ public class ConllEntry
         this.deprel = deprel;
     }
 
+    public ConllEntry(ConllEntry otherEntry){
+        this.id = otherEntry.getID();
+        this.form = otherEntry.getFORM();
+        this.cpostag = otherEntry.getCPOSTAG();
+        this.postag = otherEntry.getPOSTAG();
+        this.head = otherEntry.getHEAD();
+        this.deprel = otherEntry.getDEPREL();
+    }
+
     private int id; // position in sentence
     private String form; // word
     // lemma ommitted
@@ -29,7 +38,7 @@ public class ConllEntry
     public int getID(){return id;}
     public String getFORM(){return form;}
     public String getCPOSTAG(){return cpostag;}
-    public String getPOSTTAG(){return postag;}
+    public String getPOSTAG(){return postag;}
     public int getHEAD(){return head;}
     public String getDEPREL(){return deprel;}
 
