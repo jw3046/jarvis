@@ -169,10 +169,10 @@
 		<rule>
 			<case>
 				<condition>
-					<if var="a_m" value="Ground(EventType,{Dest})" />
+					<if var="a_m" value="Ground(EventType,{Event})" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, flying to {Dest}." />
+					<set var="u_m" value="OK, adding {Event}." />
 				</effect>
 			</case>
 		</rule>
@@ -181,10 +181,10 @@
 		<rule>
 			<case>
 				<condition>
-					<if var="a_m" value="Ground(Person,{Depart})" />
+					<if var="a_m" value="Ground(Person,{Person})" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, flying from {Depart}." />
+					<set var="u_m" value="OK, {Person}'s {EventType}." />
 				</effect>
 			</case>
 		</rule>
@@ -197,7 +197,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="OK, flying from {Person} to {EventType} on {Date}." />
+						value="OK,  {Person} to {EventType} on {Date}." />
 				</effect>
 			</case>
 		</rule>
@@ -209,7 +209,7 @@
 					<if var="a_m" value="Ground(Location,{Location})" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, {Location} tickets." />
+					<set var="u_m" value="OK, at {Location}." />
 				</effect>
 			</case>
 		</rule>
@@ -239,10 +239,10 @@
 		<rule>
 			<case>
 				<condition>
-					<if var="a_m" value="Confirm(EventType,{Dest})" />
+					<if var="a_m" value="Confirm(EventType,{Event})" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="You want to fly to {Dest}. Is that correct?" />
+					<set var="u_m" value="You want to go to {Event}. Is that correct?" />
 				</effect>
 			</case>
 		</rule>
@@ -251,10 +251,10 @@
 		<rule>
 			<case>
 				<condition>
-					<if var="a_m" value="Confirm(Person,{Depart})" />
+					<if var="a_m" value="Confirm(Person,{Person})" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="You want to fly from {Depart}. Is that correct?" />
+					<set var="u_m" value="You want to fly from {Person}. Is that correct?" />
 				</effect>
 			</case>
 		</rule>

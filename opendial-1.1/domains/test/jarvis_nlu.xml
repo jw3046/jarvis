@@ -146,7 +146,6 @@
 				</condition>
 				<effect>
 					<set var="{current_step}" value="{Event}" />
-					<set var="Person" value="{Event}" />
 				</effect>
 			</case>
 			<case>
