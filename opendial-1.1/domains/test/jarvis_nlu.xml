@@ -7,7 +7,7 @@
 	The user dialogue act associated with each utterance is represented here as a list of 
 	basic acts (such as "Confirm" or "Inform(...)").  This representation allows us to 
 	capture the fact that an utterance such as "Yes, 3 tickets" contains both a confirmation
-	and a new information about the number of tickets. 
+	and a new information about the Location of tickets. 
 	-->
 
 	<model trigger="u_u">
@@ -20,13 +20,13 @@
 		<rule>
 			<case>
 				<condition>
-					<if var="u_u" relation="contains" value="(to|from)? {Airport}" />
-					<if var="Airport" relation="in"
+					<if var="u_u" relation="contains" value="(to|from)? {Event}" />
+					<if var="Event" relation="in"
 						value="[Oslo,Bergen,Trondheim,Stavanger,Moss,
 								Sandefjord,Tromsø,Bodø,Kristiansand,Ålesund]" />
 				</condition>
 				<effect>
-					<add var="a_u" value="Inform(Airport,{Airport})" />
+					<add var="a_u" value="Inform(Event,{Event})" />
 				</effect>
 			</case>
 		</rule>
@@ -61,14 +61,14 @@
 			</case>
 		</rule>
 
-		<!-- Extracts booking information related to the number of tickets.  -->
+		<!-- Extracts booking information related to the Location of tickets.  -->
 		<rule>
 			<case>
 				<condition>
 					<if var="u_u" relation="contains" value="(1|one|a single) (ticket)?" />
 				</condition>
 				<effect>
-					<add var="a_u" value="Inform(Number,1)" />
+					<add var="a_u" value="Inform(Location,1)" />
 				</effect>
 			</case>
 				<case>
@@ -76,7 +76,7 @@
 					<if var="u_u" relation="contains" value="(2|two) (tickets)?" />
 				</condition>
 				<effect>
-					<add var="a_u" value="Inform(Number,2)" />
+					<add var="a_u" value="Inform(Location,2)" />
 				</effect>
 			</case>
 				<case>
@@ -84,7 +84,7 @@
 					<if var="u_u" relation="contains" value="(3|three) (tickets)?" />
 				</condition>
 				<effect>
-					<add var="a_u" value="Inform(Number,3)" />
+					<add var="a_u" value="Inform(Location,3)" />
 				</effect>
 			</case>
 				<case>
@@ -92,7 +92,7 @@
 					<if var="u_u" relation="contains" value="(4|four) (tickets)?" />
 				</condition>
 				<effect>
-					<add var="a_u" value="Inform(Number,4)" />
+					<add var="a_u" value="Inform(Location,4)" />
 				</effect>
 			</case>
 		</rule>
@@ -135,18 +135,17 @@
 	
 	<model trigger="a_u">
 		<!-- This model take the dialogue act fom the user and uses it to fill the corresponding
-	  slots (EventType, Person, flight dates, number of tickets, etc.). -->
-	  
-	  
+	  slots (EventType, Person, dates, time, location, etc.). -->
+	 
 		<!-- Fills the slots in accordance with the information in the dialogue act -->
 		<rule>
 			<case>
 				<condition>
 					<if var="current_step" value="(Person|EventType)" />
-					<if var="a_u" relation="contains" value="Inform(Airport,{Airport})" />
+					<if var="a_u" relation="contains" value="Inform(Event,{Event})" />
 				</condition>
 				<effect>
-					<set var="{current_step}" value="{Airport}" />
+					<set var="{current_step}" value="{Event}" />
 				</effect>
 			</case>
 			<case>
@@ -161,10 +160,10 @@
 			<case>
 				<condition>
 					<if var="current_step" value="Location" />
-					<if var="a_u" relation="contains" value="Inform(Number,{Number})" />
+					<if var="a_u" relation="contains" value="Inform(Location,{Location})" />
 				</condition>
 				<effect>
-					<set var="Location" value="{Number}" />
+					<set var="Location" value="{Location}" />
 				</effect>
 			</case>
 		</rule>

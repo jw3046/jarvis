@@ -20,29 +20,26 @@
 			<value>Jarvis Initialized, Hello</value>
 		</variable>
 		
-		<!-- We start the dialogue by asking for the destination -->
+		<!-- We start the dialogue by asking for the EventType -->
 		<variable id="current_step">
-            <value>EventType</value>
+			<value>EventType</value>
 		</variable>
 
 	</initialstate>
 
 	<!-- Natural language understanding models -->
-	<import href="gcal-test_nlu.xml"/>
+	<import href="jarvis_nlu.xml"/>
 
 	<!--  Dialogue management models (action selection and transition) -->
-	<import href="gcal-test_dm.xml"/>
+	<import href="jarvis_dm.xml"/>
 
 	<!-- Natural language generation models -->
-	<import href="gcal-test_nlg.xml"/>
+	<import href="jarvis_nlg.xml"/>
 
 
 	<!-- External module showing how to interface the dialogue system with an external 
 	database (used here to find the ticket prices and "book" the tickets) -->
-        <settings>
-            <modules>jarvis.modules.gcal.CalendarUpdate</modules>
-
-            <!-- we may use the following for NLU -->
-            <modules>jarvis.modules.parsing.Semafor</modules>
+	<settings>
+		<modules>opendial.modules.examples.FlightBookingExample</modules>
 	</settings>
 </domain>
