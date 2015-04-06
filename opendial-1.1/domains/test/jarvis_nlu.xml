@@ -135,7 +135,7 @@
 	
 	<model trigger="a_u">
 		<!-- This model take the dialogue act fom the user and uses it to fill the corresponding
-	  slots (EventType, Person, flight dates, number of tickets, etc.). -->
+	  slots (EventType, Person, dates, time, location, etc.). -->
 	  
 	  
 		<!-- Fills the slots in accordance with the information in the dialogue act -->
@@ -147,6 +147,7 @@
 				</condition>
 				<effect>
 					<set var="{current_step}" value="{Airport}" />
+					<set var="Person" value="{Airport}" />
 				</effect>
 			</case>
 			<case>
