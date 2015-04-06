@@ -41,7 +41,71 @@ public class ParseInterpreter
         // Uses simple string matching for now
         ArrayList<InformUA> extractedInfo = new ArrayList<InformUA>();
         
-        // TODO: use parse results
+        // TODO: use parse results, implement
+        //
+        /* =============================
+         * GENERAL SEMANTIC EXTRACTION
+         * =============================
+         * Initialize list of ideas
+         * BFS starting from root. TODO: break ties
+         * For each word:
+         *  If POS=NN
+         *      If ((HEAD.POS==NN)&&(DEPREL==nn||conj))
+         *          append idea (extend the phrase, maintain original ordering)
+         *      Else If ((HEAD.POS==NN)&&(DEPREL==poss))
+         *          PossBind idea (weakly extend the phrase)
+         *      Else
+         *          add new idea (the noun itself) to list
+         *  Else
+         *      If ((HEAD.POS==NN)&&(DEPREL==amod))
+         *          append idea (extend the phrase, maintain original ordering)
+         *      Else
+         *          do nothing
+         * 
+         * =============================
+         * SEMANTIC TYPE CLASSIFICATION
+         * =============================
+         * For each idea:
+         *  Get set of frames related to this idea.
+         *      If 'Calendric_unit' in this set (and not encountered yet),
+         *      If multiple exist, use the largest one (most coverage of utterance),
+         *          Assign (CLASSIFICATION: WHEN) to this idea.
+         *          TimeBind this idea to the closest,
+         *              earliest (in the idea list), nontemporal idea.
+         *          Remove all words in this frame from all ideas
+         *          TODO: convert to absolute date(time).
+         *      Else If (idea.POS contains NNP),
+         *          Assign (CLASSIFICATION: WHO/WHERE) to this idea
+         *      Else If (CLASSIFICATION: WHAT not assigned yet),
+         *          Assign (CLASSIFICATION: WHAT) to this idea
+         *              ie, assign leftmost noncalendar/nnp idea to 'what'
+         *      Else,
+         *          Assign (CLASSIFICATION: WHY) to the idea
+         *
+         * TODO: Note that we can recursively analyze ideas classified as WHY
+         *          by extracting all WHYs from the list of ideas and reclassifying
+         *          them as their own list of ideas.
+         *
+         * =================================
+         * MAIN ACTIVITY TYPE CLASSIFICATION
+         * =================================
+         * String match the WHAT idea, if nothing, string match frame names,
+         *  if nothing, string match the WHY ideas.
+         * If still nothing, (CLASSIFICATION: GENERAL_EVENT)
+         *
+         * Possible things to match
+         * statement, speak_on_topic, talk, lecture
+         * aggregate, amassing, social_event
+         * placing, locative_relation (ie, hanging out)
+         * locale_by_use, restaurant, ingestion, eat
+         * getting
+         * wear, clothing
+         *
+         */
+        // Get all Nouns in utterance
+        // Select all frames with those nouns (this will filter out bad frames)
+        // Select all nouns not captured in those frames
+        //
         for (String token: parseResult.getTokens()){
             String word = token.toLowerCase();
             for (SlotType t: SlotType.values()){
@@ -102,3 +166,5 @@ public class ParseInterpreter
         return null;
     }
 }
+
+

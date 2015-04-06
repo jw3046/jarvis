@@ -48,12 +48,9 @@ public class APISemafor {
     ParseResult parseResult = jsonResponse.getParse();
     List<ParseFrame> frames = parseResult.getFrames();
     
-    //String conll = parseResult.getRawConll();
-    //System.out.println(conll);
-    ArrayList<ConllEntry> conllTable = parseResult.getConll();
-    for (ConllEntry row: conllTable){
-        System.out.println(row);
-    }
+    String conll = parseResult.getRawConll();
+    System.out.println(conll);
+    
     System.out.println(frames.size()+" frames");
     for (ParseFrame frame: frames){
         System.out.println(frame);

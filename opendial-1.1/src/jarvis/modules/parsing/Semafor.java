@@ -54,17 +54,21 @@ public class Semafor implements Module
                     ParseResult parseResult = APISemafor.run(user_utterance);
 
                     // interpret parse results, extract relevant information
-                    // TODO: change to UserAct class
                     ArrayList<UserAct> userActs =
                         ParseInterpreter.run(parseResult);
 
                     for (UserAct ua: userActs){
                         System.out.println(ua);
                     }
-                    // TODO:return full list of interpreted results
+
                     if (userActs.size()>0){
-                        Assignment assign =
-                            new Assignment("a_u", userActs.get(0).toString());
+                        // join all user acts into a string by comma
+                        String a_u = userActs.get(0).toString();
+                        for (int i=1; i<userActs.size(); i++){
+                            a_u += "," + userActs.get(i).toString();
+                        }
+                        // return results to system
+                        Assignment assign = new Assignment("a_u", a_u);
                         system.addContent(assign);
                     }
                     else {
