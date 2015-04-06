@@ -121,7 +121,7 @@ public class GCal
       showCalendars();
       String calendarID = getPrimaryCalendarID();
       System.out.println(calendarID);
-      addEvent(calendarID);
+      addEvent(calendarID, "test event 1");
       showEvents(calendarID);
 
 
@@ -150,17 +150,17 @@ public class GCal
     return result;
   }
 
-  private static void addEvent(String calendarID) throws IOException {
+  private static void addEvent(String calendarID, String data) throws IOException {
     View.header("Add Event");
-    Event event = newEvent();
+    Event event = newEvent(data);
     Event result = client.events().insert(calendarID, event).execute();
     View.display(result);
   }
 
-  private static Event newEvent() {
+  private static Event newEvent(String data) {
       //TODO: implement newEvent where u can set the fields
     Event event = new Event();
-    event.setSummary("New Event");
+    event.setSummary(data);
     event.setDescription("This is a test event...");
     Date startDate = new Date();
     Date endDate = new Date(startDate.getTime() + 3600000);
@@ -171,8 +171,8 @@ public class GCal
     return event;
   }
 
-  public void addNewEvent() throws IOException {
-      addEvent(getPrimaryCalendarID());
+  public void addNewEvent(String data) throws IOException {
+      addEvent(getPrimaryCalendarID(), data);
   }
 
   private static void showEvents(String calendarID) throws IOException {

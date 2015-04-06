@@ -38,6 +38,7 @@
                  <rule id="SC_AU-UM">
                      <case>
                          <effect>
+                             <set var="a_m" value="AddEvent"/>
                              <set var="u_m" value="{a_u}"/>
                          </effect>
                      </case>

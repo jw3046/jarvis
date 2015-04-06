@@ -92,16 +92,20 @@ public class CalendarUpdate implements Module {
                                 */
 			}
 			else if (action.equals("AddEvent")) {
-                            // extract relevant fields from dialogue
-					
+                            // TODO: extract relevant fields from dialogue
+                                String user_act = state.queryProb("a_u").
+                                    toDiscrete().getBest().toString();
+			    /*	
 				String departure = state.queryProb("Departure").toDiscrete().getBest().toString();
 				String destination = state.queryProb("Destination").toDiscrete().getBest().toString();
 				String date = state.queryProb("Date").toDiscrete().getBest().toString();
 				String returndate = state.queryProb("ReturnDate").toDiscrete().getBest().toString();
 				String nbtickets = state.queryProb("NbTickets").toDiscrete().getBest().toString();
+                                */
                                 // add new event to gcal
                                 try {
-                                    this.gcal.addNewEvent();
+                                    System.out.println("Connecting to GCal...");
+                                    this.gcal.addNewEvent(user_act);
                                 } catch (IOException ioEx){
                                     // do nothing for now
                                     System.out.println(ioEx);
