@@ -105,7 +105,7 @@
 		</rule>
 
 		<!-- If the current step is to ask whether to proceed with the booking 
-			and the user answers yes, specifies the utility of asking for the number 
+			and the user answers yes, specifies the utility of asking for the Location 
 			of tickets. -->
 		<rule>
 			<case>
@@ -133,7 +133,7 @@
 			</case>
 		</rule>
 
-		<!-- If the current step is to ask for the number of tickets, specifies 
+		<!-- If the current step is to ask for the Location of tickets, specifies 
 			the utilities of a confirmation request or a grounding action using the current 
 			value of the "Location" slot -->
 		<rule>
@@ -319,7 +319,7 @@
 			</case>
 			<case>
 				<condition>
-					<if var="a_m" value="Ground(Location,{Number})" />
+					<if var="a_m" value="Ground(Location,{Location})" />
 				</condition>
 				<effect prob="1">
 					<set var="current_step" value="LastConfirm" />
@@ -372,8 +372,8 @@
 					<set var="current_step" value="MakeOffer" />
 				</effect>
 			</case>
-		<!-- If the number of tickets is grounded, update the total cost by multiplying the
-		price with the number of tickets. -->
+		<!-- If the Location of tickets is grounded, update the total cost by multiplying the
+		price with the Location of tickets. -->
 			<case>
 				<condition>
 					<if var="a_m" value="Ground(Location,*)" />

@@ -136,8 +136,7 @@
 	<model trigger="a_u">
 		<!-- This model take the dialogue act fom the user and uses it to fill the corresponding
 	  slots (EventType, Person, dates, time, location, etc.). -->
-	  
-	  
+	 
 		<!-- Fills the slots in accordance with the information in the dialogue act -->
 		<rule>
 			<case>
