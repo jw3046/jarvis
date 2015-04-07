@@ -397,37 +397,37 @@
 					<if var="current_step" value="EventType" />
 				</condition>
 				<effect prob="0.25">
-					<set var="EventType^p" value="Oslo" />
+					<set var="EventType^p" value="Birthday" />
 				</effect>
 				<effect prob="0.15">
-					<set var="EventType^p" value="Bergen" />
+					<set var="EventType^p" value="Anniversary" />
 				</effect>
 				<effect prob="0.1">
-					<set var="EventType^p" value="Trondheim" />
+					<set var="EventType^p" value="Party" />
 				</effect>
 				<effect prob="0.1">
-					<set var="EventType^p" value="Stavanger" />
+					<set var="EventType^p" value="Chill" />
 				</effect>
 				<effect prob="0.1">
-					<set var="EventType^p" value="Moss" />
+					<set var="EventType^p" value="Exams" />
 				</effect>
 				<effect prob="0.1">
-					<set var="EventType^p" value="Sandefjord" />
+					<set var="EventType^p" value="Seminar" />
 				</effect>
 				<effect prob="0.05">
-					<set var="EventType^p" value="Tromsø" />
+					<set var="EventType^p" value="Talk" />
 				</effect>
 				<effect prob="0.05">
-					<set var="EventType^p" value="Bodø" />
+					<set var="EventType^p" value="Job" />
 				</effect>
 				<effect prob="0.05">
-					<set var="EventType^p" value="Kristiansand" />
+					<set var="EventType^p" value="Graduation" />
 				</effect>
 				<effect prob="0.05">
-					<set var="EventType^p" value="Ålesund" />
+					<set var="EventType^p" value="Other" />
 				</effect>
 			</case>
-			<case>
+			<!-- <case>
 				<condition>
 					<if var="current_step" value="Person" />
 				</condition>
@@ -461,7 +461,7 @@
 				<effect prob="0.05">
 					<set var="Person^p" value="Ålesund" />
 				</effect>
-			</case>
+			</case> -->
 		</rule>
 		
 		

@@ -22,8 +22,7 @@
 				<condition>
 					<if var="u_u" relation="contains" value="(to|from)? {Event}" />
 					<if var="Event" relation="in"
-						value="[Oslo,Bergen,Trondheim,Stavanger,Moss,
-								Sandefjord,Tromsø,Bodø,Kristiansand,Ålesund]" />
+						value="[Birthday, Anniversary, Party, Chill, Exams, Seminar, Talk, Job, Graduation, Other]" />
 				</condition>
 				<effect>
 					<add var="a_u" value="Inform(Event,{Event})" />
@@ -145,7 +144,7 @@
 					<if var="a_u" relation="contains" value="Inform(Event,{Event})" />
 				</condition>
 				<effect>
-					<set var="{current_step}" value="{Event}" />
+					<set var="EventType" value="{Event}" />
 				</effect>
 			</case>
 			<case>
