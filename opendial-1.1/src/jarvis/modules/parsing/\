@@ -11,6 +11,7 @@ public class ParseInterpreter
          // Type(EventType)
          // Inform(SlotType,String)
          // Acknowledge(boolean)
+    //public static ArrayList<InformUA> extractInformUA(){
     public static ArrayList<UserAct> run(ParseResult parseResult){
         //TODO:change after refactoring
         
@@ -36,10 +37,6 @@ public class ParseInterpreter
                 slots.put(idea.getClassification(),idea);
             }
         }
-
-        //TODO: refactor the rest up one level to have access to DM variables
-        // just return the slots and save the leftOvers in a private static variable
-        // in this class
 
         // convert general slots into dialogue specific slots (using DM variables)
         ArrayList<UserAct> extractedInfo = new ArrayList<UserAct>(convert(slots));;

@@ -29,13 +29,23 @@ public class ConllParse
         return conllEntries.get(id);
     }
 
-    public ArrayList<ConllEntry> getCPOS(String pos){
+    public ArrayList<ConllEntry> getPOS(String pos){
         ArrayList<ConllEntry> posList = new ArrayList<ConllEntry>();
         for (ConllEntry entry: conllEntries){
-            if (entry.getCPOSTAG().contains(pos)){
+            if (entry.getPOSTAG().contains(pos)){
                 posList.add(entry);
             }
         }
         return posList;
+    }
+
+    public ArrayList<ConllEntry> getChildren(int id){
+        ArrayList<ConllEntry> childList = new ArrayList<ConllEntry>();
+        for (ConllEntry entry: conllEntries){
+            if (entry.getHEAD() == id){
+                childList.add(entry);
+            }
+        }
+        return childList;
     }
 }
