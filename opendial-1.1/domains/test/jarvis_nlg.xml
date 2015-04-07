@@ -310,12 +310,21 @@
 			<case>
 				<condition>
 					<if var="a_m" value="AskRepeat" />
-					<if var="current_step" value="(EventType|Person)" />
+					<if var="current_step" value="EventType" />
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="Sorry, could you repeat? The available airports are Oslo, Bergen, 
-					Trondheim, Stavanger, Moss,	Sandefjord, Tromsø, Bodø, Kristiansand and Ålesund." />
+						value="Sorry, could you repeat? Possible events are Birthday, Anniversary, Party, Chill, Exams, Seminar, Talk, Job, Graduation, or Other" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="AskRepeat" />
+					<if var="current_step" value="Person" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="Sorry, could you repeat? Give me the name of the person." />
 				</effect>
 			</case>
 			<case>
@@ -326,7 +335,7 @@
 				<effect util="1">
 					<set var="u_m"
 						value="Sorry, could you repeat? Please state the month and day of
-					your desired flight." />
+					your event." />
 				</effect>
 			</case>
 			<case>
