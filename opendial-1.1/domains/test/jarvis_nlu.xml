@@ -16,7 +16,7 @@
 	  domain-specific information (such as airports or dates) from the utterance. -->
 	  
 	  
-		<!-- Extracts booking information related to the EventType or Person  -->
+		<!-- Extracts EventType -->
 		<rule>
 			<case>
 				<condition>
@@ -29,8 +29,21 @@
 				</effect>
 			</case>
 		</rule>
+		
+		<!-- Extracts Person -->
+		<rule>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="{Person}" />
+					<if var="Person" relation="in" value="[John, Kate, Mark]" />
+				</condition>
+				<effect>
+					<add var="a_u" value="Inform(Person,{Person})" />
+				</effect>
+			</case>
+		</rule>
 
-		<!-- Extracts booking information related to the flight dates.  -->
+		<!-- Extracts Dates  -->
 		<rule>
 			<case>
 				<condition>
@@ -60,7 +73,7 @@
 			</case>
 		</rule>
 
-		<!-- Extracts booking information related to the Location of tickets.  -->
+		<!-- Extracts Location -->
 		<rule>
 			<case>
 				<condition>
@@ -144,9 +157,20 @@
 					<if var="a_u" relation="contains" value="Inform(Event,{Event})" />
 				</condition>
 				<effect>
-					<set var="EventType" value="{Event}" />
+					<set var="{current_step}" value="{Event}" />
 				</effect>
 			</case>
+
+			<case>
+				<condition>
+					<if var="current_step" value="(Person|EventType)" />
+					<if var="a_u" relation="contains" value="Inform(Person,{Person})" />
+				</condition>
+				<effect>
+					<set var="{current_step}" value="{Person}" />
+				</effect>
+			</case>
+
 			<case>
 				<condition>
 					<if var="current_step" value="(Date|Time)" />

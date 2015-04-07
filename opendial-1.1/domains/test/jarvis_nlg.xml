@@ -28,7 +28,7 @@
 					<if var="current_step" value="Person" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What is the event for?" />
+					<set var="u_m" value="Who is the event for?" />
 				</effect>
 			</case>
 		</rule>
@@ -40,8 +40,7 @@
 					<if var="current_step" value="Date" />
 				</condition>
 				<effect util="1">
-					<set var="u_m"
-						value="When is {EventType}?" />
+					<set var="u_m" value="When is {EventType}?" />
 				</effect>
 			</case>
 		</rule>
@@ -116,9 +115,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="You are ordering {Location} one-way tickets from {Person}
-					to {EventType} on {Date} for a total cost of {TotalCost} EUR. 
-					Shall I confirm your order?" />
+						value="You are adding {Person}'s {EventType} on {Date} at {Location}. Shall I confirm?" />
 				</effect>
 			</case>
 			<case>
@@ -127,9 +124,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="You are ordering {Location} round-trip tickets from {Person}
-					to {EventType} on {Date} and returning on {Time}  for a total cost of 
-					{TotalCost} EUR. Shall I confirm your order?" />
+						value="You are adding {Person}'s {EventType} on {Date} at {Location}. Shall I confirm?" />
 				</effect>
 			</case>
 		</rule>
@@ -141,7 +136,7 @@
 					<if var="current_step" value="Final" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="Do you want to order additional tickets?" />
+					<set var="u_m" value="Do you want to add additional event?" />
 				</effect>
 			</case>
 		</rule>
@@ -221,7 +216,7 @@
 					<if var="a_m" value="Ground(Time,NoReturn)" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, no Time trip." />
+					<set var="u_m" value="OK, no Time" />
 				</effect>
 			</case>
 			<case>
@@ -230,7 +225,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="OK, flying back from {EventType} to {Person} on {Time}." />
+						value="OK, {EventType} for {Person} on {Time}." />
 				</effect>
 			</case>
 		</rule>
@@ -254,7 +249,7 @@
 					<if var="a_m" value="Confirm(Person,{Person})" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="You want to fly from {Person}. Is that correct?" />
+					<set var="u_m" value="The event is for {Person}. Is that correct?" />
 				</effect>
 			</case>
 		</rule>
@@ -267,7 +262,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="You want to fly to {EventType} on {Date1}. Is that correct?" />
+						value="You want to attend {EventType} on {Date1}. Is that correct?" />
 				</effect>
 			</case>
 		</rule>
@@ -279,7 +274,7 @@
 					<if var="a_m" value="Confirm(Time,NoReturn)" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="Do you want to order a Time trip?" />
+					<set var="u_m" value="Do you want to add another event?" />
 				</effect>
 			</case>
 			<case>
@@ -288,7 +283,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="You want to fly back to {Person} on {Date2}. Is that correct?" />
+						value="The event is for {Person} and is on {Date2}. Is that correct?" />
 				</effect>
 			</case>
 		</rule>
@@ -300,7 +295,7 @@
 					<if var="a_m" value="Confirm(Location,{Location})" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="You want to order {Location} tickets. Is that correct?" />
+					<set var="u_m" value="The event is at {Location}. Is that correct?" />
 				</effect>
 			</case>
 		</rule>
@@ -367,8 +362,8 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="One-way flight tickets from {Person} to {EventType} 
-					on {Date} cost {Price} EUR per person. Do you want me to order tickets?" />
+						value="{Person}'s' {EventType} 
+					on {Date}.  Do you want me to add the event?" />
 				</effect>
 			</case>
 			<case>
@@ -377,8 +372,8 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="Flight tickets from {Person} to {EventType} on {Date} and returning 
-						on {Time} cost {Price} EUR per person. Do you want me to order tickets?" />
+						value="{Person}'s' {EventType} 
+					on {Date}.  Do you want me to add the event?" />
 				</effect>
 			</case>
 		</rule>
@@ -390,7 +385,7 @@
 					<if var="a_m" value="Ground(Cancel)" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, your booking is now cancelled." />
+					<set var="u_m" value="OK, your event is now cancelled." />
 				</effect>
 			</case>
 		</rule>
@@ -403,7 +398,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="OK, your tickets are now ordered and will be sent to you via email." />
+						value="OK, your event will be added to your Google calendar" />
 				</effect>
 			</case>
 		</rule>

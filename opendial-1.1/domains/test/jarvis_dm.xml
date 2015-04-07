@@ -427,7 +427,7 @@
 					<set var="EventType^p" value="Other" />
 				</effect>
 			</case>
-			<!-- <case>
+			<!--<case>
 				<condition>
 					<if var="current_step" value="Person" />
 				</condition>
@@ -461,7 +461,7 @@
 				<effect prob="0.05">
 					<set var="Person^p" value="Ålesund" />
 				</effect>
-			</case> -->
+			</case>  -->
 		</rule>
 		
 		
