@@ -69,4 +69,14 @@ public class UtteranceTheme
         });
         return entries;
     }
+    
+    public String toString(){
+        String phrase = "";
+        for (ConllEntry entry: getEntries()){
+            phrase += entry.getFORM() + " ";
+        }
+        return phrase;
+    }
 }
+
+

@@ -4,6 +4,8 @@ package jarvis.modules.parsing;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ParseInterpreter
 {
@@ -21,6 +23,7 @@ public class ParseInterpreter
         
         // general semantic extraction
         ArrayList<UtteranceTheme> ideas = getUtteranceThemes(parseResult.getConll());
+        System.out.println(ideas);
 
         // semantic type classification
         classify(ideas, parseResult.getFrames());
@@ -37,8 +40,7 @@ public class ParseInterpreter
             }
         }
 
-        //TODO: refactor the rest up one level to have access to DM variables
-        // just return the slots and save the leftOvers in a private static variable
+        //TODO: refactor the rest up one level to have access to DM variables // just return the slots and save the leftOvers in a private static variable
         // in this class
 
         // convert general slots into dialogue specific slots (using DM variables)
@@ -136,39 +138,86 @@ public class ParseInterpreter
          *          by extracting all WHYs from the list of ideas and reclassifying
          *          them as their own list of ideas.
          */
+
     }
 
     /** General semantic extraction from POS and dependencies.
      * @param conll is a ConllParse object containing the POS and DEP
      */
     public static ArrayList<UtteranceTheme> getUtteranceThemes(ConllParse conll){
-        /*
-         * =============================
-         * GENERAL SEMANTIC EXTRACTION
-         * =============================
-         * Initialize list of ideas
-         * BFS starting from root. Sort from closest child on right, 
-         *  to furthest child on right, to closest child on left, to furthest
-         *  child on left.
-         * For each word:
-         *  If POS=NN
-         *      If ((HEAD.POS==NN)&&(DEPREL==nn||conj))
-         *          append idea (extend the phrase, maintain original ordering)
-         *      Else If ((HEAD.POS==NN)&&(DEPREL==poss))
-         *          PossBind idea (weakly extend the phrase)
-         *      Else
-         *          add new idea (the noun itself) to list
-         *  Else
-         *      If ((HEAD.POS==NN)&&(DEPREL==amod))
-         *          append idea (extend the phrase, maintain original ordering)
-         *      Else
-         *          do nothing
-         */
         ArrayList<UtteranceTheme> ideas = new ArrayList<UtteranceTheme>();
 
+        int rootID = conll.getChildren(0).get(1).getID();
+
+        dfsDependencyParse(conll, rootID, ideas);
 
         return ideas;
     }
+
+    public static void dfsDependencyParse(ConllParse conll,
+            int id, ArrayList<UtteranceTheme> ideas){
+        ConllEntry current = conll.get(id);
+        
+        String currentPOS = current.getPOSTAG();
+        String headPOS = conll.get(current.getHEAD()).getPOSTAG();
+        String deprel = current.getDEPREL();
+        
+        if (currentPOS.contains("NN")){
+            if (headPOS.contains("NN")&&
+                    (deprel.contains("nn")||deprel.contains("conj"))){
+                // append idea (extend the phrase)
+                if (ideas.size()<1) ideas.add(new UtteranceTheme());
+                UtteranceTheme prev = ideas.get(ideas.size()-1);
+                prev.add(current);
+            }
+            else if (headPOS.contains("NN")&&deprel.contains("poss")){
+                // add new idea, bind to previous idea (weakly extend)
+                UtteranceTheme idea = new UtteranceTheme(current);
+                if (ideas.size()>0){
+                    UtteranceTheme prev = ideas.get(ideas.size()-1);
+                    idea.bindTo(prev);
+                }
+                ideas.add(idea);
+            }
+            else {
+                // add new idea to the list (the noun itself)
+                ideas.add(new UtteranceTheme(current));
+            }
+        }
+        else {
+            if (headPOS.contains("NN")&&deprel.contains("amod")){
+                // append idea (extend the phrase)
+                if (ideas.size()<1) ideas.add(new UtteranceTheme());
+                UtteranceTheme prev = ideas.get(ideas.size()-1);
+                prev.add(current);
+            }
+            else {
+                // do nothing; ignore this word
+            }
+        }
+        // dfs on children, sorted
+        ArrayList<ConllEntry> children = conll.getChildren(id);
+        Collections.sort(children, new Comparator<ConllEntry>(){
+            @Override
+            public int compare(ConllEntry entry1, ConllEntry entry2){
+                // closer to parent prioritized higher
+                // left side of parent prioritized higher
+                int e1_dist = Math.abs(entry1.getID()-id);
+                int e2_dist = Math.abs(entry2.getID()-id);
+                if (e1_dist>e2_dist){return 1;}
+                else if (e1_dist<e2_dist){return -1;}
+                else {
+                    if (entry1.getID()<entry2.getID()) return -1;
+                    else return 1;
+                }
+            }
+        });
+        for (ConllEntry child: children){
+            dfsDependencyParse(conll, child.getID(), ideas);
+        }
+    }
+
+
     public static AcknowledgeUA extractAcknowledgeUA(ParseResult parseResult){
         // extracts whether the user acknowledges yes/no
         // returns null if neither

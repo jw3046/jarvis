@@ -13,8 +13,9 @@ public class ConllParse
         // split by new line
         String lines[] = conllTableString.split("\\n");
         conllEntries = new ArrayList<ConllEntry>();
+        // default symbol for root _#_
         conllEntries.add(
-                new ConllEntry(0,"_ROOT_","_ROOT_","_ROOT_",0,"_ROOT_"));
+                new ConllEntry(0,"_#_","_#_","_#_",0,"_#_"));
         for (String line: lines){
             // split each line by tab
             String item[] = line.split("\\t");
