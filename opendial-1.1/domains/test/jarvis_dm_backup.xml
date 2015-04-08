@@ -6,13 +6,19 @@
 		a prediction model for the prior distributions on the destinations, 
 		departures and next user dialogue act. -->
 
-	<model trigger="Event">
 
-		<!-- Birthday Event -->
+	<model trigger="EventType,Person,Date,Time,Location">
+		<!-- This model specifies the utilities of various system actions, such 
+			as clarification requests (repetitions and confirmations) and 
+			grounding actions. -->
+
+		<!-- If the current step is to ask for the EventType, specifies the utilities 
+			of a confirmation request or a grounding action using the current value of 
+			the "EventType" slot -->
 		<rule>
 			<case>
 				<condition>
-					<if var="Event" value="Birthday" />
+					<if var="current_step" value="EventType" />
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="Ground(EventType,{EventType})" />
@@ -21,23 +27,38 @@
 					<set var="a_m" value="Confirm(EventType,{EventType})" />
 				</effect>
 			</case>
-		</rule>	
+		</rule>
 
-
-		<!-- Anniversary Event -->
+		<!-- If the current step is to ask for the Person, specifies the utilities 
+			of a confirmation request or a grounding action using the current value of 
+			the "Person" slot -->
 		<rule>
 			<case>
 				<condition>
-					<if var="Event" value="Anniversary" />
+					<if var="current_step" value="Person" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="Ground(EventType,{EventType})" />
+					<set var="a_m" value="Ground(Person,{Person})" />
 				</effect>
 				<effect util="0.5">
-					<set var="a_m" value="Confirm(EventType,{EventType})" />
+					<set var="a_m" value="Confirm(Person,{Person})" />
 				</effect>
 			</case>
-		</rule>		
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Event_Person" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(Person,{Person})" />
+				</effect>
+				<effect util="0.5">
+					<set var="a_m" value="Confirm(Person,{Person})" />
+				</effect>
+			</case>
+		</rule>
 	</model>
 	
 	

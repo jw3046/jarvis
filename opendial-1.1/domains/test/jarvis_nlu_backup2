@@ -21,7 +21,8 @@
 			<case>
 				<condition>
 					<if var="u_u" relation="contains" value="(to|from)? {Person}" />
-					<if var="Person" relation="in" value="[Kate, John, Mark]" />
+					<if var="Person" relation="in"
+						value="[Kate, John, Mark]" />
 				</condition>
 				<effect>
 					<add var="a_u" value="Inform(Person,{Person})" />
@@ -32,7 +33,8 @@
 			<case>
 				<condition>
 					<if var="u_u" relation="contains" value="(to|from)? {EventType}" />
-					<if var="EventType" relation="in" value="[Birthday, Anniversary, Party, Chill, Exams, Seminar, Talk, Job, Graduation, Other]" />
+					<if var="EventType" relation="in"
+						value="[Birthday, Anniversary, Party, Chill, Exams, Seminar, Talk, Job, Graduation, Other]" />
 				</condition>
 				<effect>
 					<add var="a_u" value="Inform(EventType,{EventType})" />
@@ -83,16 +85,16 @@
 				<condition operator="and">
 					<if var="a_u" relation="contains" value="Inform(EventType,{EventType})" />
 					<if var="a_u" relation="contains" value="Inform(Person,{Person})" />
-					<if var="a_u" relation="contains" value="Inform(Date,{Month},{Day})" />
 				</condition>
 				<effect>
-					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
 					<set var="Person" value="{Person}" />
-					<set var="Date" value="{Month} {Day}" />
+					<set var="current_step" value="Event_Person" />
 				</effect>
 			</case>
+
 		</rule>
+		
 
 		<!-- If the last system action is a confirmation request and the user confirms the
 		information, also update the corresponding slot-->
