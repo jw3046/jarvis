@@ -20,27 +20,30 @@
 		<rule>
 			<case>
 				<condition>
-					<if var="u_u" relation="contains" value="(to|from)? {Person}" />
-					<if var="Person" relation="in"
-						value="[Kate, John, Mark]" />
+					<if var="u_u" relation="contains" value="(to|from)? {Event}" />
+					<if var="Event" relation="in"
+						value="[Birthday, Anniversary, Party, Chill, Exams, Seminar, Talk, Job, Graduation, Other]" />
+				</condition>
+				<effect>
+					<add var="a_u" value="Inform(Event,{Event}) Inform(Person,{Event})" />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Extracts Person -->
+		<rule>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="{Person}" />
+					<if var="Person" relation="in" value="[John, Kate, Mark]" />
 				</condition>
 				<effect>
 					<add var="a_u" value="Inform(Person,{Person})" />
 				</effect>
 			</case>
 		</rule>
-		<rule>
-			<case>
-				<condition>
-					<if var="u_u" relation="contains" value="(to|from)? {EventType}" />
-					<if var="EventType" relation="in"
-						value="[Birthday, Anniversary, Party, Chill, Exams, Seminar, Talk, Job, Graduation, Other]" />
-				</condition>
-				<effect>
-					<add var="a_u" value="Inform(EventType,{EventType})" />
-				</effect>
-			</case>
-		</rule>
+
+		<!-- Extracts Dates  -->
 		<rule>
 			<case>
 				<condition>
@@ -69,8 +72,75 @@
 				</effect>
 			</case>
 		</rule>
-		
 
+		<!-- Extracts Location -->
+		<rule>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="(at)? {Location}" />
+				</condition>
+				<effect>
+					<add var="a_u" value="Inform(Location,{Location})" />
+				</effect>
+			</case>
+				<case>
+				<condition>
+					<if var="u_u" relation="contains" value="(2|two) (tickets)?" />
+				</condition>
+				<effect>
+					<add var="a_u" value="Inform(Location,2)" />
+				</effect>
+			</case>
+				<case>
+				<condition>
+					<if var="u_u" relation="contains" value="(3|three) (tickets)?" />
+				</condition>
+				<effect>
+					<add var="a_u" value="Inform(Location,3)" />
+				</effect>
+			</case>
+				<case>
+				<condition>
+					<if var="u_u" relation="contains" value="(4|four) (tickets)?" />
+				</condition>
+				<effect>
+					<add var="a_u" value="Inform(Location,4)" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Extracts confirmations and disconfirmations -->
+		<rule>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="(yes|correct|exactly|sure|right)" />
+				</condition>
+				<effect>
+					<add var="a_u" value="Confirm" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="(no|nope|wrong)" />
+				</condition>
+				<effect>
+					<add var="a_u" value="Disconfirm" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Rule of lower priority that associates the dialogue act to "Other"
+		    if nothing else is recognised. -->
+		<rule priority="2">
+			<case>
+				<condition>
+					<if var="u_u" relation="!=" value="None" />
+				</condition>
+				<effect>
+					<add var="a_u" value="Other" />
+				</effect>
+			</case>
+		</rule>
 
 	</model>
 	
@@ -83,16 +153,45 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="a_u" relation="contains" value="Inform(EventType,{EventType})" />
+					<if var="current_step" value="(Person|EventType)" />
+					<if var="a_u" relation="contains" value="Inform(Event,{Event})" />
 					<if var="a_u" relation="contains" value="Inform(Person,{Person})" />
 				</condition>
 				<effect>
-					<set var="EventType" value="{EventType}" />
+					<set var="EventType" value="{Event}" />
 					<set var="Person" value="{Person}" />
-					<set var="current_step" value="Event_Person" />
+
 				</effect>
 			</case>
 
+			<case>
+				<condition>
+					<if var="current_step" value="(Person|EventType)" />
+					<if var="a_u" relation="contains" value="Inform(Person,{Person})" />
+				</condition>
+				<effect>
+					<set var="{current_step}" value="{Person}" />
+				</effect>
+			</case>
+
+			<case>
+				<condition>
+					<if var="current_step" value="(Date|Time)" />
+					<if var="a_u" relation="contains" value="Inform(Date,{Month},{Day})" />
+				</condition>
+				<effect>
+					<set var="{current_step}" value="{Month} {Day}" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="current_step" value="Location" />
+					<if var="a_u" relation="contains" value="Inform(Location,{Location})" />
+				</condition>
+				<effect>
+					<set var="Location" value="{Location}" />
+				</effect>
+			</case>
 		</rule>
 		
 
