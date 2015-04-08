@@ -78,6 +78,8 @@
 	  slots (EventType, Person, dates, time, location, etc.). -->
 	 
 		<!-- Fills the slots in accordance with the information in the dialogue act -->
+
+		<!-- Basic Information -->
 		<rule>
 			<case>
 				<condition operator="and">
@@ -93,6 +95,51 @@
 				</effect>
 			</case>
 		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="a_u" relation="contains" value="Inform(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="Inform(Person,{Person})" />
+				</condition>
+				<effect>
+					<set var="Event" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+					<set var="Person" value="{Person}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="a_u" relation="contains" value="Inform(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="Inform(Date,{Month},{Day})" />
+				</condition>
+				<effect>
+					<set var="Event" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+					<set var="Person" value="{Person}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="a_u" relation="contains" value="Inform(EventType,{EventType})" />
+				</condition>
+				<effect>
+					<set var="Event" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+
+
+
+
+
 
 		<!-- If the last system action is a confirmation request and the user confirms the
 		information, also update the corresponding slot-->

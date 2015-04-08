@@ -13,9 +13,23 @@
 			<case>
 				<condition>
 					<if var="Event" value="Birthday" />
+
+					<!-- check for what slots are filled !!!!!!!!!!!!!! -->
+
+
+
+
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="Ground(EventType,{EventType})" />
+
+					<!-- OR you can do it here by setting new var. Up to you.-->
+
+
+
+
+
+
 				</effect>
 				<effect util="0.5">
 					<set var="a_m" value="Confirm(EventType,{EventType})" />
@@ -41,6 +55,12 @@
 	</model>
 	
 	<!-- more events HERE!!!!!!!!!!!!!!!!!!!!!!  -->
+
+
+
+
+
+
 
 
 	<model trigger="a_m">
