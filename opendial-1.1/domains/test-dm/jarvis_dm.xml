@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain>
+	<!-- Dialogue management models, composed of three models: an action selection 
+		model to find the best system action to execute, a transition model that 
+		specifies how the selected action modifies the current dialogue state, and 
+		a prediction model for the prior distributions on the destinations, 
+		departures and next user dialogue act. -->
+
+
+	<model trigger="Event">
+		<!-- This model specifies the utilities of various system actions, such 
+			as clarification requests (repetitions and confirmations) and 
+			grounding actions. -->
+
+		<!-- If the current step is to ask for the EventType, specifies the utilities 
+			of a confirmation request or a grounding action using the current value of 
+			the "EventType" slot -->
+		<rule>
+			
+			<case>
+				<condition>
+					<if var="Event" relation="contains" value="Birthday" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Person" value="None" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(Person,{Person})" />
+				</effect>
+				<effect util="0.5">
+					<set var="a_m" value="Confirm(Person,{Person})" />
+				</effect>
+			</case>
+			
+			<case>
+				<condition>
+					<if var="Event" relation="contains" value="Birthday" />
+					
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(EventType,{EventType})" />
+				</effect>
+				<effect util="0.5">
+					<set var="a_m" value="Confirm(EventType,{EventType})" />
+				</effect>
+			</case>
+			
+			
+			
+			<case>
+				<condition>
+					<if var="Event" value="Birthday" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Person" relation="!=" value="None" />
+					<if var="Date" value="None" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(Date,{Date})" />
+				</effect>
+				<effect util="0.5">
+					<set var="a_m" value="Confirm(Date,{Date})" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- If the current step is to ask for the Person, specifies the utilities 
+			of a confirmation request or a grounding action using the current value of 
+			the "Person" slot -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Person" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(Person,{Person})" />
+				</effect>
+				<effect util="0.5">
+					<set var="a_m" value="Confirm(Person,{Person})" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Event_Person" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Ground(Person,{Person})" />
+				</effect>
+				<effect util="0.5">
+					<set var="a_m" value="Confirm(Person,{Person})" />
+				</effect>
+			</case>
+		</rule>
+	</model>
+	
+	
+
+
+	<model trigger="a_m">
+		<!-- Transition model that specifies how the selection of a particular 
+			system action affects the current dialogue state, in particular the current 
+			step in the dialogue. -->
+
+		<!-- Moves to the next step if a particular slot has been confirmed -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(EventType,*)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Person" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Person,*)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Date" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Date,*)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="EventType" />
+				</effect>
+			</case>
+			
+			
+			
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Time)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Time" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(NoReturn)" />
+				</condition>
+				<effect prob="1">
+					<set var="Time" value="NoReturn" />
+					<set var="a_m" value="FindOffer" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Time,*)" />
+				</condition>
+				<effect prob="1">
+					<set var="a_m" value="FindOffer" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(MakeOffer)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Location" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Cancel)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Final" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Location,{Location})" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="LastConfirm" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Booking)" />
+				</condition>
+				<effect prob="1">
+					<set var="a_m" value="Book"/>
+					<set var="current_step" value="Final" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Restart)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="EventType" />
+					<set var="EventType" value="None" />
+					<set var="Person" value="None" />
+					<set var="Date" value="None" />
+					<set var="Time" value="None" />
+					<set var="Location" value="None" />
+					<set var="TotalCost" value="None" />
+					<set var="a_u" value="None" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Close)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Close" />
+				</effect>
+			</case>
+		</rule>
+
+
+		<!-- If the external module produces the system action MakeOffer(particular price),
+		registers the price in a separate variable and moves the current step. -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="MakeOffer({Price})" />
+				</condition>
+				<effect>
+					<set var="TotalCost" value="{Price}" />
+					<set var="current_step" value="MakeOffer" />
+				</effect>
+			</case>
+		<!-- If the Location of tickets is grounded, update the total cost by multiplying the
+		price with the Location of tickets. -->
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Location,*)" />
+				</condition>
+				<effect>
+					<set var="TotalCost" value="{TotalCost}*{Location}" />
+				</effect>
+			</case>
+		</rule>
+
+	</model>
+	
+	<model trigger="a_m,current_step">
+		<!-- Specifies the prior distributions for the destinations, departures and
+		responses to yes/no questions -->
+	
+		<!-- Prior probabilities for the destinations and departures -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="EventType" />
+				</condition>
+				<effect prob="0.25">
+					<set var="EventType^p" value="Birthday" />
+				</effect>
+				<effect prob="0.15">
+					<set var="EventType^p" value="Anniversary" />
+				</effect>
+				<effect prob="0.1">
+					<set var="EventType^p" value="Party" />
+				</effect>
+				<effect prob="0.1">
+					<set var="EventType^p" value="Chill" />
+				</effect>
+				<effect prob="0.1">
+					<set var="EventType^p" value="Exams" />
+				</effect>
+				<effect prob="0.1">
+					<set var="EventType^p" value="Seminar" />
+				</effect>
+				<effect prob="0.05">
+					<set var="EventType^p" value="Talk" />
+				</effect>
+				<effect prob="0.05">
+					<set var="EventType^p" value="Job" />
+				</effect>
+				<effect prob="0.05">
+					<set var="EventType^p" value="Graduation" />
+				</effect>
+				<effect prob="0.05">
+					<set var="EventType^p" value="Other" />
+				</effect>
+			</case>
+			<!--<case>
+				<condition>
+					<if var="current_step" value="Person" />
+				</condition>
+				<effect prob="0.25">
+					<set var="Person^p" value="Oslo" />
+				</effect>
+				<effect prob="0.15">
+					<set var="Person^p" value="Bergen" />
+				</effect>
+				<effect prob="0.1">
+					<set var="Person^p" value="Trondheim" />
+				</effect>
+				<effect prob="0.1">
+					<set var="Person^p" value="Stavanger" />
+				</effect>
+				<effect prob="0.1">
+					<set var="Person^p" value="Moss" />
+				</effect>
+				<effect prob="0.1">
+					<set var="Person^p" value="Sandefjord" />
+				</effect>
+				<effect prob="0.05">
+					<set var="Person^p" value="Tromsø" />
+				</effect>
+				<effect prob="0.05">
+					<set var="Person^p" value="Bodø" />
+				</effect>
+				<effect prob="0.05">
+					<set var="Person^p" value="Kristiansand" />
+				</effect>
+				<effect prob="0.05">
+					<set var="Person^p" value="Ålesund" />
+				</effect>
+			</case>  -->
+		</rule>
+		
+		
+			<!-- Prediction rule on the next user dialogue act (the probabilities
+		are here quite low to account for a range of unexpected responses)   -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="(AskRepeat|None)"/>
+					<if var="a_u" relation="!=" value="None"/>
+					<if var="a_u" relation="!=" value="[Other]"/>
+				</condition>
+				<effect prob="0.3">
+					<set var="a_u^p" value="{a_u}"/>
+				</effect>
+			</case>
+			<case>
+				<condition operator="or">
+					<if var="a_m" value="Confirm(*)"/>
+					<if var="current_step" value="Time"/>
+					<if var="current_step" value="MakeOffer"/>
+					<if var="current_step" value="LastConfirm"/>
+					<if var="current_step" value="Final"/>
+				</condition>
+				<effect prob="0.2">
+					<set var="a_u^p" value="[Confirm]"/>
+				</effect>
+				<effect prob="0.2">
+					<set var="a_u^p" value="[Disconfirm]"/>
+				</effect>
+			</case>
+			<case>
+				<effect>
+					<set var="a_u^p" value="None"/>
+				</effect>
+			</case>
+		</rule>
+		
+	</model>
+
+</domain>
