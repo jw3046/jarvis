@@ -32,6 +32,18 @@
 				</effect>
 			</case>
 		</rule>
+		
+		<!-- Asks for the Person -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Gift" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you want to send a gift for {Person}?" />
+				</effect>
+			</case>
+		</rule>
 
 		<!-- Asks for the flight date -->
 		<rule>
@@ -160,6 +172,56 @@
 	<model trigger="a_m">
 		<!-- Model producing new system utterances related to the last system action -->
 
+		<!-- Requsting the Gift -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Request(Gift)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are attending {Person}'s {EventType} on {Date}." />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Requsting the Time -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Request(Time)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are attending {Person}'s {EventType} on {Date}." />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Requsting the Person -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Request(Person)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are attending {EventType} on {Date}." />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Requsting the Date -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Request(Date)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are going to {EventType}." />
+				</effect>
+			</case>
+		</rule>
+		
+		<!--************** End of Update****************-->
+		
 		<!-- grounding the EventType -->
 		<rule>
 			<case>
