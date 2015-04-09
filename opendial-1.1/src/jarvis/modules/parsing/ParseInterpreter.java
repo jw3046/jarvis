@@ -9,10 +9,11 @@ import java.util.Comparator;
 
 public class ParseInterpreter
 {
-        // Valid user acts:
+        // user act formats:
          // Type(EventType)
          // Inform(SlotType,String)
          // Acknowledge(boolean)
+    /*
     public static ArrayList<UserAct> run(ParseResult parseResult){
         //TODO:change after refactoring
         
@@ -52,6 +53,8 @@ public class ParseInterpreter
 
         return extractedInfo;
     }
+    */
+
 
     /** Main activity type classification
      * @param slots dictionary of ideas keyed by its classification

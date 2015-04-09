@@ -53,9 +53,24 @@ public class Semafor implements Module
                     // parse user utterance (dependency and frame-based)
                     ParseResult parseResult = APISemafor.run(user_utterance);
 
+                    /*
                     // interpret parse results, extract relevant information
                     ArrayList<UserAct> userActs =
                         ParseInterpreter.run(parseResult);
+                    */
+                    // get main ideas of the utterance, ordered by dependency
+                    ArrayList<UtteranceTheme> ideas = 
+                        ParseInterpreter.getUtteranceThemes(parseResult.getConll());
+
+                    // semantic type classifcation
+                    ParseInterpreter.classify(ideas, parseResult.getFrames());
+
+                    // classify as who/what/when/where and reorder list
+                   
+                    // TESTING
+                    System.out.println(ideas);
+
+                    ArrayList<UserAct> userActs = new ArrayList<UserAct>();
 
                     for (UserAct ua: userActs){
                         System.out.println(ua);
