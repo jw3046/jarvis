@@ -67,12 +67,17 @@ public class Semafor implements Module
                     ArrayList<HashMap<String,UtteranceTheme>> actions =
                         ParseInterpreter.classify(ideas, parseResult.getFrames());
                    
+                    //TODO: implement ParseInterpreter.convert() to convert
+                    //          general intent into slot-specifc intent (based
+                    //          on DM state). This will return List<UserAct>
+                    //TODO: implement general type classifier to determine
+                    //          what type of event the user wants (this should
+                    //          only be called if the DM state is at the start)
                     
                     ArrayList<UserAct> userActs = new ArrayList<UserAct>();
                     // TESTING
                     System.out.println(ideas);
                     System.out.println(actions);
-                    System.out.println(userActs);
 
 
                     if (userActs.size()>0){
