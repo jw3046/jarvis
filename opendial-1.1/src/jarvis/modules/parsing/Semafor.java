@@ -11,6 +11,7 @@ import com.google.api.client.http.HttpResponseException;
 
 import java.util.Collection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Semafor implements Module
 {
@@ -62,13 +63,13 @@ public class Semafor implements Module
                     ArrayList<UtteranceTheme> ideas = 
                         ParseInterpreter.getUtteranceThemes(parseResult.getConll());
 
-                    // semantic type classifcation
-                    ParseInterpreter.classify(ideas, parseResult.getFrames());
-
-                    // classify as who/what/when/where and reorder list
+                    // classify as who/what/when/where and partition list
+                    ArrayList<HashMap<String,UtteranceTheme>> actions =
+                        ParseInterpreter.classify(ideas, parseResult.getFrames());
                    
                     // TESTING
                     System.out.println(ideas);
+                    System.out.println(actions);
 
                     ArrayList<UserAct> userActs = new ArrayList<UserAct>();
 

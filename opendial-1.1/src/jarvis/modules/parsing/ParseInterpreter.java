@@ -115,7 +115,76 @@ public class ParseInterpreter
      * @param ideas list of relevant ideas in sentence in order of importance
      * @param frames frame-based parsing results
      */
-    public static void classify(ArrayList<UtteranceTheme> ideas, List<ParseFrame> frames){
+    public static ArrayList<HashMap<String,UtteranceTheme>>
+        classify(ArrayList<UtteranceTheme> ideas, List<ParseFrame> frames){
+
+        ArrayList<HashMap<String,UtteranceTheme>> actions = 
+            new ArrayList<HashMap<String,UtteranceTheme>>();
+
+        ArrayList<UtteranceTheme> leftOvers =
+            new ArrayList<UtteranceTheme>(ideas);
+        while (leftOvers.size()>0){
+            HashMap<String,UtteranceTheme> subAction =
+                new HashMap<String,UtteranceTheme>();
+
+            // get first occurence of Calendric_unit frame
+            ParseFrame firstFrame = null;
+            Integer themePosition = Integer.MAX_VALUE;
+            for (ParseFrame frame: frames){
+                if (frame.getTarget().getName().equals("Calendric_unit")){
+                    // collect ids involved in the frame
+                    ArrayList<Integer> ids = frame.getTarget().getIDs();
+                    // find corresponding theme in ideas
+                    for (int i=0; i<leftOvers.size(); i++){
+                        UtteranceTheme theme = leftOvers.get(i);
+                        for (ConllEntry entry: theme.getEntries()){
+                            if (ids.contains(entry.getID())&&themePosition>=i){
+                                // found frame corresponding to earlier theme
+                                firstFrame = frame;
+                                themePosition = i;
+                            }
+                        }
+                    }
+                }
+            }
+            subAction.put("WHEN",null);
+            if (firstFrame != null){
+                // fill out the slot and remove that theme
+                subAction.put("WHEN",leftOvers.remove((int)themePosition));
+            }
+
+            // get first occurrence of proper noun (NNP)
+            subAction.put("NNP",null);
+            for (int i=0; i<leftOvers.size(); i++){
+                boolean brk = false;
+                for (ConllEntry entry: leftOvers.get(i).getEntries()){
+                    if (entry.getPOSTAG().equals("NNP")){
+                        subAction.put("NNP",leftOvers.remove(i));
+                        brk = true;
+                        break;
+                    }
+                }
+                if (brk) break;
+            }
+
+            // get first occurrence of nonproper noun (NN)
+            subAction.put("NN",null);
+            for (int i=0; i<leftOvers.size(); i++){
+                boolean brk = false;
+                for (ConllEntry entry: leftOvers.get(i).getEntries()){
+                    if (entry.getPOSTAG().contains("NN")&&
+                            !(entry.getPOSTAG().equals("NNP"))){
+                        subAction.put("NN", leftOvers.remove(i));
+                        brk = true;
+                        break;
+                    }
+                }
+                if (brk) break;
+            }
+            
+            // add this subaction to the actions list
+            actions.add(subAction);
+        }
         /* =============================
          * SEMANTIC TYPE CLASSIFICATION
          * =============================
@@ -141,7 +210,7 @@ public class ParseInterpreter
          *          by extracting all WHYs from the list of ideas and reclassifying
          *          them as their own list of ideas.
          */
-
+        return actions;
     }
 
     /** General semantic extraction from POS and dependencies.

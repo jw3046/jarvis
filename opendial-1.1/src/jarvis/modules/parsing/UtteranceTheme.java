@@ -27,12 +27,14 @@ public class UtteranceTheme
         entries.add(entry);
     }
 
-    public void remove(int id){
+    public boolean remove(int id){
         for (int i=entries.size()-1; i>=0; i--){
             if (entries.get(i).getID()==id){
                 entries.remove(i);
             }
         }
+        if (entries.size()>0) return true;
+        else return false;
     }
 
     public void bindTo(UtteranceTheme otherTheme){
