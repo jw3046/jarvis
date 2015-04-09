@@ -15,12 +15,9 @@ public class ParseInterpreter
          // Acknowledge(boolean)
     /*
     public static ArrayList<UserAct> run(ParseResult parseResult){
-        //TODO:change after refactoring
         
         // extracts the slot values from the utterance
         // returns empty list if no information found
-        // TODO: after DialogueState is integrated, return null
-        // instead of empty List.
         
         // general semantic extraction
         ArrayList<UtteranceTheme> ideas = getUtteranceThemes(parseResult.getConll());
@@ -41,9 +38,6 @@ public class ParseInterpreter
             }
         }
 
-        //TODO: refactor the rest up one level to have access to DM variables // just return the slots and save the leftOvers in a private static variable
-        // in this class
-
         // convert general slots into dialogue specific slots (using DM variables)
         ArrayList<UserAct> extractedInfo = new ArrayList<UserAct>(convert(slots));;
         // type classification
@@ -63,7 +57,7 @@ public class ParseInterpreter
      */
     public static TypeUA mainTypeClassification(HashMap<String,UtteranceTheme> slots,
             List<UtteranceTheme> leftOvers, List<ParseFrame> frames){
-        // TODO: refactor up one level so it has access to DM to know
+        // use DM to know
         //  whether this classifier is necessary at the current DM state
         return new TypeUA(EventType.EVENT);
         /*
@@ -105,8 +99,7 @@ public class ParseInterpreter
     /** Convert general WHO/WHERE; WHAT; WHEN slots into dialogue-specific slots
      * @param slots dictionary of ideas keyed by its classification
      */
-    public static ArrayList<InformUA> convert(HashMap<String,UtteranceTheme> slots){
-        // TODO: refactor up one level so it has access to DM
+    public static ArrayList<InformUA> convert(List<HashMap<String,UtteranceTheme>> actions){
         ArrayList<InformUA> extractedInfo = new ArrayList<InformUA>();
         return extractedInfo;
     }
@@ -206,9 +199,9 @@ public class ParseInterpreter
          *      Else
          *          Assign (CLASSIFICATION: WHY) to the idea if nothing else
          *
-         * TODO: Note that we can recursively analyze ideas classified as WHY
-         *          by extracting all WHYs from the list of ideas and reclassifying
-         *          them as their own list of ideas.
+         * Note that we can recursively analyze ideas classified as WHY
+         *  by extracting all WHYs from the list of ideas and reclassifying
+         *  them as their own list of ideas.
          */
         return actions;
     }

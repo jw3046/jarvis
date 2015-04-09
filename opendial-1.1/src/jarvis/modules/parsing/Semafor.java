@@ -63,19 +63,17 @@ public class Semafor implements Module
                     ArrayList<UtteranceTheme> ideas = 
                         ParseInterpreter.getUtteranceThemes(parseResult.getConll());
 
-                    // classify as who/what/when/where and partition list
+                    // partition list into sets of when/propernoun/noun
                     ArrayList<HashMap<String,UtteranceTheme>> actions =
                         ParseInterpreter.classify(ideas, parseResult.getFrames());
                    
+                    
+                    ArrayList<UserAct> userActs = new ArrayList<UserAct>();
                     // TESTING
                     System.out.println(ideas);
                     System.out.println(actions);
+                    System.out.println(userActs);
 
-                    ArrayList<UserAct> userActs = new ArrayList<UserAct>();
-
-                    for (UserAct ua: userActs){
-                        System.out.println(ua);
-                    }
 
                     if (userActs.size()>0){
                         // join all user acts into a string by comma
@@ -88,8 +86,15 @@ public class Semafor implements Module
                         system.addContent(assign);
                     }
                     else {
-                        // utterance not understood
-                        system.addContent(new Assignment("a_u", "_?_"));
+                        if (actions.size()>0){
+                            // TODO: DEBUG: REMOVE in final version
+                            system.addContent(
+                                    new Assignment("a_u", actions.toString()));
+                        }
+                        else {
+                            // utterance not understood
+                            system.addContent(new Assignment("a_u", "_?_"));
+                        }
                     }
                     
                 } catch (HttpResponseException e) {
