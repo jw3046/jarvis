@@ -9,100 +9,6 @@ import java.util.Comparator;
 
 public class ParseInterpreter
 {
-        // user act formats:
-         // Type(EventType)
-         // Inform(SlotType,String)
-         // Acknowledge(boolean)
-    /*
-    public static ArrayList<UserAct> run(ParseResult parseResult){
-        
-        // extracts the slot values from the utterance
-        // returns empty list if no information found
-        
-        // general semantic extraction
-        ArrayList<UtteranceTheme> ideas = getUtteranceThemes(parseResult.getConll());
-        System.out.println(ideas);
-
-        // semantic type classification
-        classify(ideas, parseResult.getFrames());
-
-        // load most important (classified) values into slots
-        ArrayList<UtteranceTheme> leftOvers = new ArrayList<UtteranceTheme>();
-        HashMap<String,UtteranceTheme> slots = new HashMap<String,UtteranceTheme>();
-        for (UtteranceTheme idea: ideas){
-            if (idea.getClassification().equals("WHY")){
-                leftOvers.add(idea);
-            }
-            else {
-                slots.put(idea.getClassification(),idea);
-            }
-        }
-
-        // convert general slots into dialogue specific slots (using DM variables)
-        ArrayList<UserAct> extractedInfo = new ArrayList<UserAct>(convert(slots));;
-        // type classification
-        extractedInfo.add(mainTypeClassification(slots,leftOvers,parseResult.getFrames()));
-        // acknowledgement classification
-        extractedInfo.add(extractAcknowledgeUA(parseResult));
-
-        return extractedInfo;
-    }
-    */
-
-
-    /** Main activity type classification
-     * @param slots dictionary of ideas keyed by its classification
-     * @param leftOvers list of ideas that are secondary to the utterance
-     * @param frames list of frames from parse results
-     */
-    public static TypeUA mainTypeClassification(HashMap<String,UtteranceTheme> slots,
-            List<UtteranceTheme> leftOvers, List<ParseFrame> frames){
-        // use DM to know
-        //  whether this classifier is necessary at the current DM state
-        return new TypeUA(EventType.EVENT);
-        /*
-         * =================================
-         * MAIN ACTIVITY TYPE CLASSIFICATION
-         * =================================
-         * String match the WHAT idea, if nothing, string match frame names,
-         *  if nothing, string match the WHY ideas.
-         * If still nothing, (CLASSIFICATION: GENERAL_EVENT)
-         *
-         * Possible things to match
-         * statement, speak_on_topic, talk, lecture
-         * aggregate, amassing, social_event
-         * placing, locative_relation (ie, hanging out)
-         * locale_by_use, restaurant, ingestion, eat
-         * getting
-         * wear, clothing
-         *
-         *
-         * PREVIOUS VERSION:
-         public static TypeUA extractTypeUA(ParseResult parseResult){
-             // extracts which EventType user mentions
-             // returns null if none found
-             
-             // Uses simple string matching for now
-             for (String token: parseResult.getTokens()){
-                 String word = token.toLowerCase();
-                 for (EventType t: EventType.values()){
-                     if (word.equals(t.toString().toLowerCase())){
-                         return new TypeUA(t);
-                     }
-                 }
-             }
-             return null;
-         }
-         */
-    }
-
-    /** Convert general WHO/WHERE; WHAT; WHEN slots into dialogue-specific slots
-     * @param slots dictionary of ideas keyed by its classification
-     */
-    public static ArrayList<InformUA> convert(List<HashMap<String,UtteranceTheme>> actions){
-        ArrayList<InformUA> extractedInfo = new ArrayList<InformUA>();
-        return extractedInfo;
-    }
 
     /** Semantic type classification based on frames and dependencies
      * @param ideas list of relevant ideas in sentence in order of importance
@@ -110,7 +16,7 @@ public class ParseInterpreter
      */
     public static ArrayList<HashMap<String,UtteranceTheme>>
         classify(ArrayList<UtteranceTheme> ideas, List<ParseFrame> frames){
-
+        
         ArrayList<HashMap<String,UtteranceTheme>> actions = 
             new ArrayList<HashMap<String,UtteranceTheme>>();
 
@@ -121,6 +27,7 @@ public class ParseInterpreter
                 new HashMap<String,UtteranceTheme>();
 
             // get first occurence of Calendric_unit frame
+            // TODO: get time values
             ParseFrame firstFrame = null;
             Integer themePosition = Integer.MAX_VALUE;
             for (ParseFrame frame: frames){
@@ -143,7 +50,9 @@ public class ParseInterpreter
             subAction.put("WHEN",null);
             if (firstFrame != null){
                 // fill out the slot and remove that theme
-                subAction.put("WHEN",leftOvers.remove((int)themePosition));
+                UtteranceTheme timeEntry = leftOvers.remove((int)themePosition);
+                timeEntry.setClassification("WHEN");
+                subAction.put("WHEN", timeEntry);
             }
 
             // get first occurrence of proper noun (NNP)
@@ -152,7 +61,8 @@ public class ParseInterpreter
                 boolean brk = false;
                 for (ConllEntry entry: leftOvers.get(i).getEntries()){
                     if (entry.getPOSTAG().equals("NNP")){
-                        subAction.put("NNP",leftOvers.remove(i));
+                        UtteranceTheme properNounEntry = leftOvers.remove(i);
+                        subAction.put("NNP",properNounEntry);
                         brk = true;
                         break;
                     }
@@ -167,7 +77,8 @@ public class ParseInterpreter
                 for (ConllEntry entry: leftOvers.get(i).getEntries()){
                     if (entry.getPOSTAG().contains("NN")&&
                             !(entry.getPOSTAG().equals("NNP"))){
-                        subAction.put("NN", leftOvers.remove(i));
+                        UtteranceTheme nounEntry = leftOvers.remove(i);
+                        subAction.put("NN", nounEntry);
                         brk = true;
                         break;
                     }
@@ -178,31 +89,6 @@ public class ParseInterpreter
             // add this subaction to the actions list
             actions.add(subAction);
         }
-        /* =============================
-         * SEMANTIC TYPE CLASSIFICATION
-         * =============================
-         * For each idea:
-         *  Get set of frames related to this idea.
-         *      If 'Calendric_unit' in this set (and WHEN not assigned yet),
-         *          If multiple exist, use the largest one
-         *              (most coverage of utterance),
-         *          Assign (CLASSIFICATION: WHEN) to this idea.
-         *          TimeBind this idea to the closest,
-         *              earliest (in the idea list), nontemporal idea.
-         *          Remove all words in this frame from all ideas
-         *          TODO: convert to absolute date(time).
-         *      Else If (idea.POS contains NNP) and (WHO/WHERE not assigned yet),
-         *          Assign (CLASSIFICATION: WHO/WHERE) to this idea
-         *      Else If (CLASSIFICATION: WHAT not assigned yet),
-         *          Assign (CLASSIFICATION: WHAT) to this idea
-         *              ie, assign leftmost noncalendar/nnp idea to 'what'
-         *      Else
-         *          Assign (CLASSIFICATION: WHY) to the idea if nothing else
-         *
-         * Note that we can recursively analyze ideas classified as WHY
-         *  by extracting all WHYs from the list of ideas and reclassifying
-         *  them as their own list of ideas.
-         */
         return actions;
     }
 
@@ -240,7 +126,7 @@ public class ParseInterpreter
                 UtteranceTheme idea = new UtteranceTheme(current);
                 if (ideas.size()>0){
                     UtteranceTheme prev = ideas.get(ideas.size()-1);
-                    idea.bindTo(prev);
+                    //idea.bindTo(prev);
                 }
                 ideas.add(idea);
             }

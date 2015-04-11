@@ -8,19 +8,16 @@ import java.util.Collections;
 public class UtteranceTheme
 {
     private ArrayList<ConllEntry> entries;
-    private UtteranceTheme bind;
     private String classification;
 
     public UtteranceTheme(){
         entries = new ArrayList<ConllEntry>();
-        bind = null;
-        classification = null;
+        classification = "";
     }
     public UtteranceTheme(ConllEntry entry){
         entries = new ArrayList<ConllEntry>();
         entries.add(entry);
-        bind = null;
-        classification = null;
+        classification = "";
     }
 
     public void add(ConllEntry entry){
@@ -37,15 +34,7 @@ public class UtteranceTheme
         else return false;
     }
 
-    public void bindTo(UtteranceTheme otherTheme){
-        bind = otherTheme;
-    }
-
-    public UtteranceTheme getBind(){
-        return bind;
-    }
-
-    public void classifyAs(String classification){
+    public void setClassification(String classification){
         this.classification = classification;
     }
 
@@ -76,6 +65,9 @@ public class UtteranceTheme
         String phrase = "";
         for (ConllEntry entry: getEntries()){
             phrase += entry.getFORM() + " ";
+        }
+        if (entries.size()>0 && getClassification().equals("WHEN")){
+            phrase = CalendarTimeUtil.toAbsoluteDate(phrase);
         }
         return phrase;
     }

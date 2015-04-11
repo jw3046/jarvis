@@ -81,27 +81,13 @@ public class CalendarUpdate implements Module {
 			String action = state.queryProb("a_m").toDiscrete().getBest().toString();
 			
 			if (action.equals("QueryEvent")) {
-                            /* TODO: implement event query
-				String returndate = state.queryProb("ReturnDate")
-                                    .toDiscrete().getBest().toString();
-				
-                                // find event in gcal
-				int price = (returndate.equals("NoReturn"))? 179 : 299;
-				String newAction="MakeOffer(" + price + ")";
-				system.addContent(new Assignment("a_m", newAction));
-                                */
+                            //TODO: implement event query
+                            // find event in gcal
 			}
 			else if (action.equals("AddEvent")) {
                             // TODO: extract relevant fields from dialogue
                                 String user_act = state.queryProb("a_u").
                                     toDiscrete().getBest().toString();
-			    /*	
-				String departure = state.queryProb("Departure").toDiscrete().getBest().toString();
-				String destination = state.queryProb("Destination").toDiscrete().getBest().toString();
-				String date = state.queryProb("Date").toDiscrete().getBest().toString();
-				String returndate = state.queryProb("ReturnDate").toDiscrete().getBest().toString();
-				String nbtickets = state.queryProb("NbTickets").toDiscrete().getBest().toString();
-                                */
                                 // add new event to gcal
                                 try {
                                     System.out.println("Connecting to GCal...");
@@ -112,7 +98,7 @@ public class CalendarUpdate implements Module {
                                 }
 
                                 // completion message
-				String info = "GCal Event added (not yet implemented)";
+				String info = "GCal Event added";
                                 System.out.println(info);
 			}
 		}

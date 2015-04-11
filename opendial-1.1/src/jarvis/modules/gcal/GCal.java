@@ -158,16 +158,31 @@ public class GCal
   }
 
   private static Event newEvent(String data) {
-      //TODO: implement newEvent where u can set the fields
+    //TODO: implement newEvent where u can set the fields
     Event event = new Event();
     event.setSummary(data);
     event.setDescription("This is a test event...");
-    Date startDate = new Date();
-    Date endDate = new Date(startDate.getTime() + 3600000);
-    DateTime start = new DateTime(startDate, TimeZone.getTimeZone("UTC"));
-    event.setStart(new EventDateTime().setDateTime(start));
-    DateTime end = new DateTime(endDate, TimeZone.getTimeZone("UTC"));
-    event.setEnd(new EventDateTime().setDateTime(end));
+    
+    // check if time value has been filled
+    String WHEN = "WHEN=";
+    String NULL = WHEN+"null";
+    int startIndex = data.indexOf(WHEN);
+    if (data.substring(startIndex,startIndex+NULL.length()).equals(NULL)){
+        
+        Date startDate = new Date();
+        Date endDate = new Date(startDate.getTime() + 3600000);
+        DateTime start = new DateTime(startDate, TimeZone.getTimeZone("UTC"));
+        event.setStart(new EventDateTime().setDateTime(start));
+        DateTime end = new DateTime(endDate, TimeZone.getTimeZone("UTC"));
+        event.setEnd(new EventDateTime().setDateTime(end));
+    }
+    else {
+        // extract time info
+        int endIndex = data.indexOf("}", startIndex);
+        String time = data.substring(startIndex+WHEN.length(),endIndex);
+        event.setStart(new EventDateTime().setDateTime(new DateTime(time+":00-04:00")));
+        event.setEnd(new EventDateTime().setDateTime(new DateTime(time+":01-04:00")));
+    }
     return event;
   }
 

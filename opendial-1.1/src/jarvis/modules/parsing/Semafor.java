@@ -54,11 +54,6 @@ public class Semafor implements Module
                     // parse user utterance (dependency and frame-based)
                     ParseResult parseResult = APISemafor.run(user_utterance);
 
-                    /*
-                    // interpret parse results, extract relevant information
-                    ArrayList<UserAct> userActs =
-                        ParseInterpreter.run(parseResult);
-                    */
                     // get main ideas of the utterance, ordered by dependency
                     ArrayList<UtteranceTheme> ideas = 
                         ParseInterpreter.getUtteranceThemes(parseResult.getConll());
@@ -66,15 +61,15 @@ public class Semafor implements Module
                     // partition list into sets of when/propernoun/noun
                     ArrayList<HashMap<String,UtteranceTheme>> actions =
                         ParseInterpreter.classify(ideas, parseResult.getFrames());
+
+                    ArrayList<UserAct> userActs = new ArrayList<UserAct>();
+                    // convert general information into calendar-domain slots
+                    //userActs.addAll(CalendarIntent.convert(actions));
                    
-                    //TODO: implement ParseInterpreter.convert() to convert
-                    //          general intent into slot-specifc intent (based
-                    //          on DM state). This will return List<UserAct>
                     //TODO: implement general type classifier to determine
                     //          what type of event the user wants (this should
                     //          only be called if the DM state is at the start)
                     
-                    ArrayList<UserAct> userActs = new ArrayList<UserAct>();
                     // TESTING
                     System.out.println(ideas);
                     System.out.println(actions);
