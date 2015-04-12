@@ -45,7 +45,7 @@
 			</case>
 		</rule>
 
-		<!-- Asks for the flight date -->
+		<!-- Asks for the  date -->
 		<rule>
 			<case>
 				<condition>
@@ -56,6 +56,57 @@
 				</effect>
 			</case>
 		</rule>
+
+		<!-- Asks for the  Place -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Place" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Where is {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Asks for the  Number of years for Anniversary -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="NumberOfYear" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="How many years is {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Asks for the  Subject  -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Subject" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="What is the subject/topic for the {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Asks for the DressCode  -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="DressCode" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="What is the dress code required for the {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+		
+		
+		<!-- *******************************-->
 
 		<!-- Asks whether to book a Time trip -->
 		<rule>
@@ -216,6 +267,31 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m" value="OK, You are going to {EventType}." />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Requsting the Place -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Request(Place)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are going to {EventType}." />
+				</effect>
+			</case>
+		</rule>
+		
+		
+		<!-- Requsting the NumberofYear -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Request(NumberOfYear)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are going to {EventType} on {Date}." />
 				</effect>
 			</case>
 		</rule>

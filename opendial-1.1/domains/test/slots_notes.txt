@@ -4,52 +4,51 @@ Welcome
     -specify type of event (birthday, graduation, test, parties,
     anniversary, etc)
 -date
-    - must have: month, date
+    - must have: month, date(Date)
     - optional: time(hour, min)
 
 I. Birthday
-    -name
-    -gift Y/N?
-    -where?
-    -outfit
+    -name(Person)
+    -gift Y/N?(Gift)
+    -where?(Place)
+    -outfit(Note)
 
 II. Anniversary
     - number
-    - gift Y/N?
-    - where?
-    - outfit
+    - gift Y/N?(Gift)
+    - where?(Place)
+    - outfit(Note)
 
 III. Party
-    - who's party
-    - occasion? (just, celebrate something, etc)
-    - gift Y/N?
-    - where?
-    - outfit
+    - who's party(Person)
+    - gift Y/N?(Gift)
+    - where?(Place)
+    - outfit(Note)
 
 IV. Chill
-    - with who?
-    - where?
+    - with who?(Person)
+    - where?(Place)
 
 V. Exams
-    - what exam?
-    - where?
+    - what exam?(Subject/Topic)
+    - where?(Place)
 
 VI. Seminar/Talk
-    - what is it about?
-    - speaker
-    - location
-    - dress code?
+    - what is it about?(Subject/Topic)
+    - speaker(Person)
+    - location(Place)
+    - dress code?(DressCode)
 
 VII. Job
-    - what is it about?
-    - speaker/interviewer/etc
-    - location
-    - dress code?
+    - what is it about?(Subject/Topic)
+    - speaker/interviewer/etc(Person)
+    - location(Place)
+    - dress code?(DressCode)
 
 VIII. Graduation
-    - who
-    - school
-    - gift?
+    - who(Person)
+    - school(Place)
+    - gift?(Gift)
 
 
 IX. Other
