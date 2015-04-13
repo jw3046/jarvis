@@ -70,6 +70,27 @@
 		
 
 
+
+
+		<rule>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="yes" />
+				</condition>
+				<effect>
+					<add var="a_u" value="ConfirmY" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="no" />
+				</condition>
+				<effect>
+					<add var="a_u" value="ConfirmN" />
+				</effect>
+			</case>
+		</rule>
+
 	</model>
 	
 	
@@ -144,7 +165,7 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="a_u" relation="contains" value="yes" />
+					<if var="a_u" relation="contains" value="ConfirmY" />
 				</condition>
 				<effect>
 					<set var="Event" value="ConfirmY" />
@@ -155,7 +176,7 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="a_u" relation="contains" value="no" />
+					<if var="a_u" relation="contains" value="ConfirmN" />
 				</condition>
 				<effect>
 					<set var="Event" value="ConfirmN"/>
