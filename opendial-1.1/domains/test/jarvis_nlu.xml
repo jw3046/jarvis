@@ -24,7 +24,7 @@
 					<if var="Person" relation="in" value="[Kate, John, Mark]" />
 				</condition>
 				<effect>
-					<add var="a_u" value="Inform(Person,{Person})" />
+					<add var="a_u" value="(Person,{Person})" />
 				</effect>
 			</case>
 		</rule>
@@ -35,7 +35,7 @@
 					<if var="EventType" relation="in" value="[Birthday, Anniversary, Party, Chill, Exams, Seminar, Talk, Job, Graduation, Other]" />
 				</condition>
 				<effect>
-					<add var="a_u" value="Inform(EventType,{EventType})" />
+					<add var="a_u" value="(EventType,{EventType})" />
 				</effect>
 			</case>
 		</rule>
@@ -50,7 +50,7 @@
 					<if var="Day" relation="&lt;" value="32" />
 				</condition>
 				<effect>
-					<add var="a_u" value="Inform(Date,{Month},{Day})" />
+					<add var="a_u" value="(Date,{Month},{Day})" />
 				</effect>
 			</case>
 			<case>
@@ -63,7 +63,7 @@
 					<if var="Day" relation="&lt;" value="32" />
 				</condition>
 				<effect>
-					<add var="a_u" value="Inform(Date,{Month},{Day})" />
+					<add var="a_u" value="(Date,{Month},{Day})" />
 				</effect>
 			</case>
 		</rule>
@@ -83,9 +83,9 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="a_u" relation="contains" value="Inform(EventType,{EventType})" />
-					<if var="a_u" relation="contains" value="Inform(Person,{Person})" />
-					<if var="a_u" relation="contains" value="Inform(Date,{Month},{Day})" />
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="(Person,{Person})" />
+					<if var="a_u" relation="contains" value="(Date,{Month},{Day})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -99,8 +99,8 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="a_u" relation="contains" value="Inform(EventType,{EventType})" />
-					<if var="a_u" relation="contains" value="Inform(Person,{Person})" />
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="(Person,{Person})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -113,8 +113,8 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="a_u" relation="contains" value="Inform(EventType,{EventType})" />
-					<if var="a_u" relation="contains" value="Inform(Date,{Month},{Day})" />
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="(Date,{Month},{Day})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -127,7 +127,7 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="a_u" relation="contains" value="Inform(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -140,9 +140,32 @@
 
 
 
+		<!-- yes / no --> 
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="a_u" relation="contains" value="yes" />
+				</condition>
+				<effect>
+					<set var="Event" value="ConfirmY" />
+				</effect>
+			</case>
+		</rule>
 
-		<!-- If the last system action is a confirmation request and the user confirms the
-		information, also update the corresponding slot-->
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="a_u" relation="contains" value="no" />
+				</condition>
+				<effect>
+					<set var="Event" value="ConfirmN"/>
+				</effect>
+			</case>
+		</rule>
+
+
+
+		<!-- If the last system action is a confirmation request and the user confirms the information, also update the corresponding slot-->
 		<rule>
 			<case>
 				<condition>
