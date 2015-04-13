@@ -17,7 +17,7 @@
 					<if var="Date" relation="=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="request(Date)">
+					<set var="a_m" value="request(Date)"/>
 					</effect>
 				</case>
 				
@@ -27,11 +27,11 @@
 						
 					</condition>
 					<effect util="5">
-						<set var="a_m" value="request(EventType)">
+						<set var="a_m" value="request(EventType)"/>
 						</effect>
-					</case>
+				</case>
 				
-			</rule>
+		</rule>
 					
 
 		<!-- Birthday Event -->
@@ -679,7 +679,7 @@
 					<set var="a_m" value="Confirm(EventType,{EventType})" />
 				</effect>
 			</case>
-		
+		</rule>
 		
 	</model>
 	
@@ -953,41 +953,7 @@
 					<set var="EventType^p" value="Other" />
 				</effect>
 			</case>
-			<!--<case>
-				<condition>
-					<if var="current_step" value="Person" />
-				</condition>
-				<effect prob="0.25">
-					<set var="Person^p" value="Oslo" />
-				</effect>
-				<effect prob="0.15">
-					<set var="Person^p" value="Bergen" />
-				</effect>
-				<effect prob="0.1">
-					<set var="Person^p" value="Trondheim" />
-				</effect>
-				<effect prob="0.1">
-					<set var="Person^p" value="Stavanger" />
-				</effect>
-				<effect prob="0.1">
-					<set var="Person^p" value="Moss" />
-				</effect>
-				<effect prob="0.1">
-					<set var="Person^p" value="Sandefjord" />
-				</effect>
-				<effect prob="0.05">
-					<set var="Person^p" value="Tromsø" />
-				</effect>
-				<effect prob="0.05">
-					<set var="Person^p" value="Bodø" />
-				</effect>
-				<effect prob="0.05">
-					<set var="Person^p" value="Kristiansand" />
-				</effect>
-				<effect prob="0.05">
-					<set var="Person^p" value="Ålesund" />
-				</effect>
-			</case>  -->
+			
 		</rule>
 		
 		
