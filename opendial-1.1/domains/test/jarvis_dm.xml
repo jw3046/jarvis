@@ -758,15 +758,15 @@
 					<if var="current_step" value="Confirm_Event"/>
 				</condition>
 				<effect prob="1">
-					<set var="Date" value="none"/>
-					<set var="Person" value="none"/>
-					<set var="Gift" value="none"/>
-					<set var="Place" value="none"/>
-					<set var="Note" value="none"/>
-					<set var="Subject" value="none"/>
-					<set var="DressCode" value="none"/>
-					<set var="NumberOfYear" value="none"/>
-					<set var="EventType" value="none"/>
+					<set var="Date" value"none"/>
+					<set var="Person" value"none"/>
+					<set var="Gift" value"none"/>
+					<set var="Place" value"none"/>
+					<set var="Note" value"none"/>
+					<set var="Subject" value"none"/>
+					<set var="DressCode" value"none"/>
+					<set var="NumberOfYear" value"none"/>
+					<set var="EventType" value"none"/>
 					
 					<set var="current_step" value="EventType" />
 				</effect>
