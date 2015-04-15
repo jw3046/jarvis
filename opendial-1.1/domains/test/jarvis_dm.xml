@@ -761,6 +761,16 @@
 					<if var="a_m" value="Request(Gift)" />
 				</condition>
 				<effect prob="1">
+					<set var="current_step" value="Gift_Request" />
+				</effect>
+			</case>
+			
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmY" />
+					<if var="current_step" value="Gift_Request" />
+				</condition>
+				<effect prob="1">
 					<set var="current_step" value="Gift" />
 				</effect>
 			</case>
