@@ -24,6 +24,10 @@
 		<variable id="current_step">
 			<value>EventType</value>
 		</variable>
+		
+		<variable id="EventType">
+			<value>NoEvent</value>
+		</variable>
 
 	</initialstate>
 
