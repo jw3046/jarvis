@@ -17,6 +17,8 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m" value="What is your event?" />
+					<add var="ET" value="NoEvent" />
+
 				</effect>
 			</case>
 		</rule>
@@ -33,14 +35,25 @@
 			</case>
 		</rule>
 		
-		<!-- Asks for the Person -->
+		<!-- Asks for the Gift -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Gift_Request" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you want to send a gift for {Person}?" />
+				</effect>
+			</case>
+		</rule>
+			
 		<rule>
 			<case>
 				<condition>
 					<if var="current_step" value="Gift" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="Do you want to send a gift for {Person}?" />
+					<set var="u_m" value="What gift do you want for {Person}?" />
 				</effect>
 			</case>
 		</rule>
@@ -101,6 +114,29 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m" value="What is the dress code required for the {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Asks for the Note -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Note_Request" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you have any other information to add for {EventType}" />
+				</effect>
+			</case>
+		</rule>
+			
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Note" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="What's to add in for {EventType}?" />
 				</effect>
 			</case>
 		</rule>
@@ -279,6 +315,19 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m" value="OK, You are going to {EventType}." />
+				</effect>
+			</case>
+		</rule>
+		
+		
+		<!-- Requsting the Place -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmY" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="*** System Message: Confirming..**" />
 				</effect>
 			</case>
 		</rule>

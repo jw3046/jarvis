@@ -726,7 +726,7 @@
 			step in the dialogue. -->			
 		<!-- Moves to the next step if a particular slot has been confirmed -->
 		<rule>
-			
+			<!-- Request Date -->
 			<case>
 				<condition>
 					<if var="a_m" value="Request(Date)" />
@@ -736,7 +736,7 @@
 				</effect>
 			</case>
 			
-			
+			<!-- Request Time-->
 			<case>
 				<condition>
 					<if var="a_m" value="Request(Time)" />
@@ -746,7 +746,7 @@
 				</effect>
 			</case>
 			
-			
+			<!-- Request Person-->
 			<case>
 				<condition>
 					<if var="a_m" value="Request(Person)" />
@@ -756,16 +756,27 @@
 				</effect>
 			</case>
 			
+			<!-- Request Gift -->
 			<case>
 				<condition>
 					<if var="a_m" value="Request(Gift)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Gift_Request" />
+				</effect>
+			</case>
+			
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmY" />
+					<if var="current_step" value="Gift_Request" />
 				</condition>
 				<effect prob="1">
 					<set var="current_step" value="Gift" />
 				</effect>
 			</case>
 			
-			
+			<!-- Request Number of Years -->
 			<case>
 				<condition>
 					<if var="a_m" value="Request(NumberOfYear)" />
@@ -775,6 +786,7 @@
 				</effect>
 			</case>
 			
+			<!-- Request Place -->
 			<case>
 				<condition>
 					<if var="a_m" value="Request(Place)" />
@@ -784,6 +796,7 @@
 				</effect>
 			</case>
 			
+			<!-- Request Subject -->
 			<case>
 				<condition>
 					<if var="a_m" value="Request(Subject)" />
@@ -793,13 +806,33 @@
 				</effect>
 			</case>
 			
-			
+			<!-- Request Dress Code -->
 			<case>
 				<condition>
 					<if var="a_m" value="Request(DressCode)" />
 				</condition>
 				<effect prob="1">
 					<set var="current_step" value="DressCode" />
+				</effect>
+			</case>
+			
+			<!-- Request Node -->
+			<case>
+				<condition>
+					<if var="a_m" value="Request(Node)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Node_Request" />
+				</effect>
+			</case>
+			
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmY" />
+					<if var="current_step" value="Node_Request" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Node" />
 				</effect>
 			</case>
 			
