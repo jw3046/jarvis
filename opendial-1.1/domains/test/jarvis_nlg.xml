@@ -142,6 +142,31 @@
 		</rule>
 		
 		
+		<!-- Asks for Confirmation to Create Event -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Confirm_Event" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you want to add {EventType} on {Date} to the calendar?" />
+				</effect>
+			</case>
+		</rule>
+			
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Note" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="What's to add in for {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+		
+		
+		
 		<!-- *******************************-->
 
 		<!-- Asks whether to book a Time trip -->

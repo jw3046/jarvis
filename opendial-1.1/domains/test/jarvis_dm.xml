@@ -47,7 +47,7 @@
 					<if var="Note" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreatEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -142,7 +142,7 @@
 					<if var="Note" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreatEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -255,7 +255,7 @@
 					<if var="Note" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />			
+					<set var="a_m" value="CreatEvent(EventType)" />			
 				</effect>
 				<effect util="0.5">
 					<set var="a_m" value="Confirm(EventType,{EventType})" />
@@ -340,7 +340,7 @@
 					<if var="Place" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreatEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -394,7 +394,7 @@
 					<if var="Place" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreatEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -446,7 +446,7 @@
 					<if var="DressCode" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreatEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -534,7 +534,7 @@
 					<if var="DressCode" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreatEvent({EventType}})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -622,7 +622,7 @@
 					<if var="Gift" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreatEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -726,6 +726,52 @@
 			step in the dialogue. -->			
 		<!-- Moves to the next step if a particular slot has been confirmed -->
 		<rule>
+			
+			
+			<!-- Creat Event -->
+			<case>
+				<condition>
+					<if var="a_m" value="CreatEvent({EventType})" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Confirm_Event" />
+				</effect>
+			</case>
+			
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmY" />
+					<if var="current_step" value="Confirm_Event"/>
+				</condition>
+				<effect prob="1">
+					<!-- Trigger External Model -->
+					<set var="current_step" value="Confirm" />
+				</effect>
+			</case>
+			
+			
+			<!-- Erase All Variable Value, System Start Again -->
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmN" />
+					<if var="current_step" value="Confirm_Event"/>
+				</condition>
+				<effect prob="1">
+					<set var="Date" value"none"/>
+					<set var="Person" value"none"/>
+					<set var="Gift" value"none"/>
+					<set var="Place" value"none"/>
+					<set var="Note" value"none"/>
+					<set var="Subject" value"none"/>
+					<set var="DressCode" value"none"/>
+					<set var="NumberOfYear" value"none"/>
+					<set var="EventType" value"none"/>
+					
+					<set var="current_step" value="EventType" />
+				</effect>
+			</case>
+			
+	
 			<!-- Request Date -->
 			<case>
 				<condition>
