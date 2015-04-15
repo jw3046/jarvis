@@ -17,7 +17,8 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m" value="What is your event?" />
-					<set var="EventType" value="NoEvent" />
+					<add var="ET" value="NoEvent" />
+
 				</effect>
 			</case>
 		</rule>
