@@ -681,9 +681,37 @@
 			</case>
 		</rule>
 		
+
+		<!-- Yes/ NO -->
+		<rule>
+			<!-- Got All necessary Information, confirm create corresponding calendar event -->
+			<case>
+				<condition>
+					<if var="Event" value="ConfirmY" />
+					
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="ConfirmY" />
+					
+				</effect>
+				
+			</case>
+			
+			
+			<!-- Got All necessary Information except for Gift -->
+			<case>
+				<condition>
+					<if var="Event" value="ConfirmN" />
+					
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="ConfirmN" />
+					
+				</effect>
+			</case>
+		</rule>	
 	</model>
-	
-	
+		
 
 
 
@@ -695,8 +723,7 @@
 	<model trigger="a_m">
 		<!-- Transition model that specifies how the selection of a particular 
 			system action affects the current dialogue state, in particular the current 
-			step in the dialogue. -->
-
+			step in the dialogue. -->			
 		<!-- Moves to the next step if a particular slot has been confirmed -->
 		<rule>
 			
