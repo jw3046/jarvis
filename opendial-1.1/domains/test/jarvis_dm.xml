@@ -713,19 +713,11 @@
 	</model>
 		
 
-
-
-
-
-
-
-
 	<model trigger="a_m">
 		<!-- Transition model that specifies how the selection of a particular 
 			system action affects the current dialogue state, in particular the current 
 			step in the dialogue. -->			
 		<!-- Moves to the next step if a particular slot has been confirmed -->
-<<<<<<< Updated upstream
 		<rule>
 			
 			
@@ -991,8 +983,7 @@
 				</effect>
 			</case>
 		</rule>
-=======
->>>>>>> Stashed changes
+
 
 		
 	</model>
