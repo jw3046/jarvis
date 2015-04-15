@@ -55,8 +55,12 @@ public class ParseInterpreter
                 subAction.put("WHEN", timeEntry);
             }
 
-            // get first occurrence of proper noun (NNP)
-            subAction.put("NNP",null);
+            // get WHERE
+            // TODO: use NER, Place or Organization
+            
+            // get first occurrence of proper noun WHO
+            // TODO: use NER, Person
+            subAction.put("WHO",null);
             for (int i=0; i<leftOvers.size(); i++){
                 boolean brk = false;
                 for (ConllEntry entry: leftOvers.get(i).getEntries()){
@@ -70,8 +74,9 @@ public class ParseInterpreter
                 if (brk) break;
             }
 
-            // get first occurrence of nonproper noun (NN)
-            subAction.put("NN",null);
+            // get first occurrence of nonproper noun WHAT
+            // use NER, Organization
+            subAction.put("WHAT",null);
             for (int i=0; i<leftOvers.size(); i++){
                 boolean brk = false;
                 for (ConllEntry entry: leftOvers.get(i).getEntries()){
