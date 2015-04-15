@@ -191,21 +191,7 @@
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Gift" value="{Gift}" />
-				</effect>
-			</case>
-		</rule>
-
-		<rule>
-			<case>
-				<condition operator="and">
-					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="(Outfit, {Outfit})" />
-				</condition>
-				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
-					<set var="Outfit" value="{Outfit}" />
+					<set var="Location" value="{Location}" />
 				</effect>
 			</case>
 		</rule>
@@ -281,8 +267,6 @@
 					<set var="Time" value="{Time}" />
 					<set var="Location" value="{Location}" />
 					<set var="Gift" value="{Gift}" />
-					<set var="Outfit" value="{Outfit}" />
-
 				</effect>
 			</case>
 		</rule>

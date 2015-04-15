@@ -47,7 +47,7 @@
 					<if var="Note" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreateEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -142,7 +142,7 @@
 					<if var="Note" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreateEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -255,7 +255,7 @@
 					<if var="Note" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />			
+					<set var="a_m" value="CreateEvent({EventType})" />			
 				</effect>
 				<effect util="0.5">
 					<set var="a_m" value="Confirm(EventType,{EventType})" />
@@ -340,7 +340,7 @@
 					<if var="Place" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreateEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -394,7 +394,7 @@
 					<if var="Place" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreateEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -446,7 +446,7 @@
 					<if var="DressCode" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreateEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -534,7 +534,7 @@
 					<if var="DressCode" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreateEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -622,7 +622,7 @@
 					<if var="Gift" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreatEvent(Event)" />
+					<set var="a_m" value="CreateEvent({EventType})" />
 					
 				</effect>
 				<effect util="0.5">
@@ -713,19 +713,58 @@
 	</model>
 		
 
-
-
-
-
-
-
-
 	<model trigger="a_m">
 		<!-- Transition model that specifies how the selection of a particular 
 			system action affects the current dialogue state, in particular the current 
 			step in the dialogue. -->			
 		<!-- Moves to the next step if a particular slot has been confirmed -->
 		<rule>
+			
+			
+			<!-- Creat Event -->
+			<case>
+				<condition>
+					<if var="a_m" value="CreatEvent({EventType})" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="Confirm_Event" />
+				</effect>
+			</case>
+			
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmY" />
+					<if var="current_step" value="Confirm_Event"/>
+				</condition>
+				<effect prob="1">
+					<!-- Trigger External Model -->
+					<set var="current_step" value="Confirm" />
+				</effect>
+			</case>
+			
+			
+			<!-- Erase All Variable Value, System Start Again -->
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmN" />
+					<if var="current_step" value="Confirm_Event"/>
+				</condition>
+				<effect prob="1">
+					<set var="Date" value="none"/>
+					<set var="Person" value="none"/>
+					<set var="Gift" value="none"/>
+					<set var="Place" value="none"/>
+					<set var="Note" value="none"/>
+					<set var="Subject" value="none"/>
+					<set var="DressCode" value="none"/>
+					<set var="NumberOfYear" value="none"/>
+					<set var="EventType" value="none"/>
+					
+					<set var="current_step" value="EventType" />
+				</effect>
+			</case>
+			
+	
 			<!-- Request Date -->
 			<case>
 				<condition>
@@ -941,113 +980,6 @@
 				</condition>
 				<effect prob="1">
 					<set var="current_step" value="Close" />
-				</effect>
-			</case>
-		</rule>
-
-
-		<!-- If the external module produces the system action MakeOffer(particular price),
-		registers the price in a separate variable and moves the current step. -->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="MakeOffer({Price})" />
-				</condition>
-				<effect>
-					<set var="TotalCost" value="{Price}" />
-					<set var="current_step" value="MakeOffer" />
-				</effect>
-			</case>
-		<!-- If the Location of tickets is grounded, update the total cost by multiplying the
-		price with the Location of tickets. -->
-			<case>
-				<condition>
-					<if var="a_m" value="Ground(Location,*)" />
-				</condition>
-				<effect>
-					<set var="TotalCost" value="{TotalCost}*{Location}" />
-				</effect>
-			</case>
-		</rule>
-
-	</model>
-	
-	<model trigger="a_m,current_step">
-		<!-- Specifies the prior distributions for the destinations, departures and
-		responses to yes/no questions -->
-	
-		<!-- Prior probabilities for the destinations and departures -->
-		<rule>
-			<case>
-				<condition>
-					<if var="current_step" value="EventType" />
-				</condition>
-				<effect prob="0.25">
-					<set var="EventType^p" value="Birthday" />
-				</effect>
-				<effect prob="0.15">
-					<set var="EventType^p" value="Anniversary" />
-				</effect>
-				<effect prob="0.1">
-					<set var="EventType^p" value="Party" />
-				</effect>
-				<effect prob="0.1">
-					<set var="EventType^p" value="Chill" />
-				</effect>
-				<effect prob="0.1">
-					<set var="EventType^p" value="Exams" />
-				</effect>
-				<effect prob="0.1">
-					<set var="EventType^p" value="Seminar" />
-				</effect>
-				<effect prob="0.05">
-					<set var="EventType^p" value="Talk" />
-				</effect>
-				<effect prob="0.05">
-					<set var="EventType^p" value="Job" />
-				</effect>
-				<effect prob="0.05">
-					<set var="EventType^p" value="Graduation" />
-				</effect>
-				<effect prob="0.05">
-					<set var="EventType^p" value="Other" />
-				</effect>
-			</case>
-			
-		</rule>
-		
-		
-			<!-- Prediction rule on the next user dialogue act (the probabilities
-		are here quite low to account for a range of unexpected responses)   -->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="(AskRepeat|None)"/>
-					<if var="a_u" relation="!=" value="None"/>
-					<if var="a_u" relation="!=" value="[Other]"/>
-				</condition>
-				<effect prob="0.3">
-					<set var="a_u^p" value="{a_u}"/>
-				</effect>
-			</case>
-			<case>
-				<condition operator="or">
-					<if var="a_m" value="Confirm(*)"/>
-					<if var="current_step" value="Time"/>
-					<if var="current_step" value="MakeOffer"/>
-					<if var="current_step" value="LastConfirm"/>
-					<if var="current_step" value="Final"/>
-				</condition>
-				<effect prob="0.2">
-					<set var="a_u^p" value="[Confirm]"/>
-				</effect>
-				<effect prob="0.2">
-					<set var="a_u^p" value="[Disconfirm]"/>
-				</effect>
-			</case>
-			<case>
-				<effect>
-					<set var="a_u^p" value="None"/>
 				</effect>
 			</case>
 		</rule>
