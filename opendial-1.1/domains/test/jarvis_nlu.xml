@@ -68,10 +68,7 @@
 			</case>
 		</rule>
 		
-
-
-
-
+		<!-- YES/ No -->
 		<rule>
 			<case>
 				<condition>
@@ -99,6 +96,8 @@
 	  slots (EventType, Person, dates, time, location, etc.). -->
 	 
 		<!-- Fills the slots in accordance with the information in the dialogue act -->
+
+
 
 		<!-- Basic Information -->
 		<rule>
@@ -140,10 +139,28 @@
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Person" value="{Person}" />
+					<set var="Date" value="{Month} {Day}" />
 				</effect>
 			</case>
 		</rule>
+
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="(Person,{Person})" />
+					<if var="a_u" relation="contains" value="(Date,{Month},{Day})" />
+				</condition>
+				<effect>
+					<set var="Event" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+					<set var="Person" value="{Person}" />
+					<set var="Date" value="{Month} {Day}" />
+				</effect>
+			</case>
+		</rule>
+
 
 		<rule>
 			<case>
@@ -226,11 +243,11 @@
 			<case>
 				<effect>
 					<set var="Person" value="None" />
-					<set var="Person" value="{Person}" />
-					<set var="EventType" value="{EventType}" />
-					<set var="Date" value="{Date}" />
-					<set var="Time" value="{Time}" />
-					<set var="Location" value="{Location}" />
+					<set var="Person" value="None" />
+					<set var="EventType" value="None" />
+					<set var="Date" value="None" />
+					<set var="Time" value="None" />
+					<set var="Location" value="None" />
 				</effect>
 			</case>
 		</rule>
