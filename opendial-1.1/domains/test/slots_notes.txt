@@ -14,7 +14,8 @@ I. Birthday
     -outfit(Note)
 
 II. Anniversary
-    - number
+    - Person
+    - Type of Anniversary
     - gift Y/N?(Gift)
     - where?(Place)
     - outfit(Note)
@@ -28,6 +29,7 @@ III. Party
 IV. Chill
     - with who?(Person)
     - where?(Place)
+    - outfit
 
 V. Exams
     - what exam?(Subject/Topic)
