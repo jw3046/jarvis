@@ -220,8 +220,8 @@
 				</condition>
 				<effect>
 
-					<set var="Event" value="Birthday" />
-					<set var="EventType" value="Birthday" />
+					<set var="Event" value="Anniversary" />
+					<set var="EventType" value="Anniversary" />
 					<set var="Person" value="{Person}" />
 				</effect>
 			</case>
@@ -294,8 +294,8 @@
 				</condition>
 				<effect>
 
-					<set var="Event" value="Birthday" />
-					<set var="EventType" value="Birthday" />
+					<set var="Event" value="Party" />
+					<set var="EventType" value="Party" />
 					<set var="Person" value="{Person}" />
 				</effect>
 			</case>
@@ -370,8 +370,8 @@
 				</condition>
 				<effect>
 
-					<set var="Event" value="Birthday" />
-					<set var="EventType" value="Birthday" />
+					<set var="Event" value="Chill" />
+					<set var="EventType" value="Chill" />
 					<set var="Person" value="{Person}" />
 				</effect>
 			</case>
@@ -444,8 +444,8 @@
 				</condition>
 				<effect>
 
-					<set var="Event" value="Birthday" />
-					<set var="EventType" value="Birthday" />
+					<set var="Event" value="Exam" />
+					<set var="EventType" value="Exam" />
 					<set var="Person" value="{Person}" />
 				</effect>
 			</case>
@@ -518,8 +518,8 @@
 				</condition>
 				<effect>
 
-					<set var="Event" value="Birthday" />
-					<set var="EventType" value="Birthday" />
+					<set var="Event" value="Seminar" />
+					<set var="EventType" value="Seminar" />
 					<set var="Person" value="{Person}" />
 				</effect>
 			</case>
@@ -592,8 +592,8 @@
 				</condition>
 				<effect>
 
-					<set var="Event" value="Birthday" />
-					<set var="EventType" value="Birthday" />
+					<set var="Event" value="Job" />
+					<set var="EventType" value="Job" />
 					<set var="Person" value="{Person}" />
 				</effect>
 			</case>
@@ -666,8 +666,8 @@
 				</condition>
 				<effect>
 
-					<set var="Event" value="Birthday" />
-					<set var="EventType" value="Birthday" />
+					<set var="Event" value="Graduation" />
+					<set var="EventType" value="Graduation" />
 					<set var="Person" value="{Person}" />
 				</effect>
 			</case>
@@ -741,8 +741,8 @@
 				</condition>
 				<effect>
 
-					<set var="Event" value="Birthday" />
-					<set var="EventType" value="Birthday" />
+					<set var="Event" value="Other" />
+					<set var="EventType" value="Other" />
 					<set var="Person" value="{Person}" />
 				</effect>
 			</case>
