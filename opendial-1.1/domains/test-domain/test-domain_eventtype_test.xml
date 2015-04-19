@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Basic EventTypes: 
+	
+	anniversary
+	birthday
+	chill
+	graduation
+	job
+	party
+	seminar
+
+	dp: job interview ?
+
+	dp: conference, meeting/meetup, date(two meanings),
+		go-for-a-X, ...
+
+	dp: extending from event to activity:
+		walk, shower, excercise, call, talk, ...
+-->
+
+
+
+<domain>
+	<!-- NLU -->
+	<model trigger="u_u">
+		<rule>
+
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="{X} anniversary" />	
+					<!-- add operator="or" and -->
+					<!-- remove {X} from above and -->
+					<!-- uncomment: if var="u_u" relation="contains" value=";{X} anniversary)" -->
+				</condition>
+				<effect>
+					<set var="a_u" value="(Type,{X})" />
+					<set var="a2_u" value="(EventType,anniversary)" />
+				</effect>
+			</case>
+
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="{X} birthday" />	
+					<!-- add operator="or" and -->
+					<!-- remove {X} from above and -->
+					<!-- uncomment: if var="u_u" relation="contains" value=";{X} anniversary)" -->
+				</condition>
+				<effect>
+					<set var="a_u" value="(Type,{X})" />
+					<set var="a2_u" value="(EventType,anniversary)" />
+				</effect>
+			</case>
+
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="{X} chill" />	
+					<!-- add operator="or" and -->
+					<!-- remove {X} from above and -->
+					<!-- uncomment: if var="u_u" relation="contains" value=";{X} chill)" -->
+				</condition>
+				<effect>
+					<set var="a_u" value="(Type,{X})" />
+					<set var="a2_u" value="(EventType,chill)" />
+				</effect>
+			</case>
+
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="{X} graduation" />	
+					<!-- add operator="or" and -->
+					<!-- remove {X} from above and -->
+					<!-- uncomment: if var="u_u" relation="contains" value=";{X} graduation)" -->
+				</condition>
+				<effect>
+					<set var="a_u" value="(Type,{X})" />
+					<set var="a2_u" value="(EventType,graduation)" />
+				</effect>
+			</case>
+
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="{X} job" />	
+					<!-- add operator="or" and -->
+					<!-- remove {X} from above and -->
+					<!-- uncomment: if var="u_u" relation="contains" value=";{X} job)" -->
+				</condition>
+				<effect>
+					<set var="a_u" value="(Type,{X})" />
+					<set var="a2_u" value="(EventType,job)" />
+				</effect>
+			</case>
+
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="{X} party" />	
+					<!-- add operator="or" and -->
+					<!-- remove {X} from above and -->
+					<!-- uncomment: if var="u_u" relation="contains" value=";{X} party)" -->
+				</condition>
+				<effect>
+					<set var="a_u" value="(Type,{X})" />
+					<set var="a2_u" value="(EventType,party)" />
+				</effect>
+			</case>
+
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="{X} seminar" />	
+					<!-- add operator="or" and -->
+					<!-- remove {X} from above and -->
+					<!-- uncomment: if var="u_u" relation="contains" value=";{X} seminar)" -->
+				</condition>
+				<effect>
+					<set var="a_u" value="(Type,{X})" />
+					<set var="a2_u" value="(EventType,seminar)" />
+				</effect>
+			</case>
+
+		</rule>
+	</model>
+
+
+
+
+	<!-- DM -->
+	<model trigger="a_u">
+		<rule id="et">
+			<case>
+				<condition operator="and">
+					<if var="a_u" relation="contains" value="(Type,{X})" />
+					<if var="a2_u" relation="contains" value="(EventType,{Y})" />
+				</condition>
+				<effect>
+					<set var="a_m" value="T({X})" />
+					<set var="a2_m" value="ET({Y})" />
+				</effect>
+			</case>
+		</rule>
+	</model>
+
+
+
+
+	<!-- NLG -->
+	<model trigger="a_m">
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="a_m" value="T({X})" />
+					<if var="a2_m" value="ET({Y})" />
+				</condition>
+				<effect util="1">
+					<add var="u_m" value="Go to {X} {Y}" />
+				</effect>
+			</case>
+		</rule>
+	</model>
+</domain>
