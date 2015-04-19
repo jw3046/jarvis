@@ -23,6 +23,9 @@ public class Semafor implements Module
     // the dialogue system
     DialogueSystem system;
 
+    // the parse interpreter
+    ParseInterpreter parseInterpreter;
+
     /**
      * Creates new instance of parsing module (makes API calls to semafor).
      *
@@ -30,6 +33,7 @@ public class Semafor implements Module
      */
     public Semafor(DialogueSystem system) {
         this.system = system;
+        parseInterpreter = new ParseInterpreter();
         System.out.println("Semafor Created!");
     }
 
@@ -56,11 +60,11 @@ public class Semafor implements Module
 
                     // get main ideas of the utterance, ordered by dependency
                     ArrayList<UtteranceTheme> ideas = 
-                        ParseInterpreter.getUtteranceThemes(parseResult.getConll());
+                        parseInterpreter.getUtteranceThemes(parseResult.getConll());
 
-                    // partition list into sets of when/propernoun/noun
+                    // partition list into sets of who/what/when/where
                     ArrayList<HashMap<String,UtteranceTheme>> actions =
-                        ParseInterpreter.classify(ideas, parseResult.getFrames());
+                        parseInterpreter.classify(ideas, parseResult.getFrames());
 
                     ArrayList<UserAct> userActs = new ArrayList<UserAct>();
                     // convert general information into calendar-domain slots

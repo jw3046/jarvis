@@ -110,3 +110,11 @@ tomcat-websocket.jar
 websocket-api.jar
 
 
+Stanford NER tagger jars:
+
+stanford-ner-3.5.1.jar
+stanford-ner-3.5.1-javadoc.jar
+stanford-ner-3.5.1-sources.jar
+stanford-ner.jar
+
+

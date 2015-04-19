@@ -30,6 +30,10 @@ public class ConllParse
         return conllEntries.get(id);
     }
 
+    public int size(){
+        return conllEntries.size();
+    }
+
     public ArrayList<ConllEntry> getPOS(String pos){
         ArrayList<ConllEntry> posList = new ArrayList<ConllEntry>();
         for (ConllEntry entry: conllEntries){

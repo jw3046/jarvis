@@ -63,5 +63,7 @@ slot-filling output based on a_m
 
 Notes:
 
+Ideas for guessing:
+Use Person to guess Place slot
 
 

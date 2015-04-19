@@ -7,14 +7,33 @@ import java.util.List;
 import java.util.Collections;
 import java.util.Comparator;
 
+import edu.stanford.nlp.ie.AbstractSequenceClassifier;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.ie.crf.*;
+
 public class ParseInterpreter
 {
+    // stanford NER tagger
+    AbstractSequenceClassifier<CoreLabel> classifier;
+
+    public ParseInterpreter(){
+        // 4 class:
+        // PERSON, LOCATION, ORGANIZATION, MISC
+        String serializedClassifier = "classifiers/english.conll.4class.distsim.crf.ser.gz";
+        try {
+            classifier = CRFClassifier.getClassifier(serializedClassifier);
+        }
+        catch (Exception e){
+            System.out.println(e);
+            System.exit(1);
+        }
+    }
 
     /** Semantic type classification based on frames and dependencies
      * @param ideas list of relevant ideas in sentence in order of importance
      * @param frames frame-based parsing results
      */
-    public static ArrayList<HashMap<String,UtteranceTheme>>
+    public ArrayList<HashMap<String,UtteranceTheme>>
         classify(ArrayList<UtteranceTheme> ideas, List<ParseFrame> frames){
         
         ArrayList<HashMap<String,UtteranceTheme>> actions = 
@@ -47,43 +66,58 @@ public class ParseInterpreter
                     }
                 }
             }
-            subAction.put("WHEN",null);
+            subAction.put("Date",null);
             if (firstFrame != null){
                 // fill out the slot and remove that theme
                 UtteranceTheme timeEntry = leftOvers.remove((int)themePosition);
-                timeEntry.setClassification("WHEN");
-                subAction.put("WHEN", timeEntry);
+                timeEntry.setClassification("Date");
+                subAction.put("Date", timeEntry);
+            }
+
+
+            // get first occurrence of WHO
+            subAction.put("Person",null);
+            for (int i=0; i<leftOvers.size(); i++){
+                if (leftOvers.get(i).getNER().equals("PERSON")){
+                    // maybe also use POSTAG here (NNP)
+                    UtteranceTheme properNounEntry = leftOvers.remove(i);
+                    subAction.put("Person",properNounEntry);
+                    break;
+                }
             }
 
             // get WHERE
-            // TODO: use NER, Place or Organization
-            
-            // get first occurrence of proper noun WHO
-            // TODO: use NER, Person
-            subAction.put("WHO",null);
+            subAction.put("Place",null);
             for (int i=0; i<leftOvers.size(); i++){
-                boolean brk = false;
-                for (ConllEntry entry: leftOvers.get(i).getEntries()){
-                    if (entry.getPOSTAG().equals("NNP")){
-                        UtteranceTheme properNounEntry = leftOvers.remove(i);
-                        subAction.put("NNP",properNounEntry);
-                        brk = true;
-                        break;
-                    }
+                if (leftOvers.get(i).getNER().equals("LOCATION")){
+                    // maybe also use POSTAG here (NNP)
+                    UtteranceTheme properNounEntry = leftOvers.remove(i);
+                    subAction.put("Place",properNounEntry);
+                    break;
                 }
-                if (brk) break;
+                if (leftOvers.get(i).getNER().equals("ORGANIZATION")){
+                    UtteranceTheme nounEntry = leftOvers.remove(i);
+                    subAction.put("Object", nounEntry);
+                    break;
+                }
             }
 
-            // get first occurrence of nonproper noun WHAT
-            // use NER, Organization
-            subAction.put("WHAT",null);
+            // get WHAT
+            subAction.put("Object",null);
             for (int i=0; i<leftOvers.size(); i++){
+                
+                if (leftOvers.get(i).getNER().equals("MISC")){
+                    UtteranceTheme nounEntry = leftOvers.remove(i);
+                    subAction.put("Object", nounEntry);
+                    break;
+                }
                 boolean brk = false;
                 for (ConllEntry entry: leftOvers.get(i).getEntries()){
-                    if (entry.getPOSTAG().contains("NN")&&
-                            !(entry.getPOSTAG().equals("NNP"))){
+                    //if (entry.getPOSTAG().contains("NN")&&
+                            //!(entry.getPOSTAG().equals("NNP"))){
+                    if (entry.getPOSTAG().contains("NN")){
                         UtteranceTheme nounEntry = leftOvers.remove(i);
-                        subAction.put("NN", nounEntry);
+                        subAction.put("Object", nounEntry);
                         brk = true;
                         break;
                     }
@@ -100,18 +134,30 @@ public class ParseInterpreter
     /** General semantic extraction from POS and dependencies.
      * @param conll is a ConllParse object containing the POS and DEP
      */
-    public static ArrayList<UtteranceTheme> getUtteranceThemes(ConllParse conll){
+    public ArrayList<UtteranceTheme> getUtteranceThemes(ConllParse conll){
         ArrayList<UtteranceTheme> ideas = new ArrayList<UtteranceTheme>();
 
         int rootID = conll.getChildren(0).get(1).getID();
 
-        dfsDependencyParse(conll, rootID, ideas);
+        // construct sentence from tokens of conll
+        String sentence = "";
+        for (int i=1;i<conll.size();i++)
+            sentence += conll.get(i).getFORM() + " ";
+
+        // NER parse
+        String output = classifier.classifyToString(sentence, "tsv", false);
+        ArrayList<String> tags = new ArrayList<String>();
+        for (String line: output.split("\n")){
+            tags.add(line.split("\t")[1]);
+        }
+
+        dfsDependencyParse(conll, tags, rootID, ideas);
 
         return ideas;
     }
 
-    public static void dfsDependencyParse(ConllParse conll,
-            int id, ArrayList<UtteranceTheme> ideas){
+    public void dfsDependencyParse(ConllParse conll,
+            ArrayList<String> nertags, int id, ArrayList<UtteranceTheme> ideas){
         ConllEntry current = conll.get(id);
         
         String currentPOS = current.getPOSTAG();
@@ -120,28 +166,39 @@ public class ParseInterpreter
         
         if (currentPOS.contains("NN")){
             if (headPOS.contains("NN")&&
-                    (deprel.contains("nn")||deprel.contains("conj"))){
+                    (deprel.contains("nn")||deprel.contains("conj"))&&
+                    // special case for time
+                    !(conll.get(current.getHEAD()).getDEPREL().contains("tmod"))){
                 // append idea (extend the phrase)
-                if (ideas.size()<1) ideas.add(new UtteranceTheme());
+                if (ideas.size()<1){
+                    UtteranceTheme idea = new UtteranceTheme();
+                    idea.setNER(nertags.get(id-1));
+                    ideas.add(idea);
+                }
                 UtteranceTheme prev = ideas.get(ideas.size()-1);
                 prev.add(current);
             }
+            /*
             else if (headPOS.contains("NN")&&deprel.contains("poss")){
-                // add new idea, bind to previous idea (weakly extend)
+                // add new idea; this is likely a Person
                 UtteranceTheme idea = new UtteranceTheme(current);
-                if (ideas.size()>0){
-                    UtteranceTheme prev = ideas.get(ideas.size()-1);
-                    //idea.bindTo(prev);
-                }
+                idea.setNER(nertags.get(id-1));
                 ideas.add(idea);
             }
+            */
             else {
                 // add new idea to the list (the noun itself)
-                ideas.add(new UtteranceTheme(current));
+                UtteranceTheme idea = new UtteranceTheme(current);
+                idea.setNER(nertags.get(id-1));
+                ideas.add(idea);
             }
         }
         else {
-            if (headPOS.contains("NN")&&deprel.contains("amod")){
+            if ((headPOS.contains("NN")&&deprel.contains("amod"))||
+                    // special case for time
+                (headPOS.contains("NN")&&deprel.contains("dep")&&
+                conll.get(current.getHEAD()).getDEPREL().contains("tmod"))
+                ){
                 // append idea (extend the phrase)
                 if (ideas.size()<1) ideas.add(new UtteranceTheme());
                 UtteranceTheme prev = ideas.get(ideas.size()-1);
@@ -169,12 +226,12 @@ public class ParseInterpreter
             }
         });
         for (ConllEntry child: children){
-            dfsDependencyParse(conll, child.getID(), ideas);
+            dfsDependencyParse(conll, nertags, child.getID(), ideas);
         }
     }
 
 
-    public static AcknowledgeUA extractAcknowledgeUA(ParseResult parseResult){
+    public AcknowledgeUA extractAcknowledgeUA(ParseResult parseResult){
         // extracts whether the user acknowledges yes/no
         // returns null if neither
         
