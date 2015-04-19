@@ -49,30 +49,46 @@
 
 
 			<case>
-				<condition>
-					<if var="u_u" relation="contains" value="{X} birthday" />	
-					<!-- add operator="or" and -->
-					<!-- remove {X} from above and -->
-					<!-- uncomment: if var="u_u" relation="contains" value=";{X} anniversary)" -->
+				<condition operator="and">
+					<if var="u_u" relation="contains" value="birthday" />	
+					<if var="frame_u" relation="contains" value=";{X} birthday)" -->
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
-					<set var="a2_u" value="(EventType,anniversary)" />
+					<set var="a2_u" value="(EventType,birthday)" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="birthday" />	
+				</condition>
+				<effect>
+					<set var="a2_u" value="(EventType,birthday)" />
 				</effect>
 			</case>
 
+
+
 			<case>
-				<condition>
+				<condition operator="and">
 					<if var="u_u" relation="contains" value="{X} chill" />	
-					<!-- add operator="or" and -->
-					<!-- remove {X} from above and -->
-					<!-- uncomment: if var="u_u" relation="contains" value=";{X} chill)" -->
+					<if var="frame_u" relation="contains" value=";{X} chill)" -->
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
 					<set var="a2_u" value="(EventType,chill)" />
 				</effect>
 			</case>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="chill" />	
+				</condition>
+				<effect>
+					<set var="a2_u" value="(EventType,chill)" />
+				</effect>
+			</case>
+
+
 
 			<case>
 				<condition>
