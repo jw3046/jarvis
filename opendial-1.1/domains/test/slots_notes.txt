@@ -9,46 +9,48 @@ Welcome
 
 I. Birthday
     -name(Person)
-    -gift Y/N?(Gift)
+    -gift Y/N?(Gift)*
     -where?(Place)
-    -outfit(Note)
+    -outfit(DressCode)*
 
 II. Anniversary
-    - number
-    - gift Y/N?(Gift)
+    - Person(Person)
+    - Type of Anniversary(Subject)
+    - gift Y/N?(Gift)*
     - where?(Place)
-    - outfit(Note)
+    - outfit(DressCode)*
 
 III. Party
     - who's party(Person)
-    - gift Y/N?(Gift)
+    - gift Y/N?(Gift)*
     - where?(Place)
-    - outfit(Note)
+    - outfit(DressCode)*
 
 IV. Chill
     - with who?(Person)
     - where?(Place)
+    - outfit(DressCode)*
 
 V. Exams
-    - what exam?(Subject/Topic)
+    - what exam?(Subject)
     - where?(Place)
 
 VI. Seminar/Talk
-    - what is it about?(Subject/Topic)
+    - what is it about?(Subject)
     - speaker(Person)
     - location(Place)
-    - dress code?(DressCode)
+    - dress code?(DressCode)*
 
 VII. Job
-    - what is it about?(Subject/Topic)
+    - what is it about?(Subject)
     - speaker/interviewer/etc(Person)
     - location(Place)
-    - dress code?(DressCode)
+    - dress code?(DressCode)*
 
 VIII. Graduation
     - who(Person)
     - school(Place)
-    - gift?(Gift)
+    - gift?(Gift)*
 
 
 IX. Other

@@ -44,7 +44,7 @@
 					<if var="Date" relation="!=" value="None" />
 					<if var="Person" relation="!=" value="None" />
 					<if var="Gift" relation="!=" value="None" />
-					<if var="Note" relation="!=" value="None" />
+					<if var="DressCode" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="CreateEvent({EventType})" />
@@ -66,7 +66,7 @@
 					
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="Request(Note)" />
+					<set var="a_m" value="Request(DressCode)" />
 					
 				</effect>
 				<effect util="0.5">
@@ -139,7 +139,7 @@
 					<if var="NumberYear" relation="!=" value="None" />
 					<if var="Gift" relation="!=" value="None" />
 					<if var="Place" relation="!=" value="None" />
-					<if var="Note" relation="!=" value="None" />
+					<if var="DressCode" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="CreateEvent({EventType})" />
@@ -157,12 +157,12 @@
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
 					
-					<if var="NumberYear" relation="!=" value="None" />
+					<if var="Type" relation="!=" value="None" />
 					<if var="Gift" relation="!=" value="None" />
 					<if var="Place" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="Request(Note)" />
+					<set var="a_m" value="Request(DressCode)" />
 					
 				</effect>
 				<effect util="0.5">
@@ -177,7 +177,7 @@
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
 					
-					<if var="NumberYear" relation="!=" value="None" />
+					<if var="Type" relation="!=" value="None" />
 					<if var="Gift" relation="!=" value="None" />
 					
 				</condition>
@@ -196,7 +196,7 @@
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
 					
-					<if var="NumberYear" relation="!=" value="None" />
+					<if var="Type" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="Request(Gift)" />
@@ -207,7 +207,7 @@
 				</effect>
 			</case>
 			
-			<!-- Ask for NumberOfYear -->
+			<!-- Ask for Type of Anniversary -->
 			<case>
 				<condition>
 					<if var="Event" value="Anniversary" />
@@ -216,7 +216,7 @@
 					
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="Request(NumberOfYear)" />
+					<set var="a_m" value="Request(Type)" />
 					
 				</effect>
 				<effect util="0.5">
@@ -252,7 +252,7 @@
 					<if var="Person" relation="!=" value="None" />
 					<if var="Gift" relation="!=" value="None" />
 					<if var="Place" relation="!=" value="None" />
-					<if var="Note" relation="!=" value="None" />
+					<if var="DressCode" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="CreateEvent({EventType})" />			
@@ -272,7 +272,7 @@
 					<if var="Place" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="Request(Note)" />
+					<set var="a_m" value="Request(DressCode)" />
 					
 				</effect>
 				<effect util="0.5">
@@ -757,7 +757,7 @@
 					<set var="Note" value="none"/>
 					<set var="Subject" value="none"/>
 					<set var="DressCode" value="none"/>
-					<set var="NumberOfYear" value="none"/>
+					<set var="Type" value="none"/>
 					<set var="EventType" value="none"/>
 					
 					<set var="current_step" value="EventType" />
@@ -818,10 +818,10 @@
 			<!-- Request Number of Years -->
 			<case>
 				<condition>
-					<if var="a_m" value="Request(NumberOfYear)" />
+					<if var="a_m" value="Request(Type)" />
 				</condition>
 				<effect prob="1">
-					<set var="current_step" value="NumberOfYear" />
+					<set var="current_step" value="Type" />
 				</effect>
 			</case>
 			
@@ -849,6 +849,16 @@
 			<case>
 				<condition>
 					<if var="a_m" value="Request(DressCode)" />
+				</condition>
+				<effect prob="1">
+					<set var="current_step" value="DressCode_Request" />
+				</effect>
+			</case>
+			
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmY" />
+					<if var="current_step" value="DressCode_Request" />
 				</condition>
 				<effect prob="1">
 					<set var="current_step" value="DressCode" />

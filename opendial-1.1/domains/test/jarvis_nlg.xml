@@ -18,7 +18,6 @@
 				<effect util="1">
 					<set var="u_m" value="What is your event?" />
 					<set var="ET" value="NoEvent" />
-
 				</effect>
 			</case>
 		</rule>
@@ -82,14 +81,14 @@
 			</case>
 		</rule>
 
-		<!-- Asks for the  Number of years for Anniversary -->
+		<!-- Asks for the  Type of Anniversary -->
 		<rule>
 			<case>
 				<condition>
-					<if var="current_step" value="NumberOfYear" />
+					<if var="current_step" value="Type" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="How many years is {EventType}?" />
+					<set var="u_m" value="What typde of {EventType} is this?" />
 				</effect>
 			</case>
 		</rule>
@@ -107,6 +106,18 @@
 		</rule>
 		
 		<!-- Asks for the DressCode  -->
+		
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="DressCode_Request" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you want to wear anything special for {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+		
 		<rule>
 			<case>
 				<condition>
@@ -327,7 +338,7 @@
 					<if var="a_m" value="Request(Date)" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, You are going to {EventType}." />
+					<set var="u_m" value="OK, You are attending {EventType}." />
 				</effect>
 			</case>
 		</rule>
@@ -339,33 +350,21 @@
 					<if var="a_m" value="Request(Place)" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, You are going to {EventType}." />
+					<set var="u_m" value="OK, You are attending {EventType}." />
 				</effect>
 			</case>
 		</rule>
 		
 		
-		<!-- Requsting the Place -->
+		
+		<!-- Requsting the Type of Anniversary -->
 		<rule>
 			<case>
 				<condition>
-					<if var="a_m" value="ConfirmY" />
+					<if var="a_m" value="Request(Type)" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="*** System Message: Confirming..**" />
-				</effect>
-			</case>
-		</rule>
-		
-		
-		<!-- Requsting the NumberofYear -->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Request(NumberOfYear)" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="OK, You are going to {EventType} on {Date}." />
+					<set var="u_m" value="OK, You are attending {EventType} on {Date}." />
 				</effect>
 			</case>
 		</rule>
