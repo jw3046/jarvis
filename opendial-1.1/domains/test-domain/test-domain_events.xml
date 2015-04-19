@@ -68,7 +68,7 @@
 			<case>
 				<condition operator="and">
 					<if var="u_u" relation="contains" value="chill" />	
-					<if var="frame_u" relation="contains" value=";{X} chill)" />
+					<if var="frame_u" relation="contains" value="#{X} chill)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
@@ -89,7 +89,7 @@
 			<case>
 				<condition operator="and">
 					<if var="u_u" relation="contains" value="graduation" />	
-					<if var="frame_u" relation="contains" value=";{X} graduation)" />
+					<if var="frame_u" relation="contains" value="#{X} graduation)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
@@ -110,7 +110,7 @@
 			<case>
 				<condition operator="and">
 					<if var="u_u" relation="contains" value="job" />	
-					<if var="frame_u" relation="contains" value=";{X} job)" />
+					<if var="frame_u" relation="contains" value="#{X} job)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
@@ -131,7 +131,7 @@
 			<case>
 				<condition operator="and">
 					<if var="u_u" relation="contains" value="party" />	
-					<if var="frame_u" relation="contains" value=";{X} party)" />
+					<if var="frame_u" relation="contains" value="#{X} party)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
@@ -152,7 +152,7 @@
 			<case>
 				<condition operator="and">
 					<if var="u_u" relation="contains" value="seminar" />	
-					<if var="frame_u" relation="contains" value=";{X} seminar)" />
+					<if var="frame_u" relation="contains" value="#{X} seminar)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
@@ -173,7 +173,7 @@
 			<!-- Handle unknown event types (simple & compound): -->
 			<case>
 				<condition>
-					<if var="frame_u" relation="contains" value=";{Y})" />	
+					<if var="frame_u" relation="contains" value="#{Y})" />	
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,)" />
