@@ -173,7 +173,7 @@
 			<!-- Handle unknown event types (simple & compound): -->
 			<case>
 				<condition>
-					<if var="frame_u" relation="contains" value="{Y}" />	
+					<if var="frame_u" relation="contains" value=";{Y})" />	
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,)" />
