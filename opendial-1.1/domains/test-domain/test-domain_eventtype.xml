@@ -26,7 +26,7 @@
 						walk, shower, excercise, call, talk, ...
 				-->
 
-				<!-- hard-coded "known" compound event types: ------->
+				<!-- hard-coded "known" compound event types: -->
 				<condition>
 					<if var="u_u" relation="contains" value="party" />
 						<condition>
@@ -52,7 +52,7 @@
 				<effect>
 					<add var="a_u" value="(EventType,anniversary)" />
 				</effect>
-				<!-------------------------------------------------->
+				<!---->
 
 
 				<!-- 
@@ -76,7 +76,7 @@
 				<effect>
 					<add var="a_u" value="(EventType,{E})" />
 				</effect>
-				<!-------------------------------------------------->
+				<!---->
 			</case>
 		</rule>
 	</model>

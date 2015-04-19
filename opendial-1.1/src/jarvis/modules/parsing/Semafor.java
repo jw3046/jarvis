@@ -6,6 +6,7 @@ import opendial.DialogueSystem;
 import opendial.arch.DialException;
 import opendial.state.DialogueState;
 import opendial.modules.Module;
+import opendial.bn.values.Value;
 
 import com.google.api.client.http.HttpResponseException;
 
@@ -48,8 +49,13 @@ public class Semafor implements Module
     public void trigger(DialogueState state, Collection<String> updatedVars) {
         if (updatedVars.contains("u_u") && state.hasChanceNode("u_u")) {
             // do parsing if user utterance ("u_u") has been updated
-            String user_utterance =
-                state.queryProb("u_u").toDiscrete().getBest().toString();
+            String user_utterance = "None";
+            for (Value val: state.queryProb("u_u").toDiscrete().getValues()){
+                if (!(val.toString().equals("None"))){
+                    user_utterance = val.toString();
+                    break;
+                }
+            }
             System.out.println(user_utterance);
 
             // call semafor api
