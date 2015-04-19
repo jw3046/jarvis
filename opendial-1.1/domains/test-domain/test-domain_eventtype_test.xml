@@ -30,7 +30,7 @@
 			<case>
 				<condition operator="and">
 					<if var="u_u" relation="contains" value="anniversary" />	
-					<if var="frame_u" relation="contains" value=";{X} anniversary)" -->
+					<if var="frame_u" relation="contains" value=";{X} anniversary)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
@@ -51,7 +51,7 @@
 			<case>
 				<condition operator="and">
 					<if var="u_u" relation="contains" value="birthday" />	
-					<if var="frame_u" relation="contains" value=";{X} birthday)" -->
+					<if var="frame_u" relation="contains" value=";{X} birthday)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
@@ -71,8 +71,8 @@
 
 			<case>
 				<condition operator="and">
-					<if var="u_u" relation="contains" value="{X} chill" />	
-					<if var="frame_u" relation="contains" value=";{X} chill)" -->
+					<if var="u_u" relation="contains" value="chill" />	
+					<if var="frame_u" relation="contains" value=";{X} chill)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
@@ -91,11 +91,9 @@
 
 
 			<case>
-				<condition>
-					<if var="u_u" relation="contains" value="{X} graduation" />	
-					<!-- add operator="or" and -->
-					<!-- remove {X} from above and -->
-					<!-- uncomment: if var="u_u" relation="contains" value=";{X} graduation)" -->
+				<condition operator="and">
+					<if var="u_u" relation="contains" value="graduation" />	
+					<if var="frame_u" relation="contains" value=";{X} graduation)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
@@ -103,12 +101,12 @@
 				</effect>
 			</case>
 
+
+
 			<case>
-				<condition>
-					<if var="u_u" relation="contains" value="{X} job" />	
-					<!-- add operator="or" and -->
-					<!-- remove {X} from above and -->
-					<!-- uncomment: if var="u_u" relation="contains" value=";{X} job)" -->
+				<condition operator="and">
+					<if var="u_u" relation="contains" value="job" />	
+					<if var="frame_u" relation="contains" value=";{X} job)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
@@ -116,12 +114,12 @@
 				</effect>
 			</case>
 
+
+
 			<case>
-				<condition>
-					<if var="u_u" relation="contains" value="{X} party" />	
-					<!-- add operator="or" and -->
-					<!-- remove {X} from above and -->
-					<!-- uncomment: if var="u_u" relation="contains" value=";{X} party)" -->
+				<condition operator="and">
+					<if var="u_u" relation="contains" value="party" />	
+					<if var="frame_u" relation="contains" value=";{X} party)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
@@ -129,12 +127,12 @@
 				</effect>
 			</case>
 
+
+
 			<case>
-				<condition>
-					<if var="u_u" relation="contains" value="{X} seminar" />	
-					<!-- add operator="or" and -->
-					<!-- remove {X} from above and -->
-					<!-- uncomment: if var="u_u" relation="contains" value=";{X} seminar)" -->
+				<condition operator="and">
+					<if var="u_u" relation="contains" value="seminar" />	
+					<if var="frame_u" relation="contains" value=";{X} seminar)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
