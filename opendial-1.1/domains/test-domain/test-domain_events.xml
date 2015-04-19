@@ -26,7 +26,7 @@
 			<case>
 				<condition operator="and">
 					<if var="u_u" relation="contains" value="anniversary" />	
-					<if var="frame_u" relation="contains" value=";{X} anniversary)" />
+					<if var="frame_u" relation="contains" value="#{X} anniversary)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
@@ -47,7 +47,7 @@
 			<case>
 				<condition operator="and">
 					<if var="u_u" relation="contains" value="birthday" />	
-					<if var="frame_u" relation="contains" value=";{X} birthday)" />
+					<if var="frame_u" relation="contains" value="#{X} birthday)" />
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
