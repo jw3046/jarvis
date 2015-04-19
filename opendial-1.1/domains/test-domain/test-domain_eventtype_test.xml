@@ -23,7 +23,6 @@
 
 
 <domain>
-	<!-- NLU -->
 	<model trigger="u_u">
 		<rule>
 
@@ -100,6 +99,14 @@
 					<set var="a2_u" value="(EventType,graduation)" />
 				</effect>
 			</case>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="graduation" />	
+				</condition>
+				<effect>
+					<set var="a2_u" value="(EventType,graduation)" />
+				</effect>
+			</case>
 
 
 
@@ -110,6 +117,14 @@
 				</condition>
 				<effect>
 					<set var="a_u" value="(Type,{X})" />
+					<set var="a2_u" value="(EventType,job)" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="job" />	
+				</condition>
+				<effect>
 					<set var="a2_u" value="(EventType,job)" />
 				</effect>
 			</case>
@@ -126,6 +141,14 @@
 					<set var="a2_u" value="(EventType,party)" />
 				</effect>
 			</case>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="party" />	
+				</condition>
+				<effect>
+					<set var="a2_u" value="(EventType,party)" />
+				</effect>
+			</case>
 
 
 
@@ -139,9 +162,15 @@
 					<set var="a2_u" value="(EventType,seminar)" />
 				</effect>
 			</case>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="seminar" />	
+				</condition>
+				<effect>
+					<set var="a2_u" value="(EventType,seminar)" />
+				</effect>
+			</case>
 
 		</rule>
 	</model>
-
-
 </domain>
