@@ -65,5 +65,5 @@ Notes:
 
 Ideas for guessing:
 Use Person to guess Place slot
-
+Use Object to guess Person slot
 

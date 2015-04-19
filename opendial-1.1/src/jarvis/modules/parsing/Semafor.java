@@ -72,40 +72,27 @@ public class Semafor implements Module
                     ArrayList<HashMap<String,UtteranceTheme>> actions =
                         parseInterpreter.classify(ideas, parseResult.getFrames());
 
-                    ArrayList<UserAct> userActs = new ArrayList<UserAct>();
-                    // convert general information into calendar-domain slots
-                    //userActs.addAll(CalendarIntent.convert(actions));
-                   
-                    //TODO: implement general type classifier to determine
-                    //          what type of event the user wants (this should
-                    //          only be called if the DM state is at the start)
-                    
+                    if (actions.size()>0){
+                        // join user acts into (key,value)
+                        // where key={Person,Place,Date,Object}
+                        String user_act = "";
+                        for (HashMap<String,UtteranceTheme> action: actions){
+                            for (String key: action.keySet()){
+                                UtteranceTheme idea = action.get(key);
+                                if (idea!=null){
+                                    user_act += "("+key+","+idea+"),";
+                                }
+                            }
+                        }
+                        system.addContent(new Assignment("a_u",user_act));
+                    }
+                    else {
+                        // utterance not understood
+                        system.addContent(new Assignment("a_u", "_?_"));
+                    }
                     // TESTING
                     System.out.println(ideas);
                     System.out.println(actions);
-
-
-                    if (userActs.size()>0){
-                        // join all user acts into a string by comma
-                        String a_u = userActs.get(0).toString();
-                        for (int i=1; i<userActs.size(); i++){
-                            a_u += "," + userActs.get(i).toString();
-                        }
-                        // return results to system
-                        Assignment assign = new Assignment("a_u", a_u);
-                        system.addContent(assign);
-                    }
-                    else {
-                        if (actions.size()>0){
-                            // TODO: DEBUG: REMOVE in final version
-                            system.addContent(
-                                    new Assignment("a_u", actions.toString()));
-                        }
-                        else {
-                            // utterance not understood
-                            system.addContent(new Assignment("a_u", "_?_"));
-                        }
-                    }
                     
                 } catch (HttpResponseException e) {
                     System.err.println(e.getMessage());
