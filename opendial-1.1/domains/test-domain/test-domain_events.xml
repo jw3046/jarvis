@@ -22,7 +22,7 @@
 <domain>
 	<model trigger="u_u">
 		<rule>
-
+			<!-- Handle known event types (simple & compound): -->
 			<case>
 				<condition operator="and">
 					<if var="u_u" relation="contains" value="anniversary" />	
@@ -165,6 +165,19 @@
 				</condition>
 				<effect>
 					<set var="a2_u" value="(EventType,seminar)" />
+				</effect>
+			</case>
+			
+			
+			
+			<!-- Handle unknown event types (simple & compound): -->
+			<case>
+				<condition>
+					<if var="frame_u" relation="contains" value="{Y}" />	
+				</condition>
+				<effect>
+					<set var="a_u" value="(Type,)" />
+					<set var="a2_u" value="(EventType,{Y})" />
 				</effect>
 			</case>
 
