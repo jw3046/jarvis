@@ -20,7 +20,7 @@
 
 
 <domain>
-	<model trigger="u_u">
+	<model trigger="frame_u">
 		<rule>
 			<!-- Handle known event types (simple & compound): -->
 			<case>
