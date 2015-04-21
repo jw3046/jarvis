@@ -72,6 +72,13 @@ public class Semafor implements Module
                     ArrayList<HashMap<String,UtteranceTheme>> actions =
                         parseInterpreter.classify(ideas, parseResult.getFrames());
 
+                    // set frame_u for EventType model
+                    String event_clues = "(";
+                    for (ParseFrame frame: parseResult.getFrames()){
+                        event_clues += frame.getTarget().getName() + ",";
+                    }
+                    event_clues = event_clues.substring(0,event_clues.length()-1);
+
                     if (actions.size()>0){
                         // join user acts into (key,value)
                         // where key={Person,Place,Date,Object}
@@ -84,15 +91,27 @@ public class Semafor implements Module
                                 }
                             }
                         }
-                        system.addContent(new Assignment("a_u",user_act));
+                        system.addContent(new Assignment("a0_u",user_act));
+
+                        // for frame_u
+                        for (String key: actions.get(0).keySet()){
+                            if (key.equals("Object")){
+                                event_clues += "#" + actions.get(0).get(key) + ")";
+                            }
+                        }
                     }
                     else {
                         // utterance not understood
-                        system.addContent(new Assignment("a_u", "_?_"));
+                        system.addContent(new Assignment("a0_u", "_?_"));
                     }
-                    // TESTING
+
+                    // set frame_u for EventType module
+                    system.addContent(new Assignment("frame_u", event_clues.toLowerCase()));
+
+                    // DEBUG
                     System.out.println(ideas);
                     System.out.println(actions);
+                    System.out.println(event_clues);
                     
                 } catch (HttpResponseException e) {
                     System.err.println(e.getMessage());
@@ -101,7 +120,19 @@ public class Semafor implements Module
                 t.printStackTrace();
             }
         }
-        else {
+        else if (updatedVars.contains("a2_u") && state.hasChanceNode("a2_u")){
+            String user_act = state.queryProb("a0_u").toDiscrete().getBest().toString();
+            user_act += state.queryProb("a2_u").toDiscrete().getBest().toString();
+            // also add Type(); note that a2_u guaranteed to be defined if a1_u is
+            if (updatedVars.contains("a1_u") && state.hasChanceNode("a1_u")){
+                user_act += state.queryProb("a1_u").toDiscrete().getBest().toString();
+            }
+            system.addContent(new Assignment("a_u", user_act));
+            
+            //DEBUG
+            System.out.println(user_act);
+        }
+        else{
             /*
             System.out.println(state);
             String user_act = state.queryProb("a_u").toDiscrete().getBest().toString();

@@ -80,7 +80,7 @@ public class UtteranceTheme
         if (entries.size()>0 && getClassification().equals("Date")){
             phrase = CalendarTimeUtil.toAbsoluteDate(phrase);
         }
-        return phrase;
+        return phrase.trim();
     }
 }
 
