@@ -29,7 +29,7 @@
 					<if var="frame_u" relation="contains" value="#{X} anniversary)" />
 				</condition>
 				<effect>
-					<set var="a_u" value="(Type,{X})" />
+					<set var="a1_u" value="(Type,{X})" />
 					<set var="a2_u" value="(EventType,anniversary)" />
 				</effect>
 			</case>
@@ -50,7 +50,7 @@
 					<if var="frame_u" relation="contains" value="#{X} birthday)" />
 				</condition>
 				<effect>
-					<set var="a_u" value="(Type,{X})" />
+					<set var="a1_u" value="(Type,{X})" />
 					<set var="a2_u" value="(EventType,birthday)" />
 				</effect>
 			</case>
@@ -71,7 +71,7 @@
 					<if var="frame_u" relation="contains" value="#{X} chill)" />
 				</condition>
 				<effect>
-					<set var="a_u" value="(Type,{X})" />
+					<set var="a1_u" value="(Type,{X})" />
 					<set var="a2_u" value="(EventType,chill)" />
 				</effect>
 			</case>
@@ -92,7 +92,7 @@
 					<if var="frame_u" relation="contains" value="#{X} graduation)" />
 				</condition>
 				<effect>
-					<set var="a_u" value="(Type,{X})" />
+					<set var="a1_u" value="(Type,{X})" />
 					<set var="a2_u" value="(EventType,graduation)" />
 				</effect>
 			</case>
@@ -113,7 +113,7 @@
 					<if var="frame_u" relation="contains" value="#{X} job)" />
 				</condition>
 				<effect>
-					<set var="a_u" value="(Type,{X})" />
+					<set var="a1_u" value="(Type,{X})" />
 					<set var="a2_u" value="(EventType,job)" />
 				</effect>
 			</case>
@@ -134,7 +134,7 @@
 					<if var="frame_u" relation="contains" value="#{X} party)" />
 				</condition>
 				<effect>
-					<set var="a_u" value="(Type,{X})" />
+					<set var="a1_u" value="(Type,{X})" />
 					<set var="a2_u" value="(EventType,party)" />
 				</effect>
 			</case>
@@ -155,7 +155,7 @@
 					<if var="frame_u" relation="contains" value="#{X} seminar)" />
 				</condition>
 				<effect>
-					<set var="a_u" value="(Type,{X})" />
+					<set var="a1_u" value="(Type,{X})" />
 					<set var="a2_u" value="(EventType,seminar)" />
 				</effect>
 			</case>
@@ -176,7 +176,7 @@
 					<if var="frame_u" relation="contains" value="#{Y})" />	
 				</condition>
 				<effect>
-					<set var="a_u" value="(Type,)" />
+					<set var="a1_u" value="(Type,)" />
 					<set var="a2_u" value="(EventType,{Y})" />
 				</effect>
 			</case>
