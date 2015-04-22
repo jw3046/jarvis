@@ -40,6 +40,6 @@
 	<!-- External module showing how to interface the dialogue system with an external 
 	database (used here to find the ticket prices and "book" the tickets) -->
 	<settings>
-		<modules>opendial.modules.examples.FlightBookingExample</modules>
+		<modules>jarvis.modules.gcal.GCalAddEvent</modules>
 	</settings>
 </domain>
