@@ -79,7 +79,7 @@
 			<case>
 				<condition>
 					<if var="u_u" relation="contains" value="(on)? {Date}" />
-					<if var="Month" relation="in"
+					<if var="Date" relation="in"
 						value="[January,February,March,April,May,June,July,
 								August,September,October,November,December]" />
 					<if var="Day" relation="&gt;" value="0" />
@@ -89,19 +89,7 @@
 					<add var="a_u" value="(Date,{Date})" />
 				</effect>
 			</case>
-			<case>
-				<condition>
-					<if var="u_u" relation="contains" value="(on the)? the {Day}th of {Month}" />
-					<if var="Month" relation="in"
-						value="[January,February,March,April,May,June,July,
-								August,September,October,November,December]" />
-					<if var="Day" relation="&gt;" value="0" />
-					<if var="Day" relation="&lt;" value="32" />
-				</condition>
-				<effect>
-					<add var="a_u" value="(Date,{Date})" />
-				</effect>
-			</case>
+			
 		</rule>
 		
 		<!-- YES/ No -->
