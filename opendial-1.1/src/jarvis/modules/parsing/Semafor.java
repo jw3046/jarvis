@@ -36,6 +36,8 @@ public class Semafor implements Module
         this.system = system;
         parseInterpreter = new ParseInterpreter();
         System.out.println("Semafor Created!");
+        String eventTypes = "[anniversary,birthday,chill,graduation,job,party,seminar]";
+        system.addContent(new Assignment("_etcsvlist",eventTypes));
     }
 
     /**

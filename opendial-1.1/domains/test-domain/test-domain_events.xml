@@ -24,7 +24,7 @@
 			<case>
 				<condition operator="and">
 					<if var="frame_u" value="(*#{X} {E})" />
-					<if var="E" relation="in" value="[anniversary,birthday,chill,graduation,job,party,seminar]" />	
+                                        <if var="E" relation="in" value="{_etcsvlist}" />
 				</condition>
 				<effect>
 					<set var="a1_u" value="(Type,{X})" />
