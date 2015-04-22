@@ -23,8 +23,13 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="frame_u" value="(*#{X} {E})" />
-                                        <if var="E" relation="in" value="{_etcsvlist}" />
+                                    <if var="frame_u" value="(*#{X} {E})" />
+
+                                    <if var="_etcsvlist" relation="contains" value="{E}" />
+                                    <!-- "in" doesnt work!!!!! -->
+                                    <!--<if var="E" relation="in" value="{_etcsvlist}" /> -->
+                                                         
+
 				</condition>
 				<effect>
 					<set var="a1_u" value="(Type,{X})" />
@@ -40,7 +45,7 @@
 					<if var="frame_u" value="(*#{X})" />	
 				</condition>
 				<effect>
-					<set var="a2_u" value="(EventType,{X})" />
+                                    <set var="a2_u" value="(EventType,{X})" />
 				</effect>
 			</case>
 		</rule>
