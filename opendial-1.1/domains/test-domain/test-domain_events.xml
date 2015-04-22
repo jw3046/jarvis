@@ -20,9 +20,9 @@
 
 <domain>
 	<model trigger="frame_u">
-    		<rule>
+		<rule>
 			<case>
-             			<condition>
+				<condition operator="and">
 					<if var="frame_u" value="(*#{X} {E})" />
 					<if var="E" relation="in" value="[anniversary,birthday,chill,graduation,job,party,seminar]" />	
 				</condition>
@@ -33,17 +33,17 @@
 			</case>
 		</rule>
 		
-        <rule priority="2">
-        <!-- Handle unknown event types (simple & compound): -->
-            <case>
-                <condition>
-                    <if var="frame_u" value="(*#{X})" />	
-                </condition>
-                <effect>
-                    <set var="a2_u" value="(EventType,{X})" />
-                </effect>
-            </case>
-        </rule>
+        	<rule priority="2">
+        		<!-- Handle unknown event types (simple & compound): -->
+			<case>
+				<condition>
+					<if var="frame_u" value="(*#{X})" />	
+				</condition>
+				<effect>
+					<set var="a2_u" value="(EventType,{X})" />
+				</effect>
+			</case>
+		</rule>
 	</model>
 </domain>
 
