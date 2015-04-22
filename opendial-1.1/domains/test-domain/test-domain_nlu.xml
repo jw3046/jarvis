@@ -77,12 +77,7 @@
 			<case>
 				<effect>
 					<set var="CalendarAction" value="None" />
-					<set var="CalendarAction" value="{CalendarAction}" />
-					<set var="Departure" value="{Departure}" />
-					<set var="Date" value="{Date}" />
-					<set var="ReturnDate" value="{ReturnDate}" />
-					<set var="NbTickets" value="{NbTickets}" />
-				</effect>
+                                </effect>
 			</case>
 		</rule>
 

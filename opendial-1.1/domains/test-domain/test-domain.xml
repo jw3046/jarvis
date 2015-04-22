@@ -23,7 +23,7 @@
 	</initialstate>
 
 	<!-- Natural language understanding models -->
-	<import href="test-domain_nlu.xml"/>
+        <import href="test-domain_events.xml"/>
 
 
 	<!-- External module showing how to interface the dialogue system with an external 

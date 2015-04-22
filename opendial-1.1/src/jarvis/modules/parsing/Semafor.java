@@ -6,6 +6,7 @@ import opendial.DialogueSystem;
 import opendial.arch.DialException;
 import opendial.state.DialogueState;
 import opendial.modules.Module;
+import opendial.bn.values.Value;
 
 import com.google.api.client.http.HttpResponseException;
 
@@ -23,6 +24,9 @@ public class Semafor implements Module
     // the dialogue system
     DialogueSystem system;
 
+    // the parse interpreter
+    ParseInterpreter parseInterpreter;
+
     /**
      * Creates new instance of parsing module (makes API calls to semafor).
      *
@@ -30,6 +34,7 @@ public class Semafor implements Module
      */
     public Semafor(DialogueSystem system) {
         this.system = system;
+        parseInterpreter = new ParseInterpreter();
         System.out.println("Semafor Created!");
     }
 
@@ -44,8 +49,13 @@ public class Semafor implements Module
     public void trigger(DialogueState state, Collection<String> updatedVars) {
         if (updatedVars.contains("u_u") && state.hasChanceNode("u_u")) {
             // do parsing if user utterance ("u_u") has been updated
-            String user_utterance =
-                state.queryProb("u_u").toDiscrete().getBest().toString();
+            String user_utterance = "None";
+            for (Value val: state.queryProb("u_u").toDiscrete().getValues()){
+                if (!(val.toString().equals("None"))){
+                    user_utterance = val.toString();
+                    break;
+                }
+            }
             System.out.println(user_utterance);
 
             // call semafor api
@@ -56,46 +66,52 @@ public class Semafor implements Module
 
                     // get main ideas of the utterance, ordered by dependency
                     ArrayList<UtteranceTheme> ideas = 
-                        ParseInterpreter.getUtteranceThemes(parseResult.getConll());
+                        parseInterpreter.getUtteranceThemes(parseResult.getConll());
 
-                    // partition list into sets of when/propernoun/noun
+                    // partition list into sets of who/what/when/where
                     ArrayList<HashMap<String,UtteranceTheme>> actions =
-                        ParseInterpreter.classify(ideas, parseResult.getFrames());
+                        parseInterpreter.classify(ideas, parseResult.getFrames());
 
-                    ArrayList<UserAct> userActs = new ArrayList<UserAct>();
-                    // convert general information into calendar-domain slots
-                    //userActs.addAll(CalendarIntent.convert(actions));
-                   
-                    //TODO: implement general type classifier to determine
-                    //          what type of event the user wants (this should
-                    //          only be called if the DM state is at the start)
-                    
-                    // TESTING
-                    System.out.println(ideas);
-                    System.out.println(actions);
+                    // set frame_u for EventType model
+                    String event_clues = "(";
+                    for (ParseFrame frame: parseResult.getFrames()){
+                        event_clues += frame.getTarget().getName() + ",";
+                    }
+                    event_clues = event_clues.substring(0,event_clues.length()-1);
 
-
-                    if (userActs.size()>0){
-                        // join all user acts into a string by comma
-                        String a_u = userActs.get(0).toString();
-                        for (int i=1; i<userActs.size(); i++){
-                            a_u += "," + userActs.get(i).toString();
+                    if (actions.size()>0){
+                        // join user acts into (key,value)
+                        // where key={Person,Place,Date,Object}
+                        String user_act = "";
+                        for (HashMap<String,UtteranceTheme> action: actions){
+                            for (String key: action.keySet()){
+                                UtteranceTheme idea = action.get(key);
+                                if (idea!=null){
+                                    user_act += "("+key+","+idea+"),";
+                                }
+                            }
                         }
-                        // return results to system
-                        Assignment assign = new Assignment("a_u", a_u);
-                        system.addContent(assign);
+                        system.addContent(new Assignment("a0_u",user_act));
+
+                        // for frame_u
+                        for (String key: actions.get(0).keySet()){
+                            if (key.equals("Object")){
+                                event_clues += "#" + actions.get(0).get(key) + ")";
+                            }
+                        }
                     }
                     else {
-                        if (actions.size()>0){
-                            // TODO: DEBUG: REMOVE in final version
-                            system.addContent(
-                                    new Assignment("a_u", actions.toString()));
-                        }
-                        else {
-                            // utterance not understood
-                            system.addContent(new Assignment("a_u", "_?_"));
-                        }
+                        // utterance not understood
+                        system.addContent(new Assignment("a0_u", "_?_"));
                     }
+
+                    // set frame_u for EventType module
+                    system.addContent(new Assignment("frame_u", event_clues.toLowerCase()));
+
+                    // DEBUG
+                    System.out.println(ideas);
+                    System.out.println(actions);
+                    System.out.println(event_clues);
                     
                 } catch (HttpResponseException e) {
                     System.err.println(e.getMessage());
@@ -104,7 +120,19 @@ public class Semafor implements Module
                 t.printStackTrace();
             }
         }
-        else {
+        else if (updatedVars.contains("a2_u") && state.hasChanceNode("a2_u")){
+            String user_act = state.queryProb("a0_u").toDiscrete().getBest().toString();
+            user_act += state.queryProb("a2_u").toDiscrete().getBest().toString();
+            // also add Type(); note that a2_u guaranteed to be defined if a1_u is
+            if (updatedVars.contains("a1_u") && state.hasChanceNode("a1_u")){
+                user_act += ","+ state.queryProb("a1_u").toDiscrete().getBest().toString();
+            }
+            system.addContent(new Assignment("a_u", user_act));
+            
+            //DEBUG
+            System.out.println(user_act);
+        }
+        else{
             /*
             System.out.println(state);
             String user_act = state.queryProb("a_u").toDiscrete().getBest().toString();

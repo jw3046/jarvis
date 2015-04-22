@@ -9,15 +9,18 @@ public class UtteranceTheme
 {
     private ArrayList<ConllEntry> entries;
     private String classification;
+    private String ner;
 
     public UtteranceTheme(){
         entries = new ArrayList<ConllEntry>();
         classification = "";
+        ner = "";
     }
     public UtteranceTheme(ConllEntry entry){
         entries = new ArrayList<ConllEntry>();
         entries.add(entry);
         classification = "";
+        ner = "";
     }
 
     public void add(ConllEntry entry){
@@ -40,6 +43,14 @@ public class UtteranceTheme
 
     public String getClassification(){
         return classification;
+    }
+
+    public void setNER(String ner){
+        this.ner = ner;
+    }
+
+    public String getNER(){
+        return ner;
     }
 
     public ArrayList<ConllEntry> getEntries(){
@@ -66,10 +77,10 @@ public class UtteranceTheme
         for (ConllEntry entry: getEntries()){
             phrase += entry.getFORM() + " ";
         }
-        if (entries.size()>0 && getClassification().equals("WHEN")){
+        if (entries.size()>0 && getClassification().equals("Date")){
             phrase = CalendarTimeUtil.toAbsoluteDate(phrase);
         }
-        return phrase;
+        return phrase.trim();
     }
 }
 

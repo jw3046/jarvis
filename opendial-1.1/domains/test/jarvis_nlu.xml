@@ -7,7 +7,7 @@
 	The user dialogue act associated with each utterance is represented here as a list of 
 	basic acts (such as "Confirm" or "Inform(...)").  This representation allows us to 
 	capture the fact that an utterance such as "Yes, 3 tickets" contains both a confirmation
-	and a new information about the Location of tickets. 
+	and a new information about the Place of tickets. 
 	-->
 
 	<model trigger="u_u">
@@ -17,6 +17,42 @@
 	  
 	  
 		<!-- Extracts EventType -->
+		<rule>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="(at)? {Place}" />
+					<if var="Place" relation="in" value="[House, School, Park]" />
+				</condition>
+				<effect>
+					<add var="a_u" value="(Place,{Place})" />
+				</effect>
+			</case>
+		</rule>	
+
+		<rule>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="{Type}" />
+					<if var="Type" relation="in" value="[Wedding, Fifth]" />
+				</condition>
+				<effect>
+					<add var="a_u" value="(Type,{Type})" />
+				</effect>
+			</case>
+		</rule>	
+
+		<rule>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="{Object}" />
+					<if var="Object" relation="in" value="[ring, skirt]" />
+				</condition>
+				<effect>
+					<add var="a_u" value="(Object,{Object})" />
+				</effect>
+			</case>
+		</rule>	
+
 		<rule>
 			<case>
 				<condition>
@@ -93,7 +129,7 @@
 	
 	<model trigger="a_u">
 		<!-- This model take the dialogue act fom the user and uses it to fill the corresponding
-	  slots (EventType, Person, dates, time, location, etc.). -->
+	  slots (EventType, Person, dates, time, Place, etc.). -->
 	 
 		<!-- Fills the slots in accordance with the information in the dialogue act -->
 
@@ -106,13 +142,12 @@
 					<if var="ET" value="NoEvent" />
 
 					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
-					<if var="a_u" relation="contains" value="(Date,{Month},{Day})" />
 				</condition>
 				<effect>
 					<set var="ET" value="{EventType}" />
+
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Date" value="{Month} {Day}" />
 				</effect>
 			</case>
 		</rule>
@@ -123,20 +158,165 @@
 					<if var="ET" value="NoEvent" />
 
 					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="(Date,{Month},{Day})" />
 				</condition>
 				<effect>
 					<set var="ET" value="{EventType}" />
-
-					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
+					<set var="Date" value="{Month} {Day}" />
+					<set var="Event" value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" value="NoEvent" />
+
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="(Person,{Person})" />
+				</condition>
+				<effect>
+					<set var="ET" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+					<set var="Person" value="{Person}" />
+					<set var="Event" value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" value="NoEvent" />
+
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
+				</condition>
+				<effect>
+					<set var="ET" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+					<set var="Place" value="{Place}" />
+					<set var="Event" value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" value="NoEvent" />
+
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="(Date,{Month},{Day})" />
+					<if var="a_u" relation="contains" value="(Person,{Person})" />
+				</condition>
+				<effect>
+					<set var="ET" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+					<set var="Date" value="{Month} {Day}" />
+					<set var="Person" value="{Person}" />
+					<set var="Event" value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" value="NoEvent" />
+
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="(Person,{Person})" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
+				</condition>
+				<effect>
+					<set var="ET" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+					<set var="Person" value="{Person}" />
+					<set var="Place" value="{Place}" />
+					<set var="Event" value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" value="NoEvent" />
+
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="(Date,{Month},{Day})" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
+				</condition>
+				<effect>
+					<set var="ET" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+					<set var="Date" value="{Month} {Day}" />
+					<set var="Place" value="{Place}" />
+					<set var="Event" value="{EventType}" />
 				</effect>
 			</case>
 		</rule>
 
 
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" value="NoEvent" />
+
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
+					<if var="a_u" relation="contains" value="(Date,{Month},{Day})" />
+					<if var="a_u" relation="contains" value="(Person,{Person})" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
+				</condition>
+				<effect>
+					<set var="ET" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+					<set var="Date" value="{Month} {Day}" />
+					<set var="Person" value="{Person}" />
+					<set var="Place" value="{Place}" />
+					<set var="Event" value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+
+
+
 		<!-- *************** after EVENT is updated ************* -->
 
 		<!-- Birthday -->
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Birthday" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
+					<if var="current_step" relation="=" value="Gift" />
+				</condition>
+				<effect>
+					<set var="Gift" value="{Object}" />
+					<set var="Event" value="Birthday" />
+					<set var="EventType" value="Birthday" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Birthday" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
+					<if var="current_step" relation="=" value="DressCode" />
+				</condition>
+				<effect>
+					<set var="DressCode" value="{Object}" />
+					<set var="Event" value="Birthday" />
+					<set var="EventType" value="Birthday" />
+				</effect>
+			</case>
+		</rule>
+
 
 		<rule>
 			<case>
@@ -172,40 +352,27 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="(Location, {Location})" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Location" value="{Location}" />
+					<set var="Place" value="{Place}" />
 				</effect>
 			</case>
 		</rule>
+
 
 		<rule>
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="(Gift, {Gift})" />
+					<if var="a_u" relation="contains" value="(DressCode, {DressCode})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Gift" value="{Gift}" />
-				</effect>
-			</case>
-		</rule>
-
-		<rule>
-			<case>
-				<condition operator="and">
-					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="(Outfit, {Outfit})" />
-				</condition>
-				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
-					<set var="Outfit" value="{Outfit}" />
+					<set var="DressCode" value="{DressCode}" />
 				</effect>
 			</case>
 		</rule>
@@ -219,12 +386,89 @@
 					<if var="a_u" relation="contains" value="(Person,{Person})" />
 				</condition>
 				<effect>
-					<set var="Event" value="Anniversary" />
 					<set var="EventType" value="Anniversary" />
 					<set var="Person" value="{Person}" />
+					<set var="Event" value="Anniversary" />
+				
 				</effect>
 			</case>
 		</rule>
+
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Anniversary" />
+					<if var="a_u" relation="contains" value="(Date,{Month},{Day})" />
+				</condition>
+				<effect>
+					<set var="EventType" value="{EventType}" />
+					<set var="Date" value="{Month} {Day}" />
+					<set var="Event" value="{EventType}" />
+
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Anniversary" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
+					<if var="current_step" relation="=" value="Gift" />
+				</condition>
+				<effect>
+					<set var="Gift" value="{Object}" />
+					<set var="Event" value="Anniversary" />
+					<set var="EventType" value="Anniversary" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Anniversary" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
+					<if var="current_step" relation="=" value="DressCode" />
+				</condition>
+				<effect>
+					<set var="DressCode" value="{Object}" />
+					<set var="Event" value="Anniversary" />
+					<set var="EventType" value="Anniversary" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Anniversary" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
+				</condition>
+				<effect>
+					<set var="Event" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+					<set var="Place" value="{Place}" />
+				</effect>
+			</case>
+		</rule>
+
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Anniversary" />
+					<if var="a_u" relation="contains" value="(DressCode, {DressCode})" />
+				</condition>
+				<effect>
+					<set var="Event" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+					<set var="DressCode" value="{DressCode}" />
+				</effect>
+			</case>
+		</rule>
+
 
 		<rule>
 			<case>
@@ -244,59 +488,51 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="(Date,{Month},{Day})" />
+					<if var="a_u" relation="contains" value="(Type, {Type})" />
+					<if var="current_step" relation="=" value="Type" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Date" value="{Month} {Day}" />
+					<set var="Type" value="{Object}" />
 				</effect>
 			</case>
 		</rule>
 
-		<rule>
-			<case>
-				<condition operator="and">
-					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="(Location, {Location})" />
-				</condition>
-				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
-					<set var="Location" value="{Location}" />
-				</effect>
-			</case>
-		</rule>
 
-		<rule>
-			<case>
-				<condition operator="and">
-					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="(Gift, {Gift})" />
-				</condition>
-				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
-					<set var="Gift" value="{Gift}" />
-				</effect>
-			</case>
-		</rule>
-
-		<rule>
-			<case>
-				<condition operator="and">
-					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="(Outfit, {Outfit})" />
-				</condition>
-				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
-					<set var="Outfit" value="{Outfit}" />
-				</effect>
-			</case>
-		</rule>
 
 		<!-- PARTY -->
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Party" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
+					<if var="current_step" relation="=" value="Gift" />
+				</condition>
+				<effect>
+					<set var="Gift" value="{Object}" />
+					<set var="Event" value="Party" />
+					<set var="EventType" value="Party" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Party" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
+					<if var="current_step" relation="=" value="DressCode" />
+				</condition>
+				<effect>
+					<set var="DressCode" value="{Object}" />
+					<set var="Event" value="Party" />
+					<set var="EventType" value="Party" />
+				</effect>
+			</case>
+		</rule>
+
 
 		<rule>
 			<case>
@@ -305,9 +541,10 @@
 					<if var="a_u" relation="contains" value="(Person,{Person})" />
 				</condition>
 				<effect>
-					<set var="Event" value="Party" />
 					<set var="EventType" value="Party" />
 					<set var="Person" value="{Person}" />
+					<set var="Event" value="Party" />
+				
 				</effect>
 			</case>
 		</rule>
@@ -320,9 +557,10 @@
 					<if var="a_u" relation="contains" value="(Date,{Month},{Day})" />
 				</condition>
 				<effect>
-					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
 					<set var="Date" value="{Month} {Day}" />
+					<set var="Event" value="{EventType}" />
+
 				</effect>
 			</case>
 		</rule>
@@ -331,40 +569,27 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Party" />
-					<if var="a_u" relation="contains" value="(Location, {Location})" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Location" value="{Location}" />
+					<set var="Place" value="{Place}" />
 				</effect>
 			</case>
 		</rule>
+
 
 		<rule>
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Party" />
-					<if var="a_u" relation="contains" value="(Gift, {Gift})" />
+					<if var="a_u" relation="contains" value="(DressCode, {DressCode})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Gift" value="{Gift}" />
-				</effect>
-			</case>
-		</rule>
-
-		<rule>
-			<case>
-				<condition operator="and">
-					<if var="ET" relation="=" value="Party" />
-					<if var="a_u" relation="contains" value="(Outfit, {Outfit})" />
-				</condition>
-				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
-					<set var="Outfit" value="{Outfit}" />
+					<set var="DressCode" value="{DressCode}" />
 				</effect>
 			</case>
 		</rule>
@@ -407,12 +632,12 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Chill" />
-					<if var="a_u" relation="contains" value="(Location, {Location})" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Location" value="{Location}" />
+					<set var="Place" value="{Place}" />
 				</effect>
 			</case>
 		</rule>
@@ -421,15 +646,17 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Chill" />
-					<if var="a_u" relation="contains" value="(Outfit, {Outfit})" />
+					<if var="a_u" relation="contains" value="(Object, {Object})" />
+					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Outfit" value="{Outfit}" />
+					<set var="DressCode" value="{Object}" />
 				</effect>
 			</case>
 		</rule>
+
 
 		<!-- EXAM -->
 
@@ -451,12 +678,12 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Exam" />
-					<if var="a_u" relation="contains" value="(Location, {Location})" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Location" value="{Location}" />
+					<set var="Place" value="{Place}" />
 				</effect>
 			</case>
 		</rule>
@@ -470,7 +697,7 @@
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Type" value="{Type}" />
+					<set var="Subject" value="{Type}" />
 				</effect>
 			</case>
 		</rule>
@@ -488,7 +715,7 @@
 
 					<set var="Event" value="Seminar" />
 					<set var="EventType" value="Seminar" />
-					<set var="Type" value="{Type}" />
+					<set var="Subject" value="{Type}" />
 				</effect>
 			</case>
 		</rule>
@@ -512,12 +739,12 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Seminar" />
-					<if var="a_u" relation="contains" value="(Location, {Location})" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Location" value="{Location}" />
+					<set var="Place" value="{Place}" />
 				</effect>
 			</case>
 		</rule>
@@ -527,12 +754,13 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Seminar" />
-					<if var="a_u" relation="contains" value="(Outfit, {Outfit})" />
+					<if var="a_u" relation="contains" value="(Object, {Object})" />
+					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Outfit" value="{Outfit}" />
+					<set var="DressCode" value="{Object}" />
 				</effect>
 			</case>
 		</rule>
@@ -573,12 +801,12 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Job" />
-					<if var="a_u" relation="contains" value="(Location, {Location})" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Location" value="{Location}" />
+					<set var="Place" value="{Place}" />
 				</effect>
 			</case>
 		</rule>
@@ -587,12 +815,13 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Job" />
-					<if var="a_u" relation="contains" value="(Outfit, {Outfit})" />
+					<if var="a_u" relation="contains" value="(Object, {Object})" />
+					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Outfit" value="{Outfit}" />
+					<set var="DressCode" value="{Object}" />
 				</effect>
 			</case>
 		</rule>
@@ -633,12 +862,12 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Graduation" />
-					<if var="a_u" relation="contains" value="(Location, {Location})" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Location" value="{Location}" />
+					<set var="Place" value="{Place}" />
 				</effect>
 			</case>
 		</rule>
@@ -647,12 +876,13 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Graduation" />
-					<if var="a_u" relation="contains" value="(Gift, {Gift})" />
+					<if var="a_u" relation="contains" value="(Object, {Object})" />
+					<if var="current_step" relation="=" value="Gift" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Gift" value="{Gift}" />
+					<set var="Gift" value="{Object}" />
 				</effect>
 			</case>
 		</rule>
@@ -661,12 +891,13 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Graduation" />
-					<if var="a_u" relation="contains" value="(Outfit, {Outfit})" />
+					<if var="a_u" relation="contains" value="(Object, {Object})" />
+					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Outfit" value="{Outfit}" />
+					<set var="DressCode" value="{Object}" />
 				</effect>
 			</case>
 		</rule>
@@ -708,12 +939,12 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Other" />
-					<if var="a_u" relation="contains" value="(Location, {Location})" />
+					<if var="a_u" relation="contains" value="(Place, {Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Location" value="{Location}" />
+					<set var="Place" value="{Place}" />
 				</effect>
 			</case>
 		</rule>
@@ -723,12 +954,12 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Other" />
-					<if var="a_u" relation="contains" value="(Outfit, {Outfit})" />
+					<if var="a_u" relation="contains" value="(DressCode, {DressCode})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Outfit" value="{Outfit}" />
+					<set var="DressCode" value="{DressCode}" />
 				</effect>
 			</case>
 		</rule>
@@ -802,10 +1033,11 @@
 					<set var="EventType" value="{EventType}" />
 					<set var="Date" value="{Month} {Date}" />
 					<set var="Time" value="{Time}" />
-					<set var="Location" value="{Location}" />
+					<set var="Place" value="{Place}" />
 					<set var="Gift" value="{Gift}" />
-					<set var="Outfit" value="{Outfit}" />
+					<set var="DressCode" value="{DressCode}" />
 					<set var="Type" value="{Type}" />
+
 
 				</effect>
 			</case>

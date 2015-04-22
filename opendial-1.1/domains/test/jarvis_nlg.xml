@@ -88,7 +88,7 @@
 					<if var="current_step" value="Type" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What typde of {EventType} is this?" />
+					<set var="u_m" value="What typde of {EventType} is this? {a_u}" />
 				</effect>
 			</case>
 		</rule>

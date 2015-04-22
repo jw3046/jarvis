@@ -15,7 +15,7 @@ I. Birthday
 
 II. Anniversary
     - Person(Person)
-    - Type of Anniversary(Subject)
+    - Type of Anniversary(Type)
     - gift Y/N?(Gift)*
     - where?(Place)
     - outfit(DressCode)*

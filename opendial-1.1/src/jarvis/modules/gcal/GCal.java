@@ -164,7 +164,7 @@ public class GCal
     event.setDescription("This is a test event...");
     
     // check if time value has been filled
-    String WHEN = "WHEN=";
+    String WHEN = "(Date,";
     String NULL = WHEN+"null";
     int startIndex = data.indexOf(WHEN);
     if (data.substring(startIndex,startIndex+NULL.length()).equals(NULL)){
@@ -178,7 +178,7 @@ public class GCal
     }
     else {
         // extract time info
-        int endIndex = data.indexOf("}", startIndex);
+        int endIndex = data.indexOf(")", startIndex);
         String time = data.substring(startIndex+WHEN.length(),endIndex);
         event.setStart(new EventDateTime().setDateTime(new DateTime(time+":00-04:00")));
         event.setEnd(new EventDateTime().setDateTime(new DateTime(time+":01-04:00")));
