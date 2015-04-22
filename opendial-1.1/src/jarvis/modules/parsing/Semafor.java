@@ -87,7 +87,7 @@ public class Semafor implements Module
                             for (String key: action.keySet()){
                                 UtteranceTheme idea = action.get(key);
                                 if (idea!=null){
-                                    user_act += "("+key+","+idea+"),";
+                                    user_act += "("+key+","+idea+") ";
                                 }
                             }
                         }
@@ -122,10 +122,10 @@ public class Semafor implements Module
         }
         else if (updatedVars.contains("a2_u") && state.hasChanceNode("a2_u")){
             String user_act = state.queryProb("a0_u").toDiscrete().getBest().toString();
-            user_act += state.queryProb("a2_u").toDiscrete().getBest().toString();
+            user_act += " " + state.queryProb("a2_u").toDiscrete().getBest().toString();
             // also add Type(); note that a2_u guaranteed to be defined if a1_u is
             if (updatedVars.contains("a1_u") && state.hasChanceNode("a1_u")){
-                user_act += ","+ state.queryProb("a1_u").toDiscrete().getBest().toString();
+                user_act += " "+ state.queryProb("a1_u").toDiscrete().getBest().toString();
             }
             system.addContent(new Assignment("a_u", user_act));
             
