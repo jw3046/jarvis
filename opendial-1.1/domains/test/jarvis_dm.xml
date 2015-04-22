@@ -33,9 +33,31 @@
 				
 		</rule>
 					
+					
+		<rule>
+			<!-- **************TESTING CASE ********* -->
+			<case>
+				<condition>
+					
+					<if var="EventType" value="Birthday" />
+					<if var="Date" relation="!=" value="March 1" />
+					<if var="Person" relation="!=" value="Kate" />
+					
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="CreateEvent({EventType})" />
+					
+				</effect>
+				<effect util="0.5">
+					<set var="a_m" value="Confirm(EventType,{EventType})" />
+				</effect>
+			</case>
+		</rule>
 
 		<!-- Birthday Event -->
 		<rule>
+			
+			
 			<!-- Got All necessary Information, confirm create corresponding calendar event -->
 			<case>
 				<condition>
