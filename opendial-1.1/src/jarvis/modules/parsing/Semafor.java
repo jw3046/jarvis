@@ -125,7 +125,7 @@ public class Semafor implements Module
             user_act += state.queryProb("a2_u").toDiscrete().getBest().toString();
             // also add Type(); note that a2_u guaranteed to be defined if a1_u is
             if (updatedVars.contains("a1_u") && state.hasChanceNode("a1_u")){
-                user_act += state.queryProb("a1_u").toDiscrete().getBest().toString();
+                user_act += ","+ state.queryProb("a1_u").toDiscrete().getBest().toString();
             }
             system.addContent(new Assignment("a_u", user_act));
             
