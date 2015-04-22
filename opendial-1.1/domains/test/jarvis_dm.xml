@@ -386,6 +386,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Chill" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Person" relation="!=" value="None" />
 				</condition>
@@ -402,6 +404,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Chill" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 				</condition>
 				<effect util="5">
@@ -423,6 +427,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Exams" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Subject" relation="!=" value="None" />
 					<if var="Place" relation="!=" value="None" />
@@ -441,6 +447,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Exams" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Subject" relation="!=" value="None" />
 				</condition>
@@ -457,6 +465,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Exams" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="Request(Subject)" />
@@ -473,6 +483,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Seminar" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Topic" relation="!=" value="None" />
 					<if var="Person" relation="!=" value="None" />
@@ -492,6 +504,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Seminar" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Topic" relation="!=" value="None" />
 					<if var="Person" relation="!=" value="None" />
@@ -510,6 +524,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Seminar" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Topic" relation="!=" value="None" />
 					<if var="Person" relation="!=" value="None" />
@@ -528,6 +544,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Seminar" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Topic" relation="!=" value="None" />
 				</condition>
@@ -544,6 +562,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Seminar" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="Request(Subject)" />				
@@ -561,6 +581,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Job" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Subject" relation="!=" value="None" />
 					<if var="Person" relation="!=" value="None" />
@@ -580,6 +602,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Job" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Subject" relation="!=" value="None" />
 					<if var="Person" relation="!=" value="None" />
@@ -598,6 +622,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Job" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Subject" relation="!=" value="None" />
 					<if var="Person" relation="!=" value="None" />
@@ -616,6 +642,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Job" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Subject" relation="!=" value="None" />
 				</condition>
@@ -632,6 +660,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Job" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 				</condition>
 				<effect util="5">
@@ -650,6 +680,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Graduation" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Person" relation="!=" value="None" />
 					<if var="Place" relation="!=" value="None" />
@@ -669,6 +701,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Graduation" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Person" relation="!=" value="None" />
 					<if var="Place" relation="!=" value="None" />
@@ -687,6 +721,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Graduation" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 					
 					<if var="Person" relation="!=" value="None" />
 				</condition>
@@ -704,6 +740,8 @@
 			<case>
 				<condition>
 					<if var="Event" value="Graduation" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="Request(Person)" />
