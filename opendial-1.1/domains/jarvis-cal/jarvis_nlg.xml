@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain>
+	<!-- Natural language generation models. The domain can produce new system 
+		utterance either when the current step is changed, or when a new system action 
+		is selected. -->
+
+
+	<model trigger="current_step">
+		<!--Model producing new system utterances when the current step is moved 
+			to a new step. -->
+
+		<!-- Asks for the EventType -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="EventType" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="What is your event?" />
+					<set var="ET" value="NoEvent" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Asks for the Person -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Person" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Who is the event for?" />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Asks for the Gift -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Gift_Request" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you want to send a gift for {Person}?" />
+				</effect>
+			</case>
+		</rule>
+			
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Gift" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="What gift do you want for {Person}?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Asks for the  date -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Date" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="When is {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Asks for the  Place -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Place" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Where is {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Asks for the  Type of Anniversary -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Type" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="What typde of {EventType} is this?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Asks for the  Subject  -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Subject" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="What is the subject/topic for the {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Asks for the DressCode  -->
+		
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="DressCode_Request" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you want to wear anything special for {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+		
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="DressCode" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="What is the dress code required for the {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Asks for the Note -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Note_Request" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you have any other information to add for {EventType}" />
+				</effect>
+			</case>
+		</rule>
+			
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Note" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="What's to add in for {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+		
+		
+		<!-- Asks for Confirmation to Create Event -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Confirm_Event" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you want to add {EventType} on {Date} to the calendar?" />
+				</effect>
+			</case>
+		</rule>
+			
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Note" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="What's to add in for {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+		
+		
+		
+		<!-- *******************************-->
+
+		<!-- Asks whether to book a Time trip -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Time" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you have a specific time for {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Asks for the time-->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Time" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="What time is {Person}'s {EventType}?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Asks for the Location of tickets -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Location" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you have the location?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Asks for the last confirmation -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="LastConfirm" />
+					<if var="Time" value="NoReturn" />
+					<if var="Location" value="1"/>
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="You are scheduling {Person}'s'
+					{EventType} on {Date} at {Location}. 
+					Shall I confirm your order?" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="current_step" value="LastConfirm" />
+					<if var="Location" value="1"/>
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="You are scheduling {Person}'s'
+					{EventType} on {Date}, {Time} at {Location}" />
+				</effect>
+			</case>
+				<case>
+				<condition>
+					<if var="current_step" value="LastConfirm" />
+					<if var="Time" value="NoReturn" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="You are adding {Person}'s {EventType} on {Date} at {Location}. Shall I confirm?" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="current_step" value="LastConfirm" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="You are adding {Person}'s {EventType} on {Date} at {Location}. Shall I confirm?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Asks whether to order additional tickets -->
+		<rule>
+			<case>
+				<condition operator="or">
+					<if var="current_step" value="Final" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you want to add additional event?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Closes the interaction -->
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Close" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Thank you" />
+				</effect>
+			</case>
+		</rule>
+
+
+	</model>
+
+
+	<model trigger="a_m">
+		<!-- Model producing new system utterances related to the last system action -->
+
+		<!-- Requsting the Gift -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Request(Gift)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are attending {Person}'s {EventType} on {Date}." />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Requsting the Time -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Request(Time)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are attending {Person}'s {EventType} on {Date}." />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Requsting the Person -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Request(Person)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are attending {EventType} on {Date}." />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Requsting the Date -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Request(Date)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are attending {EventType}." />
+				</effect>
+			</case>
+		</rule>
+		
+		<!-- Requsting the Place -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Request(Place)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are attending {EventType}." />
+				</effect>
+			</case>
+		</rule>
+		
+		
+		
+		<!-- Requsting the Type of Anniversary -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Request(Type)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are attending {EventType} on {Date}." />
+				</effect>
+			</case>
+		</rule>
+		
+		<!--************** End of Update****************-->
+		
+		<!-- grounding the EventType -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(EventType,{Event})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, adding {Event}." />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- grounding the Person -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Person,{Person})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, {Person}'s {EventType}." />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- grounding the flight date -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Date,{Date})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="OK,  {Person} to {EventType} on {Date}." />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- grounding the Location of tickets -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Location,{Location})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, at {Location}." />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- grounding the Time date -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Time,NoReturn)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, no Time" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Time,{Time})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="OK, {EventType} for {Person} on {Time}." />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- confirmation request for the EventType -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Confirm(EventType,{Event})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="You want to go to {Event}. Is that correct?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- confirmation request for the Person -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Confirm(Person,{Person})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="The event is for {Person}. Is that correct?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- confirmation request for the flight date -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Confirm(Date,{Date1})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="You want to attend {EventType} on {Date1}. Is that correct?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- confirmation request for the Time date -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Confirm(Time,NoReturn)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Do you want to add another event?" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="Confirm(Time,{Date2})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="The event is for {Person} and is on {Date2}. Is that correct?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- confirmation request for the Location of tickets -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Confirm(Location,{Location})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="The event is at {Location}. Is that correct?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- repetition request -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="AskRepeat" />
+					<if var="current_step" value="EventType" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="Sorry, could you repeat? Possible events are Birthday, Anniversary, Party, Chill, Exams, Seminar, Talk, Job, Graduation, or Other" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="AskRepeat" />
+					<if var="current_step" value="Person" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="Sorry, could you repeat? Give me the name of the person." />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="AskRepeat" />
+					<if var="current_step" value="(Date|Time)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="Sorry, could you repeat? Please state the month and day of
+					your event." />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m-prev" value="AskRepeat" />
+					<if var="a_m" value="AskRepeat" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="Sorry I couldn't understand you. Could you please repeat one more time?" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="AskRepeat" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Sorry, could you repeat?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Making a price offer -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="MakeOffer({Price})" />
+					<if var="Time" value="NoReturn" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="{Person}'s' {EventType} 
+					on {Date}.  Do you want me to add the event?" />
+				</effect>
+			</case>
+			<case>
+				<condition>
+					<if var="a_m" value="MakeOffer({Price})" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="{Person}'s' {EventType} 
+					on {Date}.  Do you want me to add the event?" />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Grounding the cancellation -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Cancel)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, your event is now cancelled." />
+				</effect>
+			</case>
+		</rule>
+
+		<!-- Grounding the booking -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Ground(Booking)" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="OK, your event will be added to your Google calendar" />
+				</effect>
+			</case>
+		</rule>
+
+		
+	</model>
+
+</domain>

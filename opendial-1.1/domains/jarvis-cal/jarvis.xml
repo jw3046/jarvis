@@ -20,21 +20,30 @@
 			<value>Jarvis Initialized, Hello</value>
 		</variable>
 		
+		<!-- We start the dialogue by asking for the EventType -->
+		<variable id="current_step">
+			<value>EventType</value>
+		</variable>
+
 	</initialstate>
 
-	<!-- Natural language understanding models -->
-        <import href="test-domain_events.xml"/>
+        <!-- Natural language understanding models -->
+        <import href="jarvis_events_nlu.xml"/>
+	<import href="jarvis_nlu.xml"/>
+
+	<!--  Dialogue management models (action selection and transition) -->
+	<import href="jarvis_dm.xml"/>
+
+	<!-- Natural language generation models -->
+	<import href="jarvis_nlg.xml"/>
 
 
 	<!-- External module showing how to interface the dialogue system with an external 
 	database (used here to find the ticket prices and "book" the tickets) -->
-        <settings>
+	<settings>
             <modules>
                 jarvis.modules.parsing.Semafor,
                 jarvis.modules.gcal.CalendarUpdate
             </modules>
-
-            <!-- we use the following for NLU -->
 	</settings>
 </domain>
-
