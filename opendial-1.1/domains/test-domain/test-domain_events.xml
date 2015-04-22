@@ -34,7 +34,6 @@
 			</case>
 		</rule>
 		
-        </rule>
             <rule priority="2">
                 <!-- Handle unknown event types (simple & compound): -->
                 <case>
