@@ -18,99 +18,32 @@
 -->
 
 
-
 <domain>
 	<model trigger="frame_u">
-            <rule>
-                      
-			<!-- Handle known event types (simple & compound): -->
-                        <case>
-                                <condition>
-		    	    	        <if var="frame_u" value="(*#{X} anniversary)" />
-				</condition>
-				<effect>
-					<set var="a1_u" value="(Type,{X})" />
-					<set var="a2_u" value="(EventType,anniversary)" />
-				</effect>
-			</case>
-
-
+		<rule>
 			<case>
-				<condition>
-					<if var="frame_u" value="(*#{X} birthday)" />
+				<condition operator="and">
+					<if var="frame_u" value="(*#{X} {E})" />
+                                        <if var="E" relation="in" value="{_etcsvlist}" />
 				</condition>
 				<effect>
 					<set var="a1_u" value="(Type,{X})" />
-					<set var="a2_u" value="(EventType,birthday)" />
+					<set var="a2_u" value="(EventType,{E})" />
 				</effect>
 			</case>
-			
-
-			<case>
-				<condition>
-					<if var="frame_u" value="(*#{X} chill)" />
-				</condition>
-				<effect>
-					<set var="a1_u" value="(Type,{X})" />
-					<set var="a2_u" value="(EventType,chill)" />
-				</effect>
-			</case>
+		</rule>
 		
-
+        	<rule priority="2">
+        		<!-- Handle unknown event types (simple & compound): -->
 			<case>
 				<condition>
-					<if var="frame_u" value="(*#{X} graduation)" />
+					<if var="frame_u" value="(*#{X})" />	
 				</condition>
 				<effect>
-					<set var="a1_u" value="(Type,{X})" />
-					<set var="a2_u" value="(EventType,graduation)" />
+					<set var="a2_u" value="(EventType,{X})" />
 				</effect>
 			</case>
-	
-
-			<case>
-				<condition>
-					<if var="frame_u" value="(*#{X} job)" />
-				</condition>
-				<effect>
-					<set var="a1_u" value="(Type,{X})" />
-					<set var="a2_u" value="(EventType,job)" />
-				</effect>
-			</case>
-
-			<case>
-				<condition>
-					<if var="frame_u" value="(*#{X} party)" />
-				</condition>
-				<effect>
-					<set var="a1_u" value="(Type,{X})" />
-					<set var="a2_u" value="(EventType,party)" />
-				</effect>
-			</case>
-
-
-			<case>
-				<condition>
-					<if var="frame_u" value="(*#{X} seminar)" />
-				</condition>
-				<effect>
-					<set var="a1_u" value="(Type,{X})" />
-					<set var="a2_u" value="(EventType,seminar)" />
-				</effect>
-			</case>
-		
-                    </rule>
-                    <rule priority="2">
-                        <!-- Handle unknown event types (simple & compound): -->
-                        <case>
-                                <condition>
-                                        <if var="frame_u" value="(*#{X})" />	
-                                </condition>
-                                <effect>
-                                        <set var="a2_u" value="(EventType,{X})" />
-                                </effect>
-                        </case>
-
-                </rule>
+		</rule>
 	</model>
 </domain>
+

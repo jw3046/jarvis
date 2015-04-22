@@ -36,8 +36,7 @@ public class Semafor implements Module
         this.system = system;
         parseInterpreter = new ParseInterpreter();
         System.out.println("Semafor Created!");
-        String eventTypes = "[anniversary,birthday,chill,graduation,job,party,seminar]";
-        system.addContent(new Assignment("_etcsvlist",eventTypes));
+        
     }
 
     /**
@@ -110,6 +109,12 @@ public class Semafor implements Module
                     // set frame_u for EventType module
                     system.addContent(new Assignment("frame_u", event_clues.toLowerCase()));
 
+                    // set string match keywors for EventType extractor
+                    String eventTypes = 
+                        "anniversary;birthday;chill;graduation;job;party;seminar";
+                    system.addContent(new Assignment("_etcsvlist",eventTypes));
+                    System.out.println(eventTypes);
+
                     // DEBUG
                     System.out.println(ideas);
                     System.out.println(actions);
@@ -150,7 +155,7 @@ public class Semafor implements Module
     @Override
     public void start() throws DialException {
         paused = false;
-    }
+     }
     
     /**
      * Pauses the module.
