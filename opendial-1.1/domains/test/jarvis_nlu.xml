@@ -340,7 +340,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="(Place, {Place})" />
+					<if var="a_u" relation="contains" value="(Place,{Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -355,7 +355,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="(DressCode, {DressCode})" />
+					<if var="a_u" relation="contains" value="(DressCode,{DressCode})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -432,7 +432,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="(Place, {Place})" />
+					<if var="a_u" relation="contains" value="(Place,{Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -447,7 +447,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="(DressCode, {DressCode})" />
+					<if var="a_u" relation="contains" value="(DressCode,{DressCode})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -462,7 +462,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="(Type, {Type})" />
+					<if var="a_u" relation="contains" value="(Type,{Type})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -476,7 +476,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="(Type, {Type})" />
+					<if var="a_u" relation="contains" value="(Type,{Type})" />
 					<if var="current_step" relation="=" value="Type" />
 				</condition>
 				<effect>
@@ -557,7 +557,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Party" />
-					<if var="a_u" relation="contains" value="(Place, {Place})" />
+					<if var="a_u" relation="contains" value="(Place,{Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -572,7 +572,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Party" />
-					<if var="a_u" relation="contains" value="(DressCode, {DressCode})" />
+					<if var="a_u" relation="contains" value="(DressCode,{DressCode})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -620,7 +620,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Chill" />
-					<if var="a_u" relation="contains" value="(Place, {Place})" />
+					<if var="a_u" relation="contains" value="(Place,{Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -634,7 +634,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Chill" />
-					<if var="a_u" relation="contains" value="(Object, {Object})" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
@@ -666,7 +666,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Exam" />
-					<if var="a_u" relation="contains" value="(Place, {Place})" />
+					<if var="a_u" relation="contains" value="(Place,{Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -680,7 +680,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Exam" />
-					<if var="a_u" relation="contains" value="(Type, {Type})" />
+					<if var="a_u" relation="contains" value="(Type,{Type})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -727,7 +727,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Seminar" />
-					<if var="a_u" relation="contains" value="(Place, {Place})" />
+					<if var="a_u" relation="contains" value="(Place,{Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -742,7 +742,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Seminar" />
-					<if var="a_u" relation="contains" value="(Object, {Object})" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
@@ -789,7 +789,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Job" />
-					<if var="a_u" relation="contains" value="(Place, {Place})" />
+					<if var="a_u" relation="contains" value="(Place,{Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -803,7 +803,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Job" />
-					<if var="a_u" relation="contains" value="(Object, {Object})" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
@@ -850,7 +850,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Graduation" />
-					<if var="a_u" relation="contains" value="(Place, {Place})" />
+					<if var="a_u" relation="contains" value="(Place,{Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -864,7 +864,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Graduation" />
-					<if var="a_u" relation="contains" value="(Object, {Object})" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="Gift" />
 				</condition>
 				<effect>
@@ -879,7 +879,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Graduation" />
-					<if var="a_u" relation="contains" value="(Object, {Object})" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
@@ -927,7 +927,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Other" />
-					<if var="a_u" relation="contains" value="(Place, {Place})" />
+					<if var="a_u" relation="contains" value="(Place,{Place})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
@@ -942,7 +942,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Other" />
-					<if var="a_u" relation="contains" value="(DressCode, {DressCode})" />
+					<if var="a_u" relation="contains" value="(DressCode,{DressCode})" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
