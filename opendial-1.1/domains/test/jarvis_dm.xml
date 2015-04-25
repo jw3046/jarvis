@@ -158,7 +158,7 @@
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
 					
-					<if var="NumberYear" relation="!=" value="None" />
+					<if var="Type" relation="!=" value="None" />
 					<if var="Gift" relation="!=" value="None" />
 					<if var="Place" relation="!=" value="None" />
 					<if var="DressCode" relation="!=" value="None" />
@@ -198,7 +198,7 @@
 					<if var="Event" value="Anniversary" />
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
-					
+	
 					<if var="Type" relation="!=" value="None" />
 					<if var="Gift" relation="!=" value="None" />
 					
