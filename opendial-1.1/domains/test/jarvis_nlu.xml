@@ -111,6 +111,7 @@
 				</condition>
 				<effect>
 					<add var="a_u" value="ConfirmY" />
+
 				</effect>
 			</case>
 			<case>
@@ -119,6 +120,7 @@
 				</condition>
 				<effect>
 					<add var="a_u" value="ConfirmN" />
+					<set var="a_u_reply" value="ConfirmN" />
 				</effect>
 			</case>
 		</rule>
@@ -648,21 +650,6 @@
 			</case>
 		</rule>
 
-		<rule>
-			<case>
-				<condition operator="and">
-					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="(DressCode,{DressCode})" />
-				</condition>
-				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
-					<set var="DressCode" value="{DressCode}" />
-					<set var="a_m" value="CheckDressCode"/>
-
-				</effect>
-			</case>
-		</rule>
 
 		<!-- PARTY -->
 		<rule>
@@ -745,21 +732,6 @@
 			</case>
 		</rule>
 
-		<rule>
-			<case>
-				<condition operator="and">
-					<if var="ET" relation="=" value="Party" />
-					<if var="a_u" relation="contains" value="(DressCode,{DressCode})" />
-				</condition>
-				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
-					<set var="DressCode" value="{DressCode}" />
-					<set var="a_m" value="CheckDressCode"/>
-
-				</effect>
-			</case>
-		</rule>
 
 		<!-- CHILL -->
 		<rule>
@@ -870,6 +842,23 @@
 			</case>
 		</rule>
 
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Exams" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
+					<if var="current_step" relation="=" value="Subject" />
+				</condition>
+				<effect>
+					<set var="Subject" value="{Object}" />
+					<set var="Event" value="Exams" />
+					<set var="EventType" value="Exams" />
+					<set var="a_m" value="CheckSubject"/>
+
+				</effect>
+			</case>
+		</rule>
+
 		<!-- SEMINAR -->
 		<rule>
 			<case>
@@ -888,6 +877,22 @@
 			</case>
 		</rule>
 
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Seminar" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
+					<if var="current_step" relation="=" value="Subject" />
+				</condition>
+				<effect>
+					<set var="Subject" value="{Object}" />
+					<set var="Event" value="Seminar" />
+					<set var="EventType" value="Seminar" />
+					<set var="a_m" value="Checksubject"/>
+
+				</effect>
+			</case>
+		</rule>
 		<rule>
 			<case>
 				<condition operator="and">
@@ -1136,16 +1141,18 @@
 			</case>
 		</rule>
 
+	
 		<rule>
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Other" />
-					<if var="a_u" relation="contains" value="(DressCode,{DressCode})" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
+					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="DressCode" value="{DressCode}" />
+					<set var="DressCode" value="{Object}" />
 					<set var="a_m" value="CheckDressCode"/>
 
 				</effect>
@@ -1153,7 +1160,7 @@
 		</rule>
 
 
-		<!-- yes / no --> 
+		<!-- yes --> 
 		<rule>
 			<case>
 				<condition operator="and">
@@ -1165,17 +1172,35 @@
 			</case>
 		</rule>
 
+		<!-- no --> 
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="a_u" relation="contains" value="ConfirmN" />
+					<if var="a_u_reply" relation="contains" value="ConfirmN" />
+					<if var="current_step" relation="=" value="DressCode_Request" />
 				</condition>
 				<effect>
-					<set var="Event" value="ConfirmN"/>
+					<set var="DressCode" value="NoDressCode" />
+					<set var="Event" value="{EventType}"/>
+					<set var="a_m" value="CheckNoDressCode" />
 				</effect>
 			</case>
 		</rule>
 
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="a_u_reply" relation="contains" value="ConfirmN" />
+					<if var="current_step" relation="=" value="Gift_Request" />
+				</condition>
+				<effect>
+					<set var="Gift" value="NoGift" />
+					<set var="Event" value="{EventType}"/>
+					<set var="current_step" value="Gift"/>
+					<set var="a_m" value="CheckNo" />
+				</effect>
+			</case>
+		</rule>
 
 
 		<!-- If the last system action is a confirmation request and the user confirms the information, also update the corresponding slot-->
@@ -1225,7 +1250,7 @@
 					<set var="Gift" value="{Gift}" />
 					<set var="DressCode" value="{DressCode}" />
 					<set var="Type" value="{Type}" />
-
+					<set var="Subject" value="{Subject}" />
 
 				</effect>
 			</case>
