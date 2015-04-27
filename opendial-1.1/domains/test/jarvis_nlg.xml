@@ -654,6 +654,7 @@
 				<effect util="1">
 					<set var="u_m"
 						value="CheckObject {Object}" />
+						
 				</effect>
 			</case>
 		</rule>
@@ -664,7 +665,10 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="Check" />
+						value="CheckAHHH {current_step}" />
+						<set var="current_step"
+							value="Place" />
+							
 				</effect>
 			</case>
 		</rule>
@@ -675,7 +679,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="CheckType: {Subject} {Event} {current_step}" />
+						value="CheckType: subject evet et date cs{Subject} {Event} {EventType} {Date} {current_step}" />
 				</effect>
 			</case>
 		</rule>
@@ -745,7 +749,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="CheckSubject: {Subject}" />
+						value="CheckSubject: {Subject} " />
 				</effect>
 			</case>
 		</rule>
