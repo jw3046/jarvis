@@ -214,7 +214,7 @@
 				<effect>
 					<set var="ET" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
-					<set var="Type" value="{Type}" />
+					<set var="Subject" value="{Type}" />
 					<set var="Event" value="{EventType}" />
 				</effect>
 			</case>
@@ -232,7 +232,7 @@
 					<set var="ET" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
 					<set var="Place" value="{Place}" />
-					<set var="Type" value="{Type}" />
+					<set var="Subject" value="{Type}" />
 					<set var="Event" value="{EventType}" />
 				</effect>
 			</case>
@@ -251,7 +251,7 @@
 					<set var="ET" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
 					<set var="Person" value="{Person}" />
-					<set var="Type" value="{Type}" />
+					<set var="Subject" value="{Type}" />
 					<set var="Event" value="{EventType}" />
 				</effect>
 			</case>
@@ -270,7 +270,7 @@
 					<set var="ET" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
 					<set var="Date" value="{Date}" />
-					<set var="Type" value="{Type}" />
+					<set var="Subject" value="{Type}" />
 					<set var="Event" value="{EventType}" />
 				</effect>
 			</case>
@@ -352,7 +352,7 @@
 					<set var="EventType" value="{EventType}" />
 					<set var="Person" value="{Person}" />
 					<set var="Place" value="{Place}" />
-					<set var="Type" value="{Type}" />
+					<set var="Subject" value="{Type}" />
 					<set var="Event" value="{EventType}" />
 				</effect>
 			</case>
@@ -373,7 +373,7 @@
 					<set var="EventType" value="{EventType}" />
 					<set var="Date" value="{Date}" />
 					<set var="Place" value="{Place}" />
-					<set var="Type" value="{Type}" />
+					<set var="Subject" value="{Type}" />
 					<set var="Event" value="{EventType}" />
 				</effect>
 			</case>
@@ -441,7 +441,7 @@
 					<set var="Date" value="{Date}" />
 					<set var="Person" value="{Person}" />
 					<set var="Place" value="{Place}" />
-					<set var="Type" value="{Type}" />
+					<set var="Subject" value="{Type}" />
 					<set var="Event" value="{EventType}" />
 				</effect>
 			</case>
@@ -578,7 +578,7 @@
 				<condition operator="and">
 					<if var="ET" relation="=" value="Anniversary" />
 					<if var="a_u" relation="contains" value="(Type,{Type})" />
-					<if var="current_step" relation="=" value="Type" />
+					<if var="current_step" relation="=" value="Subject" />
 				</condition>
 				<effect>
 					<set var="Subject" value="{Type}" />
