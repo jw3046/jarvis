@@ -52,7 +52,7 @@ public class GCalAddEvent implements Module {
 
 	// whether the module is paused or active
 	boolean paused = true;
-
+    CalendarManager eventManager = new CalendarManager();
 	/**
 	 * Creates a new instance of the flight-booking module
 	 *
@@ -87,6 +87,14 @@ public class GCalAddEvent implements Module {
 
             if(action.equals("Request(Gift)")){
                 String EventType= state.queryProb("EventType").toDiscrete().getBest().toString();
+                try{
+
+                    eventManager.addNewEvent(EventType);
+                    System.out.println("Adding event as "+EventType);
+                }catch(Exception e){
+                    System.out.println(e.toString());
+                }
+
                 System.out.println("Creating Event!");
                 system.addContent(new Assignment("a_m","Confirm"));
 
