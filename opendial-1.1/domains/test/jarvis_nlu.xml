@@ -581,7 +581,7 @@
 					<if var="current_step" relation="=" value="Type" />
 				</condition>
 				<effect>
-					<set var="Type" value="{Type}" />
+					<set var="Subject" value="{Type}" />
 					<set var="Event" value="{EventType}" />
 					<set var="EventType" value="{EventType}" />
 					<set var="a_m" value="CheckType"/>
