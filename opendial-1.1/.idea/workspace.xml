@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0ee3b11-40dc-4e98-b864-a59e79de3dd1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/jarvis/modules/gcal/GCalAddEvent.class" afterPath="$PROJECT_DIR$/bin/jarvis/modules/gcal/GCalAddEvent.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.store/user_calendar_credentials/StoredCredential" afterPath="$PROJECT_DIR$/.store/user_calendar_credentials/StoredCredential" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarManager.java" afterPath="$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java" afterPath="$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/opendial.iml" afterPath="$PROJECT_DIR$/opendial.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opendial.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,8 +32,8 @@
       <file leaf-file-name="GCalAddEvent.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.46391752" vertical-offset="675" max-vertical-offset="2070">
-              <caret line="92" column="67" selection-start-line="92" selection-start-column="67" selection-end-line="92" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.30927834" vertical-offset="840" max-vertical-offset="2310">
+              <caret line="95" column="20" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -47,7 +44,7 @@
       <file leaf-file-name="GCal.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/GCal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3165">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1140" max-vertical-offset="3165">
               <caret line="190" column="3" selection-start-line="190" selection-start-column="3" selection-end-line="190" selection-end-column="3" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -59,8 +56,8 @@
       <file leaf-file-name="CalendarManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2715">
-              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1954" max-vertical-offset="2730">
+              <caret line="117" column="41" selection-start-line="117" selection-start-column="41" selection-end-line="117" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -70,20 +67,10 @@
         <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarUpdate.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="1635">
-              <caret line="93" column="43" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
+              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="example-flightbooking_dm.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/domains/examples/example-flightbooking_dm.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4138" max-vertical-offset="7665">
-              <caret line="299" column="33" selection-start-line="299" selection-start-column="33" selection-end-line="299" selection-end-column="33" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -521,7 +508,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="240" y="23" width="1200" height="873" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -538,7 +525,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24916667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24916667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -703,7 +690,7 @@
     <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarUpdate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="1635">
-          <caret line="93" column="43" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
+          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -712,7 +699,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/GCal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3165">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1140" max-vertical-offset="3165">
           <caret line="190" column="3" selection-start-line="190" selection-start-column="3" selection-end-line="190" selection-end-column="3" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -722,16 +709,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2715">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1954" max-vertical-offset="2730">
+          <caret line="117" column="41" selection-start-line="117" selection-start-column="41" selection-end-line="117" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46391752" vertical-offset="675" max-vertical-offset="2070">
-          <caret line="92" column="67" selection-start-line="92" selection-start-column="67" selection-end-line="92" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.30927834" vertical-offset="840" max-vertical-offset="2310">
+          <caret line="95" column="20" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

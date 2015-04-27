@@ -109,7 +109,8 @@ public class CalendarManager
       showCalendars();
       String calendarID = getPrimaryCalendarID();
       System.out.println(calendarID);
-      addEvent(calendarID, "test event 1");
+        String[] eventData = {"Event Summary","Event Description"};
+      addEvent(calendarID, eventData);
       showEvents(calendarID);
 
 
@@ -138,24 +139,24 @@ public class CalendarManager
     return result;
   }
 
-  private static void addEvent(String calendarID, String data) throws IOException {
+  private static void addEvent(String calendarID, String[] data) throws IOException {
     View.header("Add Event");
     Event event = newEvent(data);
     Event result = client.events().insert(calendarID, event).execute();
     View.display(result);
   }
 
-  private static Event newEvent(String data) {
+  private static Event newEvent(String[] eventInfo) {
     //TODO: implement newEvent where u can set the fields
     Event event = new Event();
-    event.setSummary(data);
-    event.setDescription("This is a test event...");
+    event.setSummary(eventInfo[0]);
+    event.setDescription(eventInfo[1]);
     
     // check if time value has been filled
     String WHEN = "(Date,";
     String NULL = WHEN+"null";
-    int startIndex = data.indexOf(WHEN);
-    if (data.substring(startIndex,startIndex+NULL.length()).equals(NULL)){
+    //int startIndex = data.indexOf(WHEN);
+    //if (data.substring(startIndex,startIndex+NULL.length()).equals(NULL)){
         
         Date startDate = new Date();
         Date endDate = new Date(startDate.getTime() + 3600000);
@@ -163,19 +164,19 @@ public class CalendarManager
         event.setStart(new EventDateTime().setDateTime(start));
         DateTime end = new DateTime(endDate, TimeZone.getTimeZone("UTC"));
         event.setEnd(new EventDateTime().setDateTime(end));
-    }
-    else {
+    //}
+    //else {
         // extract time info
-        int endIndex = data.indexOf(")", startIndex);
-        String time = data.substring(startIndex+WHEN.length(),endIndex);
-        event.setStart(new EventDateTime().setDateTime(new DateTime(time+":00-04:00")));
-        event.setEnd(new EventDateTime().setDateTime(new DateTime(time+":01-04:00")));
-    }
+        //int endIndex = data.indexOf(")", startIndex);
+        //String time = data.substring(startIndex+WHEN.length(),endIndex);
+        //event.setStart(new EventDateTime().setDateTime(new DateTime(time+":00-04:00")));
+        //event.setEnd(new EventDateTime().setDateTime(new DateTime(time+":01-04:00")));
+    //}
     return event;
   }
 
-  public void addNewEvent(String data) throws IOException {
-      addEvent(getPrimaryCalendarID(), data);
+  public void addNewEvent(String[] eventInfo) throws IOException {
+      addEvent(getPrimaryCalendarID(), eventInfo);
   }
 
   private static void showEvents(String calendarID) throws IOException {

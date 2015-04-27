@@ -86,24 +86,40 @@ public class GCalAddEvent implements Module {
 			String action = state.queryProb("a_m").toDiscrete().getBest().toString();
 
             if(action.equals("Request(Gift)")){
+                //String EventType= state.queryProb("EventType").toDiscrete().getBest().toString();
+                String[] eventData=new String[5];
                 String EventType= state.queryProb("EventType").toDiscrete().getBest().toString();
+                eventData[0]=EventType;
+                String Person=state.queryProb("Person").toDiscrete().getBest().toString();
+                eventData[1]="Person: "+ Person;
+                System.out.println("Creating Event!");
                 try{
 
-                    eventManager.addNewEvent(EventType);
+                    eventManager.addNewEvent(eventData);
                     System.out.println("Adding event as "+EventType);
                 }catch(Exception e){
                     System.out.println(e.toString());
                 }
 
                 System.out.println("Creating Event!");
-                system.addContent(new Assignment("a_m","Confirm"));
+                //system.addContent(new Assignment("a_m","Confirm"));
 
             }
 
 			if (action.equals("CreateEvent({EventType})")) {
-
+                String[] eventData=new String[5];
                 String EventType= state.queryProb("EventType").toDiscrete().getBest().toString();
+                eventData[0]=EventType;
+                String Person=state.queryProb("Person").toDiscrete().getBest().toString();
+                eventData[1]="Person: "+ Person;
                 System.out.println("Creating Event!");
+                try{
+
+                    eventManager.addNewEvent(eventData);
+                    System.out.println("Adding event as "+EventType);
+                }catch(Exception e){
+                    System.out.println(e.toString());
+                }
                 system.addContent(new Assignment("a_m","Confirm"));
 
 
