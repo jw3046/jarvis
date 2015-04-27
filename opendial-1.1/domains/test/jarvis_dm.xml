@@ -9,7 +9,30 @@
 	<model trigger="Event">
 		
 		
-
+		<!-- Check for Event Type and Date -->
+		<rule>
+			<case>
+				<condition>
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="=" value="None" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="request(Date)"/>
+					</effect>
+				</case>
+				
+				<case>
+					<condition>
+						<if var="EventType" relation="=" value="None" />
+						
+					</condition>
+					<effect util="5">
+						<set var="a_m" value="request(EventType)"/>
+						</effect>
+				</case>
+				
+		</rule>
+					
 					
 		<rule>
 			<!-- **************TESTING CASE ********* -->
@@ -373,9 +396,30 @@
 					
 					<if var="Person" relation="!=" value="None" />
 					<if var="Place" relation="!=" value="None" />
+					<if var="DressCode" relation="!=" value="None" />
+					
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="CreateEvent({EventType})" />
+					
+				</effect>
+				<effect util="0.5">
+					<set var="a_m" value="Confirm(EventType,{EventType})" />
+				</effect>
+			</case>
+			
+			<!--  Ask for DressCode -->
+			<case>
+				<condition>
+					<if var="Event" value="Chill" />
+					<if var="EventType" relation="!=" value="None" />
+					<if var="Date" relation="!=" value="None" />
+					
+					<if var="Person" relation="!=" value="None" />
+					<if var="Place" relation="!=" value="None" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="Request(DressCode)" />
 					
 				</effect>
 				<effect util="0.5">
@@ -487,7 +531,7 @@
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
 					
-					<if var="Topic" relation="!=" value="None" />
+					<if var="Subject" relation="!=" value="None" />
 					<if var="Person" relation="!=" value="None" />
 					<if var="Place" relation="!=" value="None" />
 					<if var="DressCode" relation="!=" value="None" />
@@ -508,7 +552,7 @@
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
 					
-					<if var="Topic" relation="!=" value="None" />
+					<if var="Subject" relation="!=" value="None" />
 					<if var="Person" relation="!=" value="None" />
 					<if var="Place" relation="!=" value="None" />
 				</condition>
@@ -528,7 +572,7 @@
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
 					
-					<if var="Topic" relation="!=" value="None" />
+					<if var="Subject" relation="!=" value="None" />
 					<if var="Person" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
@@ -548,7 +592,7 @@
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
 					
-					<if var="Topic" relation="!=" value="None" />
+					<if var="Subject" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="Request(Person)" />

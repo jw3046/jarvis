@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0ee3b11-40dc-4e98-b864-a59e79de3dd1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.store/user_calendar_credentials/StoredCredential" afterPath="$PROJECT_DIR$/.store/user_calendar_credentials/StoredCredential" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarManager.java" afterPath="$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java" afterPath="$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java" />
-    </list>
+    <list default="true" id="b0ee3b11-40dc-4e98-b864-a59e79de3dd1" name="Default" comment="" />
     <ignored path="opendial.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/bin/" />
