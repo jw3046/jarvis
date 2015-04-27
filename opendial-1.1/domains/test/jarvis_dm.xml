@@ -9,30 +9,7 @@
 	<model trigger="Event">
 		
 		
-		<!-- Check for Event Type and Date -->
-		<rule>
-			<case>
-				<condition>
-					<if var="EventType" relation="!=" value="None" />
-					<if var="Date" relation="=" value="None" />
-				</condition>
-				<effect util="5">
-					<set var="a_m" value="request(Date)"/>
-					</effect>
-				</case>
-				
-				<case>
-					<condition>
-						<if var="EventType" relation="=" value="None" />
-						
-					</condition>
-					<effect util="5">
-						<set var="a_m" value="request(EventType)"/>
-						</effect>
-				</case>
-				
-		</rule>
-					
+
 					
 		<rule>
 			<!-- **************TESTING CASE ********* -->
