@@ -202,7 +202,7 @@
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
 	
-					<if var="Type" relation="!=" value="None" />
+					<if var="Subject" relation="!=" value="None" />
 					<if var="Gift" relation="!=" value="None" />
 					
 				</condition>
@@ -221,9 +221,10 @@
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
 					
-					<if var="Type" relation="!=" value="None" />
+					<if var="Subject" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
+					<set var="a_m" value="Check" />
 					<set var="a_m" value="Request(Gift)" />
 					
 				</effect>
@@ -241,7 +242,7 @@
 					
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="Request(Type)" />
+					<set var="a_m" value="Request(Subject)" />
 					
 				</effect>
 				<effect util="0.5">

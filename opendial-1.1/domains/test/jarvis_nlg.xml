@@ -675,7 +675,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="CheckType: {Type}" />
+						value="CheckType: {Type} {Event} {current_step}" />
 				</effect>
 			</case>
 		</rule>
