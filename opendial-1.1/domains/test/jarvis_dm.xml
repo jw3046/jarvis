@@ -32,7 +32,25 @@
 				</case>
 				
 		</rule>
-					
+		
+
+		<!-- NoEvent Event -->
+		<rule>
+			
+			
+			<!-- Got All necessary Information, confirm create corresponding calendar event -->
+			<case>
+				<condition>
+					<if var="Event" value="null" />
+					<if var="EventType" value="null" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="AskRepeat" />
+				</effect>
+
+			</case>
+		</rule>
+		
 
 		<!-- GuessObject Event -->
 		<rule>
