@@ -161,7 +161,7 @@
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
 					
-					<if var="Type" relation="!=" value="None" />
+					<if var="Subject" relation="!=" value="None" />
 					<if var="Gift" relation="!=" value="None" />
 					<if var="Place" relation="!=" value="None" />
 					<if var="DressCode" relation="!=" value="None" />
@@ -182,8 +182,8 @@
 					<if var="EventType" relation="!=" value="None" />
 					<if var="Date" relation="!=" value="None" />
 					
-					<if var="Type" relation="!=" value="None" />
-					<if var="Gift" relation="!=" value="None" />
+					<if var="Subject" relation="!=" value="None" />
+					
 					<if var="Place" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
@@ -847,6 +847,7 @@
 					<if var="current_step" value="Confirm_Event"/>
 				</condition>
 				<effect prob="1">
+					<set var="a_m" value="Check"/>
 					<set var="Date" value="none"/>
 					<set var="Person" value="none"/>
 					<set var="Gift" value="none"/>

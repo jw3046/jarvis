@@ -1269,7 +1269,17 @@
 				</effect>
 			</case>
 		</rule>
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="a_u_reply" relation="=" value="ConfirmN" />
+				</condition>
+				<effect>
+					<set var="Event" value="ConfirmN" />
 
+				</effect>
+			</case>
+		</rule>
 
 		<!-- If the last system action is a confirmation request and the user confirms the information, also update the corresponding slot-->
 		<rule>
