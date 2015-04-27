@@ -52,7 +52,7 @@
 					<if var="current_step" value="Gift" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What gift do you want for {Person}?" />
+					<set var="u_m" value="What gift do you want for {Person}? {current_step}" />
 				</effect>
 			</case>
 		</rule>
@@ -640,7 +640,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="Check {Object} {Event} {EventType}" />
+						value="CheckObject {Object}" />
 				</effect>
 			</case>
 		</rule>
