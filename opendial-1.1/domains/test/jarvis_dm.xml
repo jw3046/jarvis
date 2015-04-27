@@ -45,7 +45,7 @@
 					
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreateEvent({EventType})" />
+					<set var="a_m" value="CreateEvent" />
 					
 				</effect>
 				<effect util="0.5">
@@ -93,7 +93,7 @@
 					<if var="DressCode" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreateEvent({EventType})" />
+					<set var="a_m" value="CreateEvent" />
 					
 				</effect>
 				<effect util="0.5">
@@ -188,7 +188,7 @@
 					<if var="DressCode" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreateEvent({EventType})" />
+					<set var="a_m" value="CreateEvent" />
 					
 				</effect>
 				<effect util="0.5">
@@ -303,7 +303,7 @@
 					<if var="DressCode" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreateEvent({EventType})" />			
+					<set var="a_m" value="CreateEvent" />			
 				</effect>
 				<effect util="0.5">
 					<set var="a_m" value="Confirm(EventType,{EventType})" />
@@ -400,7 +400,7 @@
 					
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreateEvent({EventType})" />
+					<set var="a_m" value="CreateEvent" />
 					
 				</effect>
 				<effect util="0.5">
@@ -479,7 +479,7 @@
 					<if var="Place" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreateEvent({EventType})" />
+					<set var="a_m" value="CreateEvent" />
 					
 				</effect>
 				<effect util="0.5">
@@ -537,7 +537,7 @@
 					<if var="DressCode" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreateEvent({EventType})" />
+					<set var="a_m" value="CreateEvent" />
 					
 				</effect>
 				<effect util="0.5">
@@ -635,7 +635,7 @@
 					<if var="DressCode" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreateEvent({EventType})" />
+					<set var="a_m" value="CreateEvent" />
 					
 				</effect>
 				<effect util="0.5">
@@ -733,7 +733,7 @@
 					<if var="Gift" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CreateEvent({EventType})" />
+					<set var="a_m" value="CreateEvent" />
 					
 				</effect>
 				<effect util="0.5">
@@ -841,7 +841,7 @@
 			<!-- Creat Event -->
 			<case>
 				<condition>
-					<if var="a_m" value="CreatEvent({EventType})" />
+					<if var="a_m" value="CreateEvent" />
 				</condition>
 				<effect prob="1">
 					<set var="current_step" value="Confirm_Event" />
