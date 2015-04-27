@@ -72,6 +72,7 @@
 				</condition>
 				<effect>
 					<add var="a_u" value="(EventType,{EventType})" />
+					<add var="a_u" value="(Object,{EventType})" />
 				</effect>
 			</case>
 		</rule>
@@ -137,6 +138,7 @@
 
 
 		<!-- ********** Basic Information NOEVENT ****************-->
+
 	
 		<rule>
 			<case>
@@ -445,6 +447,26 @@
 			</case>
 		</rule>
 
+
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" value="NoEvent" />
+
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
+
+				</condition>
+				<effect>
+					<set var="a_m" value="CheckObject" />
+					<set var="ET" value="{EventType}" />
+					<set var="EventType" value="{EventType}" />
+					<set var="Object" value="{Object}" />
+					<set var="Event" value="GuessObject" />
+				</effect>
+			</case>
+		</rule>	
 		<!-- *************** after EVENT is updated ************* -->
 
 		<!-- Birthday -->
@@ -888,7 +910,7 @@
 					<set var="Subject" value="{Object}" />
 					<set var="Event" value="Seminar" />
 					<set var="EventType" value="Seminar" />
-					<set var="a_m" value="Checksubject"/>
+					<set var="a_m" value="CheckSubject"/>
 
 				</effect>
 			</case>
@@ -1008,7 +1030,39 @@
 				</effect>
 			</case>
 		</rule>
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Job" />
+					<if var="a_u" relation="contains" value="(Type,{Type})" />
+				</condition>
+				<effect>
 
+					<set var="Event" value="Job" />
+					<set var="EventType" value="Job" />
+					<set var="Subject" value="{Type}" />
+					<set var="a_m" value="CheckSubject" />
+
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="ET" relation="=" value="Job" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
+					<if var="current_step" relation="=" value="Subject" />
+				</condition>
+				<effect>
+					<set var="Subject" value="{Object}" />
+					<set var="Event" value="Job" />
+					<set var="EventType" value="Job" />
+					<set var="a_m" value="CheckSubject"/>
+
+				</effect>
+			</case>
+		</rule>
 		<!-- GRADUATION -->
 		<rule>
 			<case>
@@ -1165,12 +1219,25 @@
 			<case>
 				<condition operator="and">
 					<if var="a_u" relation="contains" value="ConfirmY" />
+					<if var="current_step" relation="=" value="GuessforGift" />
+				</condition>
+				<effect>
+					<set var="Gift" value="{Object}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition operator="and">
+					<if var="a_u" relation="contains" value="ConfirmY" />
 				</condition>
 				<effect>
 					<set var="Event" value="ConfirmY" />
 				</effect>
 			</case>
 		</rule>
+
 
 		<!-- no --> 
 		<rule>
@@ -1251,6 +1318,7 @@
 					<set var="DressCode" value="{DressCode}" />
 					<set var="Type" value="{Type}" />
 					<set var="Subject" value="{Subject}" />
+					<set var="Object" value="{Object}" />
 
 				</effect>
 			</case>

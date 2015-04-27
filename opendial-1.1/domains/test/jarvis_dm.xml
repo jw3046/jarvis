@@ -54,6 +54,29 @@
 			</case>
 		</rule>
 
+
+		<!-- GuessObject Event -->
+		<rule>
+			
+			
+			<!-- Got All necessary Information, confirm create corresponding calendar event -->
+			<case>
+				<condition>
+					<if var="Event" value="GuessObject" />
+					<if var="EventType" value="Anniversary" />
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="GuessforGift" />
+					<set var="current_step" value="GuessGift" />
+
+				</effect>
+
+			</case>
+		</rule>
+
+
+
+
 		<!-- Birthday Event -->
 		<rule>
 			

@@ -614,6 +614,36 @@
 			</case>
 		</rule>
 
+
+
+
+		<!-- Code for Guessing -->
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="GuessforGift" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="is {Object} your gift?" />
+				</effect>
+			</case>
+		</rule>
+
+
+		<!-- TEST CODE for JEEEEEE -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckObject" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="Check {Object} {Event} {EventType}" />
+				</effect>
+			</case>
+		</rule>
 		<rule>
 			<case>
 				<condition>
