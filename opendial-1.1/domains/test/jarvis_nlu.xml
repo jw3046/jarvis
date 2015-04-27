@@ -72,7 +72,6 @@
 				</condition>
 				<effect>
 					<add var="a_u" value="(EventType,{EventType})" />
-					<add var="a_u" value="(Object,{EventType})" />
 				</effect>
 			</case>
 		</rule>
@@ -112,6 +111,7 @@
 				</condition>
 				<effect>
 					<add var="a_u" value="ConfirmY" />
+					<set var="a_u_reply" value="ConfirmY" />
 
 				</effect>
 			</case>
@@ -1218,7 +1218,7 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="a_u" relation="contains" value="ConfirmY" />
+					<if var="a_u_reply" relation="=" value="ConfirmY" />
 					<if var="current_step" relation="=" value="GuessforGift" />
 				</condition>
 				<effect>
@@ -1230,10 +1230,11 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="a_u" relation="contains" value="ConfirmY" />
+					<if var="a_u_reply" relation="=" value="ConfirmY" />
 				</condition>
 				<effect>
 					<set var="Event" value="ConfirmY" />
+
 				</effect>
 			</case>
 		</rule>
@@ -1243,7 +1244,7 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="a_u_reply" relation="contains" value="ConfirmN" />
+					<if var="a_u_reply" relation="=" value="ConfirmN" />
 					<if var="current_step" relation="=" value="DressCode_Request" />
 				</condition>
 				<effect>
@@ -1257,7 +1258,7 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="a_u_reply" relation="contains" value="ConfirmN" />
+					<if var="a_u_reply" relation="=" value="ConfirmN" />
 					<if var="current_step" relation="=" value="Gift_Request" />
 				</condition>
 				<effect>
