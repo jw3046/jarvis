@@ -10,20 +10,8 @@
 		
 		
 
-		<!-- NoEvent Event -->
-		<rule>
-			<!-- Got All necessary Information, confirm create corresponding calendar event -->
-			<case>
-				<condition>
-					<if var="Event" value="null" />
-				</condition>
-				<effect util="5">
-					<set var="a_m" value="AskRepeat" />
-				</effect>
-
-			</case>
-		</rule>
 		
+
 
 		<!-- GuessObject Event -->
 		<rule>
@@ -783,11 +771,11 @@
 			</case>
 			
 			
-			<!-- Got All necessary Information except for Gift -->
 			<case>
 				<condition>
 					<if var="Event" value="ConfirmN" />
-					
+					<if var="current_step" value="Confirm_Event"/>
+
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="ConfirmN" />
@@ -795,6 +783,12 @@
 				</effect>
 			</case>
 		</rule>	
+
+
+
+
+
+
 	</model>
 		
 
@@ -806,7 +800,7 @@
 		<rule>
 			
 			
-			<!-- Creat Event -->
+			<!-- Create Event -->
 			<case>
 				<condition>
 					<if var="a_m" value="CreateEvent" />
@@ -835,7 +829,7 @@
 					<if var="current_step" value="Confirm_Event"/>
 				</condition>
 				<effect prob="1">
-					<set var="a_m" value="Check"/>
+					<set var="a_m" value="CheckNo"/>
 					<set var="Date" value="none"/>
 					<set var="Person" value="none"/>
 					<set var="Gift" value="none"/>
@@ -843,10 +837,8 @@
 					<set var="Note" value="none"/>
 					<set var="Subject" value="none"/>
 					<set var="DressCode" value="none"/>
-					<set var="Type" value="none"/>
 					<set var="EventType" value="none"/>
 					
-					<set var="current_step" value="EventType" />
 				</effect>
 			</case>
 			
@@ -972,89 +964,7 @@
 			</case>
 			
 			<!-- ************Modification stops here********* -->
-			
-			<case>
-				<condition>
-					<if var="a_m" value="Ground(EventType,*)" />
-				</condition>
-				<effect prob="1">
-					<set var="current_step" value="Person" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="a_m" value="Ground(Person,*)" />
-				</condition>
-				<effect prob="1">
-					<set var="current_step" value="Date" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="a_m" value="Ground(Date,*)" />
-				</condition>
-				<effect prob="1">
-					<set var="current_step" value="Time" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="a_m" value="Ground(Time)" />
-				</condition>
-				<effect prob="1">
-					<set var="current_step" value="Time" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="a_m" value="Ground(NoReturn)" />
-				</condition>
-				<effect prob="1">
-					<set var="Time" value="NoReturn" />
-					<set var="a_m" value="FindOffer" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="a_m" value="Ground(Time,*)" />
-				</condition>
-				<effect prob="1">
-					<set var="a_m" value="FindOffer" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="a_m" value="Ground(MakeOffer)" />
-				</condition>
-				<effect prob="1">
-					<set var="current_step" value="Location" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="a_m" value="Ground(Cancel)" />
-				</condition>
-				<effect prob="1">
-					<set var="current_step" value="Final" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="a_m" value="Ground(Location,{Location})" />
-				</condition>
-				<effect prob="1">
-					<set var="current_step" value="LastConfirm" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="a_m" value="Ground(Booking)" />
-				</condition>
-				<effect prob="1">
-					<set var="a_m" value="Book"/>
-					<set var="current_step" value="Final" />
-				</effect>
-			</case>
+
 			<case>
 				<condition>
 					<if var="a_m" value="Ground(Restart)" />
