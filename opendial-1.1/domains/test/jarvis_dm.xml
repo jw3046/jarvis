@@ -7,11 +7,18 @@
 		departures and next user dialogue act. -->
 
 	<model trigger="Event">
-		
-		
 
-		
-
+		<rule>
+			<case>
+				<condition>
+					<if var="Event" value="null" />
+				</condition>
+				<effect util="1">
+					<set var="a_m" value="NoEventType" />
+					<set var="EventType" value="none"/>
+				</effect>
+			</case>
+		</rule>		
 
 		<!-- GuessObject Event -->
 		<rule>
@@ -806,15 +813,7 @@
 
 				</effect>
 			</case>
-
-
 		</rule>	
-
-
-
-
-
-
 	</model>
 		
 
@@ -857,17 +856,6 @@
 				</effect>
 			</case>
 
-
-			<case>
-				<condition>
-					<if var="a_m" value="ConfirmN" />
-					<if var="current_step" value="Confirm_Delete"/>
-				</condition>
-				<effect prob="1">
-					<set var="a_m" value="Exit"/>
-				</effect>
-			</case>
-
 			<!-- New Event to add, System Start Again -->
 			<case>
 				<condition>
@@ -889,7 +877,7 @@
 				</effect>
 			</case>
 
-			<!-- No more Event to add, System Start Exists-->
+			<!-- No more Event to add, System Exists-->
 			<case>
 				<condition>
 					<if var="a_m" value="ConfirmN" />
@@ -902,6 +890,16 @@
 				</effect>
 			</case>	
 
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmN" />
+					<if var="current_step" value="Confirm_Delete"/>
+				</condition>
+				<effect prob="1">
+					<set var="a_m" value="Exit"/>
+				</effect>
+			</case>
+
 			<!-- Erase All Variable Value, System Start Again -->
 			<case>
 				<condition>
@@ -909,7 +907,7 @@
 					<if var="current_step" value="Confirm_Event"/>
 				</condition>
 				<effect prob="1">
-					<set var="a_m" value="CheckNo"/>
+					<set var="a_m" value="EraseAll"/>
 					<set var="Date" value="none"/>
 					<set var="Person" value="none"/>
 					<set var="Gift" value="none"/>

@@ -625,9 +625,17 @@
 			</case>
 		</rule>
 
-
-
-
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="NoEventType" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="No Event detected. Could you repeat your event?" />
+					<set var="current_step" value="EventType" />
+				</effect>
+			</case>
+		</rule>
 
 		<!-- Code for Guessing -->
 
@@ -643,13 +651,15 @@
 			</case>
 		</rule>
 
+
+		<!-- Code for restarting / exiting adding new event -->
 		<rule>
 			<case>
 				<condition>
-					<if var="a_m" value="CheckNo" />
+					<if var="a_m" value="EraseAll" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="CheckNo: {current_step}" />
+					<set var="u_m" value="Erasing all slots" />
 					<set var="current_step" value="Confirm_Delete" />
 				</effect>
 			</case>
