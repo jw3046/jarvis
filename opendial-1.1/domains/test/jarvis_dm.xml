@@ -18,7 +18,8 @@
 					<set var="EventType" value="none"/>
 				</effect>
 			</case>
-		</rule>		
+		</rule>	
+
 
 		<!-- GuessObject Event -->
 		<rule>

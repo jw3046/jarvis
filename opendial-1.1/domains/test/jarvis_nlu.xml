@@ -21,7 +21,7 @@
 			<case>
 				<condition>
 					<if var="u_u" relation="contains" value="(at)? {Place}" />
-					<if var="Place" relation="in" value="[House, School, Park]" />
+					<if var="Place" relation="in" value="[House, School, Park, noplace]" />
 				</condition>
 				<effect>
 					<add var="a_u" value="(Place,{Place})" />
@@ -33,7 +33,7 @@
 			<case>
 				<condition>
 					<if var="u_u" relation="contains" value="{Type}" />
-					<if var="Type" relation="in" value="[Wedding, Fifth, History]" />
+					<if var="Type" relation="in" value="[Wedding, Fifth, History, notype]" />
 				</condition>
 				<effect>
 					<add var="a_u" value="(Type,{Type})" />
@@ -45,7 +45,7 @@
 			<case>
 				<condition>
 					<if var="u_u" relation="contains" value="{Object}" />
-					<if var="Object" relation="in" value="[ring, skirt]" />
+					<if var="Object" relation="in" value="[ring, skirt, noobject]" />
 				</condition>
 				<effect>
 					<add var="a_u" value="(Object,{Object})" />
@@ -57,7 +57,7 @@
 			<case>
 				<condition>
 					<if var="u_u" relation="contains" value="(to|from)? {Person}" />
-					<if var="Person" relation="in" value="[Kate, John, Mark]" />
+					<if var="Person" relation="in" value="[Kate, John, Mark, noperson]" />
 				</condition>
 				<effect>
 					<add var="a_u" value="(Person,{Person})" />
@@ -126,6 +126,19 @@
 			</case>
 		</rule>
 
+		<rule>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="Quit" />
+				</condition>
+				<effect>
+					<set var="a_u" value="Quit" />
+
+				</effect>
+			</case>
+
+		</rule>
+
 	</model>
 	
 	
@@ -135,7 +148,17 @@
 	 
 		<!-- Fills the slots in accordance with the information in the dialogue act -->
 
+		<rule>
+			<case>
+				<condition>
+					<if var="a_u" relation="=" value="Quit" />
 
+				</condition>
+				<effect>
+					<set var="a_m" value="Exit" />
+				</effect>
+			</case>
+		</rule>
 
 		<!-- ********** Basic Information NOEVENT ****************-->
 		<rule>
@@ -217,6 +240,8 @@
 		</rule>		
 
 		<!-- *************** after EVENT is updated ************* -->
+		
+
 
 		<!-- Birthday -->
 		<rule>
