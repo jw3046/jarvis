@@ -176,7 +176,17 @@
 				</effect>
 			</case>
 		</rule>
-		
+
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Confirm_Delete" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Event has not been added. Do you want to add an event?" />
+				</effect>
+			</case>
+		</rule>	
 		
 		
 		<!-- *******************************-->
@@ -615,18 +625,6 @@
 			</case>
 		</rule>
 
-		<!-- Grounding the booking -->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Ground(Booking)" />
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="OK, your event will be added to your Google calendar" />
-				</effect>
-			</case>
-		</rule>
 
 
 
@@ -652,7 +650,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m" value="CheckNo: {current_step}" />
-					<set var="current_step" value="EventType" />
+					<set var="current_step" value="Confirm_Delete" />
 				</effect>
 			</case>
 		</rule>
@@ -668,6 +666,20 @@
 				</effect>
 			</case>
 		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Exit" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Jarvis exiting. Thank you." />
+				</effect>
+			</case>
+		</rule>
+
+
+
 		<!-- TEST CODE for JEEEEEE -->
 		<rule>
 			<case>
@@ -688,9 +700,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="CheckAHHH {current_step}" />
-						<set var="current_step"
-							value="Place" />
+						value="Check {current_step}" />
 							
 				</effect>
 			</case>

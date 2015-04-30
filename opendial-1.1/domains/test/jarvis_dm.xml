@@ -779,9 +779,35 @@
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="ConfirmN" />
-					
+
 				</effect>
 			</case>
+
+			<case>
+				<condition>
+					<if var="Event" value="ConfirmN" />
+					<if var="current_step" value="Confirm"/>
+
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="ConfirmN" />
+
+				</effect>
+			</case>
+
+			<case>
+				<condition>
+					<if var="Event" value="ConfirmN" />
+					<if var="current_step" value="Confirm_Delete"/>
+
+				</condition>
+				<effect util="5">
+					<set var="a_m" value="ConfirmN" />
+
+				</effect>
+			</case>
+
+
 		</rule>	
 
 
@@ -821,6 +847,27 @@
 				</effect>
 			</case>
 
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmY" />
+					<if var="current_step" value="Confirm_Delete"/>
+				</condition>
+				<effect prob="1">
+					<set var="a_m" value="Repeat"/>
+				</effect>
+			</case>
+
+
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmN" />
+					<if var="current_step" value="Confirm_Delete"/>
+				</condition>
+				<effect prob="1">
+					<set var="a_m" value="Exit"/>
+				</effect>
+			</case>
+
 			<!-- New Event to add, System Start Again -->
 			<case>
 				<condition>
@@ -841,7 +888,20 @@
 					
 				</effect>
 			</case>
-			
+
+			<!-- No more Event to add, System Start Exists-->
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmN" />
+					<if var="current_step" value="Confirm"/>
+
+				</condition>
+				<effect prob="1">
+					<set var="a_m" value="Exit"/>
+					
+				</effect>
+			</case>	
+
 			<!-- Erase All Variable Value, System Start Again -->
 			<case>
 				<condition>
