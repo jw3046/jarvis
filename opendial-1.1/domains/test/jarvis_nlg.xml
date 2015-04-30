@@ -172,7 +172,7 @@
 					<if var="current_step" value="Confirm" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="Event has been added" />
+					<set var="u_m" value="Event has been added. Do you want to add more event?" />
 				</effect>
 			</case>
 		</rule>
@@ -645,7 +645,29 @@
 			</case>
 		</rule>
 
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckNo" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="CheckNo: {current_step}" />
+					<set var="current_step" value="EventType" />
+				</effect>
+			</case>
+		</rule>
 
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Repeat" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="You want to add a new event." />
+					<set var="current_step" value="EventType" />
+				</effect>
+			</case>
+		</rule>
 		<!-- TEST CODE for JEEEEEE -->
 		<rule>
 			<case>
@@ -751,17 +773,7 @@
 				</effect>
 			</case>
 		</rule>
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="CheckNo" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="CheckNo: {current_step}" />
-					<set var="current_step" value="EventType" />
-				</effect>
-			</case>
-		</rule>
+
 		<rule>
 			<case>
 				<condition>

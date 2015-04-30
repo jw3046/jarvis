@@ -769,7 +769,7 @@
 				</effect>
 				
 			</case>
-			
+	
 			
 			<case>
 				<condition>
@@ -820,7 +820,27 @@
 					<set var="current_step" value="Confirm" />
 				</effect>
 			</case>
-			
+
+			<!-- New Event to add, System Start Again -->
+			<case>
+				<condition>
+					<if var="a_m" value="ConfirmY" />
+					<if var="current_step" value="Confirm"/>
+
+				</condition>
+				<effect prob="1">
+					<set var="a_m" value="Repeat"/>
+					<set var="Date" value="none"/>
+					<set var="Person" value="none"/>
+					<set var="Gift" value="none"/>
+					<set var="Place" value="none"/>
+					<set var="Note" value="none"/>
+					<set var="Subject" value="none"/>
+					<set var="DressCode" value="none"/>
+					<set var="EventType" value="none"/>
+					
+				</effect>
+			</case>
 			
 			<!-- Erase All Variable Value, System Start Again -->
 			<case>
