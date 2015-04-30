@@ -9,40 +9,13 @@
 	<model trigger="Event">
 		
 		
-		<!-- Check for Event Type and Date -->
-		<rule>
-			<case>
-				<condition>
-					<if var="EventType" relation="!=" value="None" />
-					<if var="Date" relation="=" value="None" />
-				</condition>
-				<effect util="5">
-					<set var="a_m" value="request(Date)"/>
-					</effect>
-				</case>
-				
-				<case>
-					<condition>
-						<if var="EventType" relation="=" value="None" />
-						
-					</condition>
-					<effect util="5">
-						<set var="a_m" value="request(EventType)"/>
-						</effect>
-				</case>
-				
-		</rule>
-		
 
 		<!-- NoEvent Event -->
 		<rule>
-			
-			
 			<!-- Got All necessary Information, confirm create corresponding calendar event -->
 			<case>
 				<condition>
 					<if var="Event" value="null" />
-					<if var="EventType" value="null" />
 				</condition>
 				<effect util="5">
 					<set var="a_m" value="AskRepeat" />
@@ -60,12 +33,9 @@
 			<case>
 				<condition>
 					<if var="Event" value="GuessObject" />
-					<if var="EventType" value="anniversary" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="Check" />
-					<set var="a_m" value="GuessforGift" />
-					<set var="current_step" value="GuessGift" />
+					<set var="a_m" value="CheckObject" />
 
 				</effect>
 
