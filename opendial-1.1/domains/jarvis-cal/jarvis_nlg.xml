@@ -128,6 +128,7 @@
 				</effect>
 			</case>
 		</rule>
+
 		
 		<!-- Asks for the Note -->
 		<rule>
@@ -171,11 +172,21 @@
 					<if var="current_step" value="Confirm" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="Event has been added" />
+					<set var="u_m" value="Event has been added. Do you want to add more event?" />
 				</effect>
 			</case>
 		</rule>
-		
+
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Confirm_Delete" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Event has not been added. Do you want to add an event?" />
+				</effect>
+			</case>
+		</rule>	
 		
 		
 		<!-- *******************************-->
@@ -614,21 +625,17 @@
 			</case>
 		</rule>
 
-		<!-- Grounding the booking -->
 		<rule>
 			<case>
 				<condition>
-					<if var="a_m" value="Ground(Booking)" />
+					<if var="a_m" value="NoEventType" />
 				</condition>
 				<effect util="1">
-					<set var="u_m"
-						value="OK, your event will be added to your Google calendar" />
+					<set var="u_m" value="No Event detected. Could you repeat your event?" />
+					<set var="current_step" value="EventType" />
 				</effect>
 			</case>
 		</rule>
-
-
-
 
 		<!-- Code for Guessing -->
 
@@ -645,6 +652,44 @@
 		</rule>
 
 
+		<!-- Code for restarting / exiting adding new event -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="EraseAll" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Erasing all slots" />
+					<set var="current_step" value="Confirm_Delete" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Repeat" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="You want to add a new event." />
+					<set var="current_step" value="EventType" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Exit" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Jarvis exiting. Thank you." />
+				</effect>
+			</case>
+		</rule>
+
+
+
 		<!-- TEST CODE for JEEEEEE -->
 		<rule>
 			<case>
@@ -654,6 +699,7 @@
 				<effect util="1">
 					<set var="u_m"
 						value="CheckObject {Object}" />
+						
 				</effect>
 			</case>
 		</rule>
@@ -664,7 +710,8 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="Check" />
+						value="Check {current_step}" />
+							
 				</effect>
 			</case>
 		</rule>
@@ -675,7 +722,7 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m"
-						value="CheckType: {Subject} {Event} {current_step}" />
+						value="CheckType: subject evet et date cs{Subject} {Event} {EventType} {Date} {current_step}" />
 				</effect>
 			</case>
 		</rule>
@@ -720,8 +767,7 @@
 					<if var="a_m" value="CheckPlace" />
 				</condition>
 				<effect util="1">
-					<set var="u_m"
-						value="CheckPlace: {Place}" />
+					<set var="u_m" value="CheckPlace: {Place}" />
 				</effect>
 			</case>
 		</rule>
@@ -732,8 +778,7 @@
 					<if var="a_m" value="CheckGift" />
 				</condition>
 				<effect util="1">
-					<set var="u_m"
-						value="CheckGift: {Gift}" />
+					<set var="u_m" value="CheckGift: {Gift}" />
 				</effect>
 			</case>
 		</rule>
@@ -744,22 +789,11 @@
 					<if var="a_m" value="CheckSubject" />
 				</condition>
 				<effect util="1">
-					<set var="u_m"
-						value="CheckSubject: {Subject}" />
+					<set var="u_m" value="CheckSubject: {Subject} " />
 				</effect>
 			</case>
 		</rule>
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="CheckNo" />
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="CheckNo: {current_step}" />
-				</effect>
-			</case>
-		</rule>
+
 		<rule>
 			<case>
 				<condition>

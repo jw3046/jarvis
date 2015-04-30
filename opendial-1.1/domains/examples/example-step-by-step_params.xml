@@ -26,18 +26,17 @@
 		<rule>
 			<case>
 				<condition operator="or">
-					<if var="u_u" value="turn * left" relation="contains" />
-					<if var="u_u" value="move * left" relation="contains" />
-					<if var="u_u" value="go * left" relation="contains" />
+					<if var="u_u" value="turn * left * move * right" relation="contains" />				
 				</condition>
 				<effect prob="1">
 					<set var="a_u" value="Request(Left)" />
+
 				</effect>
 			</case>
 			<case>
 				<condition operator="or">
 					<if var="u_u" value="turn * right" relation="contains" />
-					<if var="u_u" value="move * right" relation="contains" />
+					<if var="u_u" value="move * right * turn * left " relation="contains" />
 					<if var="u_u" value="go * right" relation="contains" />
 				</condition>
 				<effect prob="1">
