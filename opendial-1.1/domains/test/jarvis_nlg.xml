@@ -392,7 +392,8 @@
 				</effect>
 			</case>
 		</rule>
-		
+
+
 		<!--************** End of Update****************-->
 		
 		<!-- grounding the EventType -->
@@ -700,6 +701,18 @@
 					<set var="u_m"
 						value="CheckObject {Object}" />
 						
+				</effect>
+			</case>
+		</rule>
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckET" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="CheckET {EventType}" />
+							
 				</effect>
 			</case>
 		</rule>

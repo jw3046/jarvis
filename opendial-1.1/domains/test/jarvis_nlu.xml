@@ -72,6 +72,7 @@
 				</condition>
 				<effect>
 					<set var="a_u" value="(EventType,{EventType})" />
+					<set var="a_m" value="CheckET" />
 				</effect>
 			</case>
 		</rule>
@@ -210,7 +211,7 @@
 		<rule>
 			<case>
 				<condition operator="and">
-					<if var="ET" value="(NoEvent|null)" />
+					<if var="ET" value="NoEvent" />
 
 					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
 				</condition>
