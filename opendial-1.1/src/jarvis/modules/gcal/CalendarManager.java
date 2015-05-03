@@ -150,8 +150,15 @@ public class CalendarManager
     //TODO: implement newEvent where u can set the fields
     Event event = new Event();
     event.setSummary(eventInfo[0]);
-    event.setDescription(eventInfo[1]);
-    
+
+      event.setLocation(eventInfo[2]);
+      StringBuffer description= new StringBuffer();
+      //if(eventInfo[3]!=null)  event.setAttendees(eventInfo[3]);
+      for(int i=3;i<eventInfo.length;i++){
+          if(eventInfo[i]!=null) description.append(eventInfo[i]);
+      }
+      System.out.println("Calendar Manager: "+description.toString());
+      event.setDescription(description.toString());
     // check if time value has been filled
     String WHEN = "(Date,";
     String NULL = WHEN+"null";

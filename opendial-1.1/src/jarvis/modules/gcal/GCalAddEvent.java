@@ -84,34 +84,75 @@ public class GCalAddEvent implements Module {
 	public void trigger(DialogueState state, Collection<String> updatedVars) {
 		if (updatedVars.contains("a_m") && state.hasChanceNode("a_m")) {
 			String action = state.queryProb("a_m").toDiscrete().getBest().toString();
+            String current_event = state.queryProb("current_step").toDiscrete().getBest().toString();
 
-            if(action.equals("Request(Gift)")){
-                //String EventType= state.queryProb("EventType").toDiscrete().getBest().toString();
-                String[] eventData=new String[5];
+			if (current_event.equals("Confirm_Event")) {
+                String[] eventData=new String[6];
+                //structure for eventData
+                //0:EventType
+                //1:Date
+                //2:Place
+                //3:Person
+                //4:Gift
+                //5:DressCode
+                //6:Subject
+
+
+                //filling in mandatory slots for all event types
                 String EventType= state.queryProb("EventType").toDiscrete().getBest().toString();
                 eventData[0]=EventType;
-                String Person=state.queryProb("Person").toDiscrete().getBest().toString();
-                eventData[1]="Person: "+ Person;
-                System.out.println("Creating Event!");
-                try{
+                String Date=state.queryProb("Date").toDiscrete().getBest().toString();
+                EventType=EventType.toLowerCase();
+                eventData[1] =Date;
+                String Place=state.queryProb("Place").toDiscrete().getBest().toString();
+                eventData[2]=Place;
+                //mandatory information filled
 
-                    eventManager.addNewEvent(eventData);
-                    System.out.println("Adding event as "+EventType);
-                }catch(Exception e){
-                    System.out.println(e.toString());
+                //getting all possible slots value
+                String Person=state.queryProb("Person").toDiscrete().getBest().toString();
+                String Gift=state.queryProb("Gift").toDiscrete().getBest().toString();
+                String DressCode=state.queryProb("DressCode").toDiscrete().getBest().toString();
+                String Subject=state.queryProb("Subject").toDiscrete().getBest().toString();
+
+                System.out.println("info: type, data, place, person, gift, dresscode, subject");
+                System.out.println(EventType+" "+Date+" "+Place+" "+Person+" "+Gift+" "+ DressCode+" "+Subject);
+
+                //adding additional slots
+                if(EventType.contains("birthday")||EventType.contains("party")){
+                    eventData[3]=Person;
+                    if(!Gift.equals("NoGift"))   eventData[4]="Gift: " + Gift;
+                    if(!DressCode.equals("NoDressCode")) eventData[5]="Dress Code: " + DressCode;
                 }
 
-                System.out.println("Creating Event!");
-                //system.addContent(new Assignment("a_m","Confirm"));
+                if(EventType.contains("anniversary")){
+                    eventData[3]=Person;
+                    if(!Gift.equals("NoGift"))   eventData[4]="Gift: " + Gift;
+                    if(!DressCode.equals("NoDressCode")) eventData[5]="Dress Code: " + DressCode;
+                    eventData[6]="type: "+Subject;
+                }
 
-            }
+                if(EventType.contains("chill")){
+                    eventData[3]=Person;
+                    if(!DressCode.equals("NoDressCode")) eventData[5]="Dress Code: " + DressCode;
 
-			if (action.equals("CreateEvent({EventType})")) {
-                String[] eventData=new String[5];
-                String EventType= state.queryProb("EventType").toDiscrete().getBest().toString();
-                eventData[0]=EventType;
-                String Person=state.queryProb("Person").toDiscrete().getBest().toString();
-                eventData[1]="Person: "+ Person;
+                }
+
+                if(EventType.contains("exam")){
+                    eventData[6]="Subject: "+Subject;
+                }
+
+                if(EventType.contains("seminar")||EventType.contains("job")){
+                    eventData[3]=Person;
+                    if(!DressCode.equals("NoDressCode")) eventData[5]="Dress Code: " + DressCode;
+                    eventData[6]="Subject: "+Subject;
+                }
+
+                if(EventType.contains("graduation")){
+                    eventData[3]=Person;
+                    if(!Gift.equals("NoGift"))   eventData[4]="Gift: " + Gift;
+                }
+
+
                 System.out.println("Creating Event!");
                 try{
 
@@ -121,7 +162,7 @@ public class GCalAddEvent implements Module {
                     System.out.println(e.toString());
                 }
                 system.addContent(new Assignment("a_m","Confirm"));
-
+                System.out.println("Event Added successfully!");
 
                 /*
 				String returndate = state.queryProb("ReturnDate").toDiscrete().getBest().toString();
@@ -133,24 +174,11 @@ public class GCalAddEvent implements Module {
 				system.addContent(new Assignment("a_m", newAction));
 				*/
 			}
-			else if (action.equals("Book")) {
-					
-				String departure = state.queryProb("Departure").toDiscrete().getBest().toString();
-				String destination = state.queryProb("Destination").toDiscrete().getBest().toString();
-				String date = state.queryProb("Date").toDiscrete().getBest().toString();
-				String returndate = state.queryProb("ReturnDate").toDiscrete().getBest().toString();
-				String nbtickets = state.queryProb("NbTickets").toDiscrete().getBest().toString();
-				
-				// In a real system, the system database should be modified here to 
-				// actually perform the booking.  Here, we just print a small message.
-				String info = "Booked " + nbtickets + " tickets from " + departure + " to " 
-						+ destination + " on " + date 
-						+ ((returndate.equals("NoReturn"))? " and return on " + returndate : "");
-				log.info(info);
-			}
+
 		}
 
 	}
+
 
 	/**
 	 * Pauses the module.
