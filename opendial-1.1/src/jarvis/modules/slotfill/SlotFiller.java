@@ -1,6 +1,7 @@
 
 package jarvis.modules.slotfill;
 
+import java.util.HashMap;
 import java.util.Collection;
 import java.io.IOException;
 
@@ -41,22 +42,24 @@ public class SlotFiller implements Module {
 
 	@Override
 	public void trigger(DialogueState state, Collection<String> updatedVars) {
-		if (updatedVars.contains("a_u") && state.hasChanceNode("a_u")) {
-			String user_act =
-                            state.queryProb("a_u").toDiscrete().getBest().toString();
-                        // string matching/slot filling code here
-                        
-                        String ET = 
-                            state.queryProb("ET").toDiscrete().getBest().toString();
-                        String CurrStep = 
-                            state.queryProb("current_step").toDiscrete().getBest().toString();
+            if (updatedVars.contains("a_u") && state.hasChanceNode("a_u")) {
+                // get relevant vars
+                String user_act =
+                    state.queryProb("a_u").toDiscrete().getBest().toString();
+                String ET = 
+                    state.queryProb("ET").toDiscrete().getBest().toString();
+                String CurrStep = 
+                    state.queryProb("current_step").toDiscrete().getBest().toString();
+                String system_act = 
+                    state.queryProb("a_m").toDiscrete().getBest().toString();
 
-                        //HashMap<String,String> hm = Filler.myfunc(user_act, ET, current_step);
+                HashMap<String,String> newVars =
+                    SlotMapper.map(user_act, ET, current_step, system_act);
 
-		}
-
-                                
-
+                for(String key: newVars.keySet()){
+                    system.addContent(new Assignment(key, newVars.get(key)));
+                }
+            }
 	}
 
 	/**
