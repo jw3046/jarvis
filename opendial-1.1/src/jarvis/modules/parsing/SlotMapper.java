@@ -3,6 +3,8 @@ package jarvis.modules.parsing;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 
 
@@ -15,18 +17,42 @@ public class SlotMapper {
          
 	}
 
-
-	public HashMap<String,String> map(HashMap<String,ArrayList<String>> user_act, String ET, String current_step, String system_act) {
+	private static HashMap<String,ArrayList<String>> removeNull(HashMap<String,ArrayList<String>> user_act){
+		Set keys = user_act.keySet();
+		Iterator iterator = keys.iterator();
+		
+		while (iterator.hasNext()) {
+			String key = (String) iterator.next();
+			ArrayList<String> value = user_act.get(key);
+			if (value.isEmpty()) {
+				user_act.remove(key);
+			}
+			if (value.get(0).equals("null") || value.get(0).equals("none") ){
+				user_act.remove(key);
+			}
+		}
+	
+		
+		return user_act;
+	}
+	
+	public static HashMap<String,String> map(HashMap<String,ArrayList<String>> user_act, String ET, String current_step, String system_act) {
 		
 		HashMap<String,String> returnMap = new HashMap<String,String>();
 		ArrayList<String> valueList = new ArrayList<String>();
+		
 		String value = new String();
-		HashMap<String, ArrayList<String>> a_u = user_act;
+		
+		HashMap<String, ArrayList<String>> a_u = removeNull(user_act);
 
+		
 		//Quit
-		if (a_u.equals("Quit")) {
-			returnMap.put("a_m", "Exit");
-			return returnMap;
+		if (a_u.containsKey("Confirm")) {
+			value = valueList.get(0);
+			if (value.equals("Quit")){
+				returnMap.put("a_m", "Exit");
+				return returnMap;
+			}
 		}
 		
 		//Basic information NoEvent
@@ -724,7 +750,22 @@ public class SlotMapper {
 		
 		return returnMap;
 	}
-
-
+	/* test code 
+	public static void main(String[] args) {
+		HashMap<String,ArrayList<String>> user_act = new HashMap<String,ArrayList<String>> ();
+		String ET = "Birthday";
+		String current_step = "Gift";
+		String system_act = "test";
+		ArrayList<String> dateList = new ArrayList<String>();
+		dateList.add("March");
+		dateList.add("May");
+		user_act.put("Object",dateList);
+		System.out.println(dateList);
+		HashMap<String, String> testReturn = new HashMap<String,String>();
+		testReturn = map(user_act, ET, current_step, system_act);
+		System.out.println(testReturn);
+	}
+	*/
+		
 
 }

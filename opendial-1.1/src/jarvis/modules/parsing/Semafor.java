@@ -159,7 +159,20 @@ public class Semafor implements Module
                 this.user_acts.get("Type").add(typeStr);
             }
             system.addContent(new Assignment("a_u", user_act));
-            
+            // fill slots
+            String ET =
+                state.queryProb("ET").toDiscrete().getBest().toString();
+            String CurrStep =
+                state.queryProb("current_step").toDiscrete().getBest().toString();
+            String system_act = state.queryProb("a_m").toDiscrete().getBest().toString();
+            HashMap<String,String> newVars =
+                SlotMapper.map(this.user_acts,ET,CurrStep,system_act);
+
+            for (String key: newVars.keySet()){
+                system.addContent(new Assignment(key, newVars.get(key)));
+            }
+
+
             //DEBUG
             System.out.println(user_act);
         }
