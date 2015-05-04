@@ -60,10 +60,17 @@ public class CalendarTimeUtil
                     break;
                 }
             }
+            // week utterance
+            if (relativeDate.contains("next week")){
+                // plus week
+                datetime = datetime.plusWeeks(1);
+                brk = true;
+            }
             // month utterance
             if (relativeDate.contains("next month")){
                 // plus month
                 datetime = datetime.plusMonths(1);
+                brk = true;
             }
             for (String month: months){
                 if (relativeDate.contains(month)){
