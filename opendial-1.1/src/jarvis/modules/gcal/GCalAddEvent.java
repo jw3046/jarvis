@@ -86,7 +86,7 @@ public class GCalAddEvent implements Module {
 			String action = state.queryProb("a_m").toDiscrete().getBest().toString();
             String current_event = state.queryProb("current_step").toDiscrete().getBest().toString();
 
-			if (current_event.equals("Confirm_Event")) {
+			if (current_event.equals("Confirm_Adding")) {
                 String[] eventData=new String[7];
                 //structure for eventData
                 //0:EventType

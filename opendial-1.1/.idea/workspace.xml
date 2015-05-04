@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b0ee3b11-40dc-4e98-b864-a59e79de3dd1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.store/user_calendar_credentials/StoredCredential" afterPath="$PROJECT_DIR$/.store/user_calendar_credentials/StoredCredential" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarManager.java" afterPath="$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java" afterPath="$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/domains/test/jarvis_dm.xml" afterPath="$PROJECT_DIR$/domains/test/jarvis_dm.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opendial.iws" />
@@ -34,8 +32,8 @@
       <file leaf-file-name="GCalAddEvent.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22680412" vertical-offset="814" max-vertical-offset="2730">
-              <caret line="89" column="49" selection-start-line="89" selection-start-column="49" selection-end-line="89" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.74871135" vertical-offset="394" max-vertical-offset="2730">
+              <caret line="88" column="52" selection-start-line="88" selection-start-column="52" selection-end-line="88" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -792,8 +790,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22680412" vertical-offset="814" max-vertical-offset="2730">
-          <caret line="89" column="49" selection-start-line="89" selection-start-column="49" selection-end-line="89" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.74871135" vertical-offset="394" max-vertical-offset="2730">
+          <caret line="88" column="52" selection-start-line="88" selection-start-column="52" selection-end-line="88" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
