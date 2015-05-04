@@ -689,6 +689,105 @@
 			</case>
 		</rule>
 
+		<!-- CALLING EVENT model after filling the slot -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckType" />
+				</condition>
+				<effect util="1">
+					
+					<set var="Event"
+						value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckDressCode" />
+				</condition>
+				<effect util="1">
+					<set var="Event"
+						value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckDate" />
+				</condition>
+				<effect util="1">
+					<set var="Event"
+						value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckPerson" />
+				</condition>
+				<effect util="1">
+
+					<set var="Event"
+						value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckPlace" />
+				</condition>
+				<effect util="1">
+
+					<set var="Event"
+						value="{EventType}" />				
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckGift" />
+				</condition>
+				<effect util="1">
+					<set var="Event"
+						value="{EventType}" />				
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckSubject" />
+				</condition>
+				<effect util="1">
+
+					<set var="Event"
+						value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckNoDresscode" />
+				</condition>
+				<effect util="1">
+					<set var="Event"
+						value="{EventType}" />
+				</effect>
+			</case>
+		</rule>
+
+
 
 
 		<!-- TEST CODE for JEEEEEE -->
@@ -728,97 +827,8 @@
 				</effect>
 			</case>
 		</rule>
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="CheckType" />
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="CheckType: subject evet et date cs{Subject} {Event} {EventType} {Date} {current_step}" />
-				</effect>
-			</case>
-		</rule>
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="CheckDressCode" />
-				</condition>
-				<effect util="1">
-					<set var="Event"
-						value="{EventType}" />
-				</effect>
-			</case>
-		</rule>
 
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="CheckDate" />
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="CheckDate: {Date}" />
-				</effect>
-			</case>
-		</rule>
 
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="CheckPerson" />
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="CheckPerson: {Person}" />
-				</effect>
-			</case>
-		</rule>
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="CheckPlace" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="CheckPlace: {Place}" />
-				</effect>
-			</case>
-		</rule>
-
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="CheckGift" />
-				</condition>
-				<effect util="1">
-					<set var="Event"
-						value="{EventType}" />				
-				</effect>
-			</case>
-		</rule>
-
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="CheckSubject" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="CheckSubject: {Subject} " />
-				</effect>
-			</case>
-		</rule>
-
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="CheckNoDresscode" />
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="CheckNoDC: {DressCode}" />
-				</effect>
-			</case>
-		</rule>
 	</model>
 
 </domain>
