@@ -745,8 +745,8 @@
 					<if var="a_m" value="CheckDressCode" />
 				</condition>
 				<effect util="1">
-					<set var="u_m"
-						value="CheckDresscode: {DressCode}" />
+					<set var="Event"
+						value="{EventType}" />
 				</effect>
 			</case>
 		</rule>
@@ -791,7 +791,8 @@
 					<if var="a_m" value="CheckGift" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="CheckGift: {Gift}" />
+					<set var="Event"
+						value="{EventType}" />				
 				</effect>
 			</case>
 		</rule>

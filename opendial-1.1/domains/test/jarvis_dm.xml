@@ -20,31 +20,6 @@
 			</case>
 		</rule>	
 
-		<!-- Check for Event Type and Date -->
-
- 		<rule>
- 			<case>
- 				<condition>
-					<if var="EventType" relation="!=" value="None" />
-					<if var="Date" relation="=" value="None" />
-					<if var="Event" value="null" />
- 				</condition>
-				<effect util="5">
-					<set var="a_m" value="request(Date)"/>
-					</effect>
-				</case>
-				
-				<case>
-					<condition>
-						<if var="EventType" relation="=" value="None" />
-						
-					</condition>
-					<effect util="5">
-						<set var="a_m" value="request(EventType)"/>
-						</effect>
-				</case>
-				
-		</rule>
 		<!-- GuessObject Event -->
 		<rule>
 			
@@ -897,7 +872,6 @@
 			<case>
 				<condition>
 					<if var="Event" value="ConfirmN" />
-					<if var="current_step" value="Confirm_Event"/>
 
 				</condition>
 				<effect util="5">
@@ -906,29 +880,7 @@
 				</effect>
 			</case>
 
-			<case>
-				<condition>
-					<if var="Event" value="ConfirmN" />
-					<if var="current_step" value="Confirm"/>
 
-				</condition>
-				<effect util="5">
-					<set var="a_m" value="ConfirmN" />
-
-				</effect>
-			</case>
-
-			<case>
-				<condition>
-					<if var="Event" value="ConfirmN" />
-					<if var="current_step" value="Confirm_Delete"/>
-
-				</condition>
-				<effect util="5">
-					<set var="a_m" value="ConfirmN" />
-
-				</effect>
-			</case>
 		</rule>	
 	</model>
 		

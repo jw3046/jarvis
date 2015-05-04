@@ -254,8 +254,6 @@
 				</condition>
 				<effect>
 					<set var="Gift" value="{Object}" />
-					<set var="Event" value="Birthday" />
-					<set var="EventType" value="Birthday" />
 					<set var="a_m" value="CheckGift"/>
 
 				</effect>
@@ -271,8 +269,6 @@
 				</condition>
 				<effect>
 					<set var="DressCode" value="{Object}" />
-					<set var="Event" value="Birthday" />
-					<set var="EventType" value="Birthday" />
 					<set var="a_m" value="CheckDressCode"/>
 
 				</effect>
@@ -288,7 +284,6 @@
 				<effect>
 					<set var="Person" value="{Person}" />
 					<set var="Event" value="Birthday" />
-					<set var="EventType" value="Birthday" />
 					<set var="a_m" value="CheckPerson"/>
 				</effect>
 			</case>
@@ -380,8 +375,6 @@
 				</condition>
 				<effect>
 					<set var="DressCode" value="{DressCode}" />
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
 					<set var="a_m" value="CheckDressCode"/>
 
 				</effect>
@@ -400,7 +393,6 @@
 				<effect>
 					<set var="Subject" value="{Type}" />
 					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
 					<set var="a_m" value="CheckType"/>
 
 				</effect>
@@ -414,7 +406,6 @@
 					<if var="a_u" relation="contains" value="(Person,{Person})" />
 				</condition>
 				<effect>
-					<set var="EventType" value="Anniversary" />
 					<set var="Person" value="{Person}" />
 					<set var="Event" value="Anniversary" />
 					<set var="a_m" value="Check"/>
@@ -465,8 +456,6 @@
 				</condition>
 				<effect>
 					<set var="DressCode" value="{Object}" />
-					<set var="Event" value="Anniversary" />
-					<set var="EventType" value="Anniversary" />
 					<set var="a_m" value="CheckDressCode"/>
 
 				</effect>
@@ -517,8 +506,6 @@
 				</condition>
 				<effect>
 					<set var="DressCode" value="{Object}" />
-					<set var="Event" value="Party" />
-					<set var="EventType" value="Party" />
 					<set var="a_m" value="CheckDressCode"/>
 
 				</effect>
@@ -625,8 +612,6 @@
 					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
 					<set var="DressCode" value="{Object}" />
 					<set var="a_m" value="CheckDressCode"/>
 
@@ -772,8 +757,6 @@
 					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
 					<set var="DressCode" value="{Object}" />
 					<set var="a_m" value="CheckDressCode"/>
 
@@ -839,8 +822,6 @@
 					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
 					<set var="DressCode" value="{Object}" />
 					<set var="a_m" value="CheckDressCode"/>
 
@@ -956,8 +937,6 @@
 					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
 					<set var="DressCode" value="{Object}" />
 					<set var="a_m" value="CheckDressCode"/>
 
@@ -1021,8 +1000,6 @@
 					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
-					<set var="Event" value="{EventType}" />
-					<set var="EventType" value="{EventType}" />
 					<set var="DressCode" value="{Object}" />
 					<set var="a_m" value="CheckDressCode"/>
 
@@ -1104,7 +1081,6 @@
 				</condition>
 				<effect>
 					<set var="Gift" value="NoGift" />
-					<set var="Event" value="{EventType}"/>
 					<set var="a_m" value="CheckGift" />
 				</effect>
 			</case>
