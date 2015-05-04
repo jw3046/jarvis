@@ -59,7 +59,8 @@ public class GCalAddEvent implements Module {
 	 * @param system the dialogue system to which the module should be attached
 	 */
 	public GCalAddEvent(DialogueSystem system) {
-		this.system = system;
+		System.out.println("system initializaed!");
+        this.system = system;
 	}
 
 	/**
