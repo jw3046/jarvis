@@ -54,7 +54,7 @@ public class Semafor implements Module
 
             // clear previous
             String[] act_keys =
-                {"Person","Place","Date","Object","Confirm"};
+                {"Person","Place","Date","Object","Confirm","EventType","Type"};
             for (String actType: act_keys){
                 this.user_acts.put(actType,new ArrayList<String>());
             }
@@ -149,10 +149,14 @@ public class Semafor implements Module
         }
         else if (updatedVars.contains("a2_u") && state.hasChanceNode("a2_u")){
             String user_act = state.queryProb("a0_u").toDiscrete().getBest().toString();
-            user_act += " " + state.queryProb("a2_u").toDiscrete().getBest().toString();
+            String eventTypeStr = state.queryProb("a2_u").toDiscrete().getBest().toString();
+            user_act += " " + eventTypeStr;
+            this.user_acts.get("EventType").add(eventTypeStr);
             // also add Type(); note that a2_u guaranteed to be defined if a1_u is
             if (updatedVars.contains("a1_u") && state.hasChanceNode("a1_u")){
-                user_act += " "+ state.queryProb("a1_u").toDiscrete().getBest().toString();
+                String typeStr = state.queryProb("a1_u").toDiscrete().getBest().toString();
+                user_act += " "+ typeStr;
+                this.user_acts.get("Type").add(typeStr);
             }
             system.addContent(new Assignment("a_u", user_act));
             
