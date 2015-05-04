@@ -233,7 +233,6 @@
 					<if var="Subject" relation="!=" value="None" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="Check" />
 					<set var="a_m" value="Request(Gift)" />
 					
 				</effect>
