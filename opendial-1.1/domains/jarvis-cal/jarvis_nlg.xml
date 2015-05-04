@@ -52,7 +52,7 @@
 					<if var="current_step" value="Gift" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What gift do you want for {Person}?" />
+					<set var="u_m" value="What gift do you want for {Person}? {current_step}" />
 				</effect>
 			</case>
 		</rule>
@@ -88,7 +88,7 @@
 					<if var="current_step" value="Type" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What typde of {EventType} is this?" />
+					<set var="u_m" value="What type of {EventType} is this?" />
 				</effect>
 			</case>
 		</rule>
@@ -124,10 +124,11 @@
 					<if var="current_step" value="DressCode" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What is the dress code required for the {EventType}?" />
+					<set var="u_m" value="What is the dress code required for the {EventType}? {a_u_reply} {current_step}" />
 				</effect>
 			</case>
 		</rule>
+
 		
 		<!-- Asks for the Note -->
 		<rule>
@@ -168,14 +169,24 @@
 		<rule>
 			<case>
 				<condition>
-					<if var="current_step" value="Note" />
+					<if var="current_step" value="Confirm" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What's to add in for {EventType}?" />
+					<set var="u_m" value="Event has been added. Do you want to add more event?" />
 				</effect>
 			</case>
 		</rule>
-		
+
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Confirm_Delete" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Event has not been added. Do you want to add an event?" />
+				</effect>
+			</case>
+		</rule>	
 		
 		
 		<!-- *******************************-->
@@ -294,6 +305,19 @@
 
 	<model trigger="a_m">
 		<!-- Model producing new system utterances related to the last system action -->
+		
+		
+		<!-- Requsting the Confirmation -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CreateEvent" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are attending {Person}'s {EventType} on {Date}. {a_u} {current_step}" />
+				</effect>
+			</case>
+		</rule>
 
 		<!-- Requsting the Gift -->
 		<rule>
@@ -302,7 +326,7 @@
 					<if var="a_m" value="Request(Gift)" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, You are attending {Person}'s {EventType} on {Date}." />
+					<set var="u_m" value="OK, You are attending {Person}'s {EventType} on {Date}. {a_u} {current_step}" />
 				</effect>
 			</case>
 		</rule>
@@ -314,7 +338,7 @@
 					<if var="a_m" value="Request(Time)" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, You are attending {Person}'s {EventType} on {Date}." />
+					<set var="u_m" value="OK, You are attending {Person}'s {EventType} on {Date}. {a_u}" />
 				</effect>
 			</case>
 		</rule>
@@ -326,7 +350,7 @@
 					<if var="a_m" value="Request(Person)" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, You are attending {EventType} on {Date}." />
+					<set var="u_m" value="OK, You are attending {EventType} on {Date}. {a_u}" />
 				</effect>
 			</case>
 		</rule>
@@ -338,7 +362,7 @@
 					<if var="a_m" value="Request(Date)" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, You are attending {EventType}." />
+					<set var="u_m" value="OK, You are attending {EventType}. {a_u}" />
 				</effect>
 			</case>
 		</rule>
@@ -350,7 +374,7 @@
 					<if var="a_m" value="Request(Place)" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, You are attending {EventType}." />
+					<set var="u_m" value="OK, You are attending {EventType}. {a_u}" />
 				</effect>
 			</case>
 		</rule>
@@ -601,20 +625,186 @@
 			</case>
 		</rule>
 
-		<!-- Grounding the booking -->
 		<rule>
 			<case>
 				<condition>
-					<if var="a_m" value="Ground(Booking)" />
+					<if var="a_m" value="NoEventType" />
 				</condition>
 				<effect util="1">
-					<set var="u_m"
-						value="OK, your event will be added to your Google calendar" />
+					<set var="u_m" value="No Event detected. Could you repeat your event?" />
+					<set var="current_step" value="EventType" />
 				</effect>
 			</case>
 		</rule>
 
-		
+		<!-- Code for Guessing -->
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="GuessforGift" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="is {Object} your gift?" />
+				</effect>
+			</case>
+		</rule>
+
+
+		<!-- Code for restarting / exiting adding new event -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="EraseAll" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Erasing all slots" />
+					<set var="current_step" value="Confirm_Delete" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Repeat" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="You want to add a new event." />
+					<set var="current_step" value="EventType" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Exit" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Jarvis exiting. Thank you." />
+				</effect>
+			</case>
+		</rule>
+
+
+
+		<!-- TEST CODE for JEEEEEE -->
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckObject" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="CheckObject {Object}" />
+						
+				</effect>
+			</case>
+		</rule>
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Check" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="Check {current_step}" />
+							
+				</effect>
+			</case>
+		</rule>
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckType" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="CheckType: subject evet et date cs{Subject} {Event} {EventType} {Date} {current_step}" />
+				</effect>
+			</case>
+		</rule>
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckDressCode" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="CheckDresscode: {DressCode}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckDate" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="CheckDate: {Date}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckPerson" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="CheckPerson: {Person}" />
+				</effect>
+			</case>
+		</rule>
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckPlace" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="CheckPlace: {Place}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckGift" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="CheckGift: {Gift}" />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckSubject" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="CheckSubject: {Subject} " />
+				</effect>
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="CheckNoDresscode" />
+				</condition>
+				<effect util="1">
+					<set var="u_m"
+						value="CheckNoDC: {DressCode}" />
+				</effect>
+			</case>
+		</rule>
 	</model>
 
 </domain>

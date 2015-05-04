@@ -124,7 +124,7 @@
 					<if var="current_step" value="DressCode" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What is the dress code required for the {EventType}? {a_u_reply} {current_step}" />
+					<set var="u_m" value="What is the dress code required for the {EventType}?" />
 				</effect>
 			</case>
 		</rule>
@@ -188,117 +188,6 @@
 			</case>
 		</rule>	
 		
-		
-		<!-- *******************************-->
-
-		<!-- Asks whether to book a Time trip -->
-		<rule>
-			<case>
-				<condition>
-					<if var="current_step" value="Time" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="Do you have a specific time for {EventType}?" />
-				</effect>
-			</case>
-		</rule>
-
-		<!-- Asks for the time-->
-		<rule>
-			<case>
-				<condition>
-					<if var="current_step" value="Time" />
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="What time is {Person}'s {EventType}?" />
-				</effect>
-			</case>
-		</rule>
-
-		<!-- Asks for the Location of tickets -->
-		<rule>
-			<case>
-				<condition>
-					<if var="current_step" value="Location" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="Do you have the location?" />
-				</effect>
-			</case>
-		</rule>
-
-		<!-- Asks for the last confirmation -->
-		<rule>
-			<case>
-				<condition>
-					<if var="current_step" value="LastConfirm" />
-					<if var="Time" value="NoReturn" />
-					<if var="Location" value="1"/>
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="You are scheduling {Person}'s'
-					{EventType} on {Date} at {Location}. 
-					Shall I confirm your order?" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="current_step" value="LastConfirm" />
-					<if var="Location" value="1"/>
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="You are scheduling {Person}'s'
-					{EventType} on {Date}, {Time} at {Location}" />
-				</effect>
-			</case>
-				<case>
-				<condition>
-					<if var="current_step" value="LastConfirm" />
-					<if var="Time" value="NoReturn" />
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="You are adding {Person}'s {EventType} on {Date} at {Location}. Shall I confirm?" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="current_step" value="LastConfirm" />
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="You are adding {Person}'s {EventType} on {Date} at {Location}. Shall I confirm?" />
-				</effect>
-			</case>
-		</rule>
-
-		<!-- Asks whether to order additional tickets -->
-		<rule>
-			<case>
-				<condition operator="or">
-					<if var="current_step" value="Final" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="Do you want to add additional event?" />
-				</effect>
-			</case>
-		</rule>
-
-		<!-- Closes the interaction -->
-		<rule>
-			<case>
-				<condition>
-					<if var="current_step" value="Close" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="Thank you" />
-				</effect>
-			</case>
-		</rule>
-
 
 	</model>
 
@@ -314,81 +203,7 @@
 					<if var="a_m" value="CreateEvent" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="OK, You are attending {Person}'s {EventType} on {Date}. {a_u} {current_step}" />
-				</effect>
-			</case>
-		</rule>
-
-		<!-- Requsting the Gift -->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Request(Gift)" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="OK, You are attending {Person}'s {EventType} on {Date}. {a_u} {current_step}" />
-				</effect>
-			</case>
-		</rule>
-		
-		<!-- Requsting the Time -->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Request(Time)" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="OK, You are attending {Person}'s {EventType} on {Date}. {a_u}" />
-				</effect>
-			</case>
-		</rule>
-		
-		<!-- Requsting the Person -->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Request(Person)" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="OK, You are attending {EventType} on {Date}. {a_u}" />
-				</effect>
-			</case>
-		</rule>
-		
-		<!-- Requsting the Date -->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Request(Date)" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="OK, You are attending {EventType}. {a_u}" />
-				</effect>
-			</case>
-		</rule>
-		
-		<!-- Requsting the Place -->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Request(Place)" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="OK, You are attending {EventType}. {a_u}" />
-				</effect>
-			</case>
-		</rule>
-		
-		
-		
-		<!-- Requsting the Type of Anniversary -->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Request(Type)" />
-				</condition>
-				<effect util="1">
-					<set var="u_m" value="OK, You are attending {EventType} on {Date}." />
+					
 				</effect>
 			</case>
 		</rule>
@@ -660,7 +475,6 @@
 					<if var="a_m" value="EraseAll" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="Erasing all slots" />
 					<set var="current_step" value="Confirm_Delete" />
 				</effect>
 			</case>
@@ -786,48 +600,6 @@
 				</effect>
 			</case>
 		</rule>
-
-
-
-
-		<!-- TEST CODE for JEEEEEE -->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="CheckObject" />
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="CheckObject {Object}" />
-						
-				</effect>
-			</case>
-		</rule>
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="CheckET" />
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="CheckET {EventType}" />
-							
-				</effect>
-			</case>
-		</rule>
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Check" />
-				</condition>
-				<effect util="1">
-					<set var="u_m"
-						value="Check {current_step}" />
-							
-				</effect>
-			</case>
-		</rule>
-
 
 	</model>
 
