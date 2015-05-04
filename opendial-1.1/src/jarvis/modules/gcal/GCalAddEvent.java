@@ -85,7 +85,7 @@ public class GCalAddEvent implements Module {
 		if (updatedVars.contains("a_m") && state.hasChanceNode("a_m")) {
 			String action = state.queryProb("a_m").toDiscrete().getBest().toString();
             String current_event = state.queryProb("current_step").toDiscrete().getBest().toString();
-
+            System.out.println(current_event);
 			if (current_event.equals("Confirm_Adding")) {
                 String[] eventData=new String[7];
                 //structure for eventData

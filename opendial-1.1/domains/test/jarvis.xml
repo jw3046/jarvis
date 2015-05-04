@@ -34,7 +34,7 @@
 	<import href="jarvis_dm.xml"/>
 
 	<!-- Natural language generation models -->
-	<import href="jarvis_nlg.xml"/>
+	<import href="jarvis_nlg clean.xml"/>
 
 
 	<!-- External module showing how to interface the dialogue system with an external 

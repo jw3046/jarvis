@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0ee3b11-40dc-4e98-b864-a59e79de3dd1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.store/user_calendar_credentials/StoredCredential" afterPath="$PROJECT_DIR$/.store/user_calendar_credentials/StoredCredential" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java" afterPath="$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/domains/test/jarvis.xml" afterPath="$PROJECT_DIR$/domains/test/jarvis.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opendial.iws" />
@@ -32,8 +32,8 @@
       <file leaf-file-name="GCalAddEvent.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.74871135" vertical-offset="394" max-vertical-offset="2730">
-              <caret line="88" column="52" selection-start-line="88" selection-start-column="52" selection-end-line="88" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.11597938" vertical-offset="795" max-vertical-offset="2730">
+              <caret line="82" column="13" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -44,8 +44,8 @@
       <file leaf-file-name="CalendarManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1729" max-vertical-offset="2790">
-              <caret line="159" column="70" selection-start-line="159" selection-start-column="70" selection-end-line="159" selection-end-column="70" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1414" max-vertical-offset="2790">
+              <caret line="136" column="45" selection-start-line="136" selection-start-column="45" selection-end-line="136" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -782,16 +782,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/CalendarManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1729" max-vertical-offset="2790">
-          <caret line="159" column="70" selection-start-line="159" selection-start-column="70" selection-end-line="159" selection-end-column="70" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1414" max-vertical-offset="2790">
+          <caret line="136" column="45" selection-start-line="136" selection-start-column="45" selection-end-line="136" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74871135" vertical-offset="394" max-vertical-offset="2730">
-          <caret line="88" column="52" selection-start-line="88" selection-start-column="52" selection-end-line="88" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.11597938" vertical-offset="795" max-vertical-offset="2730">
+          <caret line="82" column="13" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
