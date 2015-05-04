@@ -139,6 +139,19 @@
 			</case>
 
 		</rule>
+		
+		<rule>
+			<case>
+				<condition>
+					<if var="u_u" relation="contains" value="Restart" />
+				</condition>
+				<effect>
+					<set var="a_u" value="Restart" />
+
+				</effect>
+			</case>
+
+		</rule>
 
 	</model>
 	
@@ -146,6 +159,21 @@
 	<model trigger="a_u">
 		<!-- This model take the dialogue act fom the user and uses it to fill the corresponding
 	  slots (EventType, Person, dates, time, Place, etc.). -->
+		
+		<!-- Fills the slots in accordance with the information in the dialogue act -->
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_u" relation="=" value="Restart" />
+
+				</condition>
+				<effect>
+					<set var="a_m" value="Restart" />
+				</effect>
+			</case>
+		</rule>
+		
 	 
 		<!-- Fills the slots in accordance with the information in the dialogue act -->
 

@@ -28,8 +28,8 @@
       <file leaf-file-name="GCalAddEvent.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8234536" vertical-offset="336" max-vertical-offset="2790">
-              <caret line="86" column="85" selection-start-line="86" selection-start-column="85" selection-end-line="86" selection-end-column="85" />
+            <state vertical-scroll-proportion="0.2822165" vertical-offset="336" max-vertical-offset="2790">
+              <caret line="58" column="78" selection-start-line="58" selection-start-column="78" selection-end-line="58" selection-end-column="78" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -811,8 +811,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jarvis/modules/gcal/GCalAddEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8234536" vertical-offset="336" max-vertical-offset="2790">
-          <caret line="86" column="85" selection-start-line="86" selection-start-column="85" selection-end-line="86" selection-end-column="85" />
+        <state vertical-scroll-proportion="0.2822165" vertical-offset="336" max-vertical-offset="2790">
+          <caret line="58" column="78" selection-start-line="58" selection-start-column="78" selection-end-line="58" selection-end-column="78" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
