@@ -50,7 +50,8 @@ public class ParseInterpreter
             ParseFrame firstFrame = null;
             Integer themePosition = Integer.MAX_VALUE;
             for (ParseFrame frame: frames){
-                if (frame.getTarget().getName().equals("Calendric_unit")){
+                if (frame.getTarget().getName().equals("Calendric_unit")||
+                        frame.getTarget().getName().equals("Measure_duration")){
                     // collect ids involved in the frame
                     ArrayList<Integer> ids = frame.getTarget().getIDs();
                     // find corresponding theme in ideas

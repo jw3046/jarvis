@@ -76,6 +76,7 @@ public class SlotMapper {
 			valueList = a_u.get("EventType");
 			value = valueList.get(0);
 			returnMap.put("EventType", value);
+                        ET = value;
 		}
 		
 		//BIRTHDAY EVENT 
