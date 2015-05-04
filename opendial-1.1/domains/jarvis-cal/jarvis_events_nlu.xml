@@ -32,8 +32,10 @@
 
 				</condition>
 				<effect>
-					<set var="a1_u" value="(Type,{X})" />
-					<set var="a2_u" value="(EventType,{E})" />
+                                        <!-- Type -->
+					<set var="a1_u" value="{X}" />
+                                        <!-- EventType -->
+					<set var="a2_u" value="{E}" />
 				</effect>
 			</case>
 		</rule>
@@ -44,8 +46,9 @@
 				<condition>
 					<if var="frame_u" value="(*#{X})" />	
 				</condition>
-				<effect>
-                                    <set var="a2_u" value="(EventType,{X})" />
+                                <effect>
+                                    <!-- EventType -->
+                                    <set var="a2_u" value="{X}" />
 				</effect>
 			</case>
 		</rule>
