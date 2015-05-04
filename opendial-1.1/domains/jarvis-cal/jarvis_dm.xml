@@ -36,8 +36,35 @@
 
 			</case>
 		</rule>
+		<rule>
+			<case>
+				<condition>
+					<if var="Event" value="ConfirmN" />
+					<if var="current_step" value="GuessedObject" />
 
+				</condition>
+				<effect util="5">
+					<set var="Event" value="{EventType}" />
 
+				</effect>
+
+			</case>
+		</rule>
+
+		<rule>
+			<case>
+				<condition>
+					<if var="Event" value="ConfirmY" />
+					<if var="current_step" value="GuessedObject" />
+
+				</condition>
+				<effect util="5">
+					<set var="Gift" value="{Object}"/>
+					<set var="Event" value="{EventType}"/>
+				</effect>
+
+			</case>
+		</rule>
 
 
 		<!-- Birthday Event -->
