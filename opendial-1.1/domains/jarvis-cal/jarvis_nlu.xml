@@ -10,7 +10,7 @@
 	and a new information about the Place of tickets. 
 	-->
 	
-	<model trigger="a_u">
+		<model trigger="a_u">
 		<!-- This model take the dialogue act fom the user and uses it to fill the corresponding
 	  slots (EventType, Person, dates, time, Place, etc.). -->
 	 
@@ -33,7 +33,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" value="NoEvent" />
-					<if var="a_u" relation="contains" value="*(Date,{Date})*" />
+					<if var="a_u" relation="contains" value="(Date,{Date})" />
 				</condition>
 				<effect>
 					<set var="Date" value="{Date}" />
@@ -45,7 +45,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" value="NoEvent" />
-					<if var="a_u" relation="contains" value="*(Person,{Person})*" />
+					<if var="a_u" relation="contains" value="(Person,{Person})" />
 				</condition>
 				<effect>
 					<set var="Person" value="{Person}" />
@@ -56,7 +56,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" value="NoEvent" />
-					<if var="a_u" relation="contains" value="*(Place,{Place})*" />
+					<if var="a_u" relation="contains" value="(Place,{Place})" />
 				</condition>
 				<effect>
 					<set var="Place" value="{Place}" />
@@ -67,7 +67,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" value="NoEvent" />
-					<if var="a_u" relation="contains" value="*(Type,{Type})*" />
+					<if var="a_u" relation="contains" value="(Type,{Type})" />
 				</condition>
 				<effect>
 					<set var="Subject" value="{Type}" />
@@ -80,7 +80,7 @@
 				<condition operator="and">
 					<if var="ET" value="NoEvent" />
 
-					<if var="a_u" relation="contains" value="*(EventType,{EventType})*" />
+					<if var="a_u" relation="contains" value="(EventType,{EventType})" />
 				</condition>
 				<effect>
 					<set var="ET" value="{EventType}" />
@@ -96,7 +96,7 @@
 				<condition operator="and">
 					<if var="ET" value="NoEvent" />
 
-					<if var="a_u" relation="contains" value="*(Object,{Object})*" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 
 				</condition>
 				<effect>
@@ -116,7 +116,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="*(Object,{Object})*" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="Gift" />
 				</condition>
 				<effect>
@@ -131,7 +131,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="*(Object,{Object})*" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
@@ -146,7 +146,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="*(Person,{Person})*" />
+					<if var="a_u" relation="contains" value="(Person,{Person})" />
 				</condition>
 				<effect>
 					<set var="Person" value="{Person}" />
@@ -159,7 +159,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="*(Object,{Object})*" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="Person" />
 
 				</condition>
@@ -174,7 +174,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="*(Date,{Date})*" />
+					<if var="a_u" relation="contains" value="(Date,{Date})" />
 				</condition>
 				<effect>
 					<set var="Date" value="{Date}" />
@@ -187,7 +187,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="*(Object,{Object})*" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="Date" />
 
 				</condition>
@@ -201,7 +201,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="*(Place,{Place})*" />
+					<if var="a_u" relation="contains" value="(Place,{Place})" />
 				</condition>
 				<effect>
 					<set var="Place" value="{Place}" />
@@ -213,7 +213,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="*(Object,{Object})*" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="Place" />
 
 				</condition>
@@ -227,7 +227,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Birthday" />
-					<if var="a_u" relation="contains" value="*(DressCode,{DressCode})*" />
+					<if var="a_u" relation="contains" value="(DressCode,{DressCode})" />
 				</condition>
 				<effect>
 					<set var="DressCode" value="{DressCode}" />
@@ -243,7 +243,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="*(Type,{Type})*" />
+					<if var="a_u" relation="contains" value="(Type,{Type})" />
 					<if var="current_step" relation="=" value="Subject" />
 				</condition>
 				<effect>
@@ -258,7 +258,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="*(Person,{Person})*" />
+					<if var="a_u" relation="contains" value="(Person,{Person})" />
 				</condition>
 				<effect>
 					<set var="Person" value="{Person}" />
@@ -272,7 +272,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="*(Date,{Date})*" />
+					<if var="a_u" relation="contains" value="(Date,{Date})" />
 				</condition>
 				<effect>
 					<set var="Date" value="{Date}" />
@@ -286,7 +286,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="*(Object,{Object})*" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="Gift" />
 				</condition>
 				<effect>
@@ -301,7 +301,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="*(Object,{Object})*" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
@@ -316,7 +316,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Anniversary" />
-					<if var="a_u" relation="contains" value="*(Place,{Place})*" />
+					<if var="a_u" relation="contains" value="(Place,{Place})" />
 				</condition>
 				<effect>
 					<set var="Place" value="{Place}" />
@@ -332,7 +332,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Party" />
-					<if var="a_u" relation="contains" value="*(Object,{Object})*" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="Gift" />
 				</condition>
 				<effect>
@@ -347,7 +347,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Party" />
-					<if var="a_u" relation="contains" value="*(Object,{Object})*" />
+					<if var="a_u" relation="contains" value="(Object,{Object})" />
 					<if var="current_step" relation="=" value="DressCode" />
 				</condition>
 				<effect>
@@ -362,7 +362,7 @@
 			<case>
 				<condition operator="and">
 					<if var="ET" relation="=" value="Party" />
-					<if var="a_u" relation="contains" value="*(Person,{Person})*" />
+					<if var="a_u" relation="contains" value="(Person,{Person})" />
 				</condition>
 				<effect>
 					<set var="Person" value="{Person}" />
@@ -909,39 +909,7 @@
 			</case>
 		</rule>
 
-		<!-- If the last system action is a confirmation request and the user confirms the information, also update the corresponding slot-->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Confirm({Slot},{Value})" />
-					<if var="a_u" relation="contains" value="Confirm" />
-				</condition>
-				<effect>
-					<set var="{Slot}" value="{Value}" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="a_m" value="Confirm({Slot},{Value})" />
-					<if var="a_u" relation="contains" value="Disconfirm" />
-				</condition>
-				<effect>
-					<set var="{Slot}" value="None" />
-				</effect>
-			</case>
-		</rule>
-		
-		<!-- Once the information is grounded, we assume the value won't change-->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Ground({Slot},{Value})" />
-				</condition>
-				<effect>
-					<set var="{Slot}" value="{Value}" />
-				</effect>
-			</case>
-		</rule>
+
 
 		<!-- Catch-all rule that simply keeps the slots to their current value
 		in the absence of any other new information. -->

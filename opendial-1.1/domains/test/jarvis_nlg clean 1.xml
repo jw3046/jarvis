@@ -18,6 +18,7 @@
 				<effect util="1">
 					<set var="u_m" value="What are you going to do?" />
 					<set var="ET" value="NoEvent" />
+					<set var="a_m" value="Initial" />
 				</effect>
 			</case>
 		</rule>
