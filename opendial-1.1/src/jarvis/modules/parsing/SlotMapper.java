@@ -44,6 +44,7 @@ public class SlotMapper {
 		
 		//Quit
 		if (a_u.containsKey("Confirm")) {
+                        valueList = a_u.get("Confirm");
 			value = valueList.get(0);
 			if (value.equals("Quit")){
 				returnMap.put("a_m", "Exit");
@@ -53,6 +54,7 @@ public class SlotMapper {
 		
 		//Restart
 		if (a_u.containsKey("Confirm")) {
+                        valueList = a_u.get("Confirm");
 			value = valueList.get(0);
 			if (value.equals("Restart")){
 				returnMap.put("a_m", "Restart");
@@ -683,7 +685,7 @@ public class SlotMapper {
 			else if (current_step.equals("Gift_Request")){
 				valueList = a_u.get("Confirm");
 				value = valueList.get(0);
-				if (value.equals("yes")){
+				if (value.equals("ConfirmY")){
 					returnMap.put("current_step", "Gift");
 					return returnMap;
 
@@ -692,7 +694,7 @@ public class SlotMapper {
 			else if (current_step.equals("DressCode_Request")){
 				valueList = a_u.get("Confirm");
 				value = valueList.get(0);
-				if (value.equals("yes")){
+				if (value.equals("ConfirmY")){
 					returnMap.put("current_step", "DressCode");
 					return returnMap;
 
@@ -701,7 +703,7 @@ public class SlotMapper {
 			else {
 				valueList = a_u.get("Confirm");
 				value = valueList.get(0);
-				if (value.equals("yes")){
+				if (value.equals("ConfirmY")){
 					returnMap.put("Event", "ConfirmY");
 					return returnMap;
 
@@ -714,7 +716,7 @@ public class SlotMapper {
 			if (current_step.equals("Gift_Request")){
 				valueList = a_u.get("Confirm");
 				value = valueList.get(0);
-				if (value.equals("no")){
+				if (value.equals("ConfirmN")){
 					returnMap.put("current_step", "Gift");
 					return returnMap;
 
@@ -725,7 +727,7 @@ public class SlotMapper {
 				value = valueList.get(0);
 				ArrayList<String> EventTypeList = new ArrayList<String> ();
 				String EventType = EventTypeList.get(0);
-				if (value.equals("no")){
+				if (value.equals("ConfirmN")){
 					returnMap.put("DressCode", "NoDressCode");
 					returnMap.put("Event", EventType);
 					returnMap.put("a_m", "CheckNoDressCode");
@@ -736,7 +738,7 @@ public class SlotMapper {
 			else if (current_step.equals("Gift_Request")){
 				valueList = a_u.get("Confirm");
 				value = valueList.get(0);
-				if (value.equals("no")){
+				if (value.equals("ConfirmN")){
 					returnMap.put("a_m", "CheckGift");
 					returnMap.put("Gift", "NoGift");
 					return returnMap;
@@ -746,7 +748,7 @@ public class SlotMapper {
 			else {
 				valueList = a_u.get("Confirm");
 				value = valueList.get(0);
-				if (value.equals("no")){
+				if (value.equals("ConfirmN")){
 					returnMap.put("Event", "ConfirmN");
 					return returnMap;
 

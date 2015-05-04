@@ -120,11 +120,12 @@ public class Semafor implements Module
                             // utterance completely incomprehensible
                             confirm = "_?_";
                         }
-                        System.out.println(confirm);
                         system.addContent(new Assignment("a0_u",confirm));
                         if (!confirm.equals("_?_")){
                             this.user_acts.get("Confirm").add(confirm);
                         }
+                        // for frame_u
+                        event_clues += "#"+"unknown)";
                     }
 
                     // set frame_u for EventType module
@@ -159,6 +160,20 @@ public class Semafor implements Module
                 this.user_acts.get("Type").add(typeStr);
             }
             system.addContent(new Assignment("a_u", user_act));
+
+                    for (String key: this.user_acts.keySet()){
+                        System.out.println("Key:"+key);
+                        for (String item: this.user_acts.get(key)){
+                            System.out.println(item);
+                        }
+                    }
+/*
+            for (String key: this.user_acts.keySet()){
+                for (String val: this.user_acts.get(key)){
+                    System.out.println(key+":"+val);
+                }
+            }
+            */
             // fill slots
             String ET =
                 state.queryProb("ET").toDiscrete().getBest().toString();
