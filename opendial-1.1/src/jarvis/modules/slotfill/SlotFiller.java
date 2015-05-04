@@ -1,6 +1,7 @@
 
 package jarvis.modules.slotfill;
 
+import java.util.Collection;
 import java.io.IOException;
 
 import opendial.DialogueSystem;
@@ -25,7 +26,7 @@ public class SlotFiller implements Module {
 	 * 
 	 * @param system the dialogue system to which the module should be attached
 	 */
-	public CalendarUpdate(DialogueSystem system) {
+	public SlotFiller(DialogueSystem system) {
 		this.system = system;
                 System.out.println("SlotFiller created!");
 	}
@@ -38,23 +39,18 @@ public class SlotFiller implements Module {
 		paused = false;
 	}
 
-	/**
-	 * Checks whether the updated variables contains the system action and (if yes)
-	 * whether the system action value is "FindOffer" or "Book".  If the value is 
-	 * "FindOffer", checks the price of the order (faked here to 179 or 299 EUR) 
-	 * and adds the new action "MakeOffer(price)" to the dialogue state.  If the
-	 * value is "Book", simply write down the order on the system output.
-	 * 
-	 * @param state the current dialogue state
-	 * @param updatedVars the updated variables in the state
-	 */
 	@Override
 	public void trigger(DialogueState state, Collection<String> updatedVars) {
 		if (updatedVars.contains("a_u") && state.hasChanceNode("a_u")) {
-			String user_act = state.queryProb("a_u").toDiscrete().getBest().toString();
+			String user_act =
+                            state.queryProb("a_u").toDiscrete().getBest().toString();
                         // string matching/slot filling code here
                         
-                        //String ET = state.queryProb("ET");
+                        String ET = 
+                            state.queryProb("ET").toDiscrete().getBest().toString();
+                        String CurrStep = 
+                            state.queryProb("current_step").toDiscrete().getBest().toString();
+
                         //HashMap<String,String> hm = Filler.myfunc(user_act, ET, current_step);
 
 		}
