@@ -1025,7 +1025,7 @@
 				</condition>
 				<effect prob="1">
 					<!-- Trigger External Model -->
-					<set var="current_step" value="Confirm" />
+					<set var="current_step" value="Confirm_Adding" />
 				</effect>
 			</case>
 
