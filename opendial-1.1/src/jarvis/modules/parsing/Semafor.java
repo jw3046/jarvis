@@ -102,14 +102,20 @@ public class Semafor implements Module
                         }
                     }
                     else {
-                        // utterance not understood
-                        system.addContent(new Assignment("a0_u", "_?_"));
+                        // check for yes/no/quit
+                        String confirm = parseInterpreter.extractConfirm(parseResult);
+                        if (confirm.equals("")){
+                            // utterance completely incomprehensible
+                            confirm = "_?_";
+                        }
+                        System.out.println(confirm);
+                        system.addContent(new Assignment("a0_u",confirm));
                     }
 
                     // set frame_u for EventType module
                     system.addContent(new Assignment("frame_u", event_clues.toLowerCase()));
 
-                    // set string match keywors for EventType extractor
+                    // set string match keywords for EventType extractor
                     String eventTypes = 
                         "anniversary;birthday;chill;graduation;job;party;seminar";
                     system.addContent(new Assignment("_etcsvlist",eventTypes));
@@ -143,6 +149,7 @@ public class Semafor implements Module
             /*
             System.out.println(state);
             String user_act = state.queryProb("a_u").toDiscrete().getBest().toString();
+            System.out.println("a_u");
             System.out.println(user_act);
             */
         }
