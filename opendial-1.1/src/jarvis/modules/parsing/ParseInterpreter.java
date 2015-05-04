@@ -195,9 +195,12 @@ public class ParseInterpreter
         }
         else {
             if ((headPOS.contains("NN")&&deprel.contains("amod"))||
-                // special case for time
+                // special extra cases for time
                 (headPOS.contains("NN")&&deprel.contains("dep")&&
                 conll.get(current.getHEAD()).getDEPREL().contains("tmod"))
+                || (headPOS.contains("NNP")&&
+                    (deprel.contains("amod")||deprel.contains("num"))&&
+                    (currentPOS.contains("JJ")||currentPOS.contains("CD")))
                 ){
                 // append idea (extend the phrase)
                 if (ideas.size()<1) ideas.add(new UtteranceTheme());

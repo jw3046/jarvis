@@ -1,9 +1,12 @@
 
 package jarvis.modules.parsing;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.DayOfWeek;
+import java.time.Month;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.ChronoUnit;
 
@@ -12,10 +15,18 @@ public class CalendarTimeUtil
     public static String toAbsoluteDate(String relativeDate){
         // converts user utterance to absolute date
         //TODO: recognize time
+        
+        // initialize standard values
         ArrayList<String> days = new ArrayList<String>();
         for (DayOfWeek d: DayOfWeek.values()){
             days.add(d.toString().toLowerCase());
         }
+        ArrayList<String> months = new ArrayList<String>();
+        for (Month m: Month.values()){
+            months.add(m.toString().toLowerCase());
+        }
+
+        // get current time
         LocalDateTime datetime = LocalDateTime.now()
             .truncatedTo(ChronoUnit.MINUTES);
 
@@ -28,6 +39,7 @@ public class CalendarTimeUtil
         }
         else {
             boolean brk = false;
+            // day of week utterance
             for (String day: days){
                 if (relativeDate.contains(day)){
                     // TemporalAdjuster
@@ -43,6 +55,29 @@ public class CalendarTimeUtil
                         datetime = datetime.with(TemporalAdjusters.next(
                                     DayOfWeek.valueOf(
                                         day.toUpperCase())));
+                    }
+                    brk = true;
+                    break;
+                }
+            }
+            // month utterance
+            if (relativeDate.contains("next month")){
+                // plus month
+                datetime = datetime.plusMonths(1);
+            }
+            for (String month: months){
+                if (relativeDate.contains(month)){
+                    int monthVal = Month.valueOf(month.toUpperCase()).getValue();
+                    datetime = datetime.withMonth(monthVal);
+                    List<String> tokens = Arrays.asList(relativeDate.split(" "));
+                    int pos = relativeDate.indexOf(month);
+                    if (tokens.size()>pos+1 &&
+                            tokens.get(pos+1).
+                            matches("(\\d+(st|th|rd|nd)|\\d+$)")){
+                        // get exact date
+                        String numbers = tokens.get(pos+1).replaceAll("[^0-9]","");
+                        Integer exactDay = Integer.parseInt(numbers);
+                        datetime = datetime.withDayOfMonth(exactDay);
                     }
                     brk = true;
                     break;

@@ -27,6 +27,8 @@ public class Semafor implements Module
     // the parse interpreter
     ParseInterpreter parseInterpreter;
 
+    // current list of user_acts
+    HashMap<String,ArrayList<String>> user_acts;
     /**
      * Creates new instance of parsing module (makes API calls to semafor).
      *
@@ -35,8 +37,8 @@ public class Semafor implements Module
     public Semafor(DialogueSystem system) {
         this.system = system;
         parseInterpreter = new ParseInterpreter();
+        user_acts = new HashMap<String,ArrayList<String>>();
         System.out.println("Semafor Created!");
-        
     }
 
     /**
@@ -49,6 +51,14 @@ public class Semafor implements Module
     @Override
     public void trigger(DialogueState state, Collection<String> updatedVars) {
         if (updatedVars.contains("u_u") && state.hasChanceNode("u_u")) {
+
+            // clear previous
+            String[] act_keys =
+                {"Person","Place","Date","Object","Confirm"};
+            for (String actType: act_keys){
+                this.user_acts.put(actType,new ArrayList<String>());
+            }
+
             // do parsing if user utterance ("u_u") has been updated
             String user_utterance = "None";
             for (Value val: state.queryProb("u_u").toDiscrete().getValues()){
@@ -82,13 +92,15 @@ public class Semafor implements Module
 
                     if (actions.size()>0){
                         // join user acts into (key,value)
-                        // where key={Person,Place,Date,Object}
+                        // where key={Person,Place,Date,Object,Confirm}
                         String user_act = "";
                         for (HashMap<String,UtteranceTheme> action: actions){
                             for (String key: action.keySet()){
                                 UtteranceTheme idea = action.get(key);
                                 if (idea!=null){
                                     user_act += "("+key+","+idea+") ";
+                                    // add to internal list
+                                    this.user_acts.get(key).add(idea.toString());
                                 }
                             }
                         }
@@ -110,6 +122,9 @@ public class Semafor implements Module
                         }
                         System.out.println(confirm);
                         system.addContent(new Assignment("a0_u",confirm));
+                        if (!confirm.equals("_?_")){
+                            this.user_acts.get("Confirm").add(confirm);
+                        }
                     }
 
                     // set frame_u for EventType module
@@ -119,7 +134,6 @@ public class Semafor implements Module
                     String eventTypes = 
                         "anniversary;birthday;chill;graduation;job;party;seminar";
                     system.addContent(new Assignment("_etcsvlist",eventTypes));
-                    System.out.println(eventTypes);
 
                     // DEBUG
                     System.out.println(ideas);
