@@ -100,9 +100,9 @@
 
 				</condition>
 				<effect>
-					<set var="a_m" value="CheckObject" />
+					
 					<set var="Object" value="{Object}" />
-					<set var="Event" value="GuessObject" />
+					<set var="a_m" value="CheckObject" />
 				</effect>
 			</case>
 		</rule>		

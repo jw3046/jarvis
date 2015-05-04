@@ -30,7 +30,7 @@
 					<if var="Event" value="GuessObject" />
 				</condition>
 				<effect util="5">
-					<set var="a_m" value="CheckObject" />
+					<set var="current_step" value="GuessingObjectRequest" />
 
 				</effect>
 
