@@ -75,6 +75,7 @@ public class SlotMapper {
 		if (ET.equals("NoEvent") && a_u.containsKey("EventType")){
 			valueList = a_u.get("EventType");
 			value = valueList.get(0);
+                        valueList.remove(0);
 			returnMap.put("EventType", value);
                         ET = value;
 		}
