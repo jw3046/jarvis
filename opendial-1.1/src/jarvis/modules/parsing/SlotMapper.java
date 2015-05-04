@@ -76,6 +76,7 @@ public class SlotMapper {
 			valueList = a_u.get("EventType");
 			value = valueList.get(0);
                         valueList.remove(0);
+                        a_u = removeNull(a_u);
 			returnMap.put("EventType", value);
                         ET = value;
 		}
