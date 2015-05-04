@@ -161,12 +161,16 @@ public class Semafor implements Module
             }
             system.addContent(new Assignment("a_u", user_act));
 
+            System.out.println("\n\n==========");
+            System.out.println("==========");
+            System.out.println("==========");
                     for (String key: this.user_acts.keySet()){
-                        System.out.println("Key:"+key);
-                        for (String item: this.user_acts.get(key)){
-                            System.out.println(item);
-                        }
+                        System.out.print(key+":");
+                        System.out.println(this.user_acts.get(key));
                     }
+            System.out.println("==========");
+            System.out.println("==========");
+            System.out.println("==========");
 /*
             for (String key: this.user_acts.keySet()){
                 for (String val: this.user_acts.get(key)){
@@ -183,10 +187,12 @@ public class Semafor implements Module
             HashMap<String,String> newVars =
                 SlotMapper.map(this.user_acts,ET,CurrStep,system_act);
 
+            /*
             for (String key: newVars.keySet()){
                 System.out.println(key + ":" + newVars.get(key));
                 system.addContent(new Assignment(key, newVars.get(key)));
             }
+            */
 
 
             //DEBUG

@@ -93,6 +93,8 @@ public class SlotMapper {
                                 Character.toUpperCase(value.charAt(0))+value.substring(1));
 			returnMap.put("Event",
                                 Character.toUpperCase(value.charAt(0))+value.substring(1));
+			returnMap.put("ET",
+                                Character.toUpperCase(value.charAt(0))+value.substring(1));
                         ET = value;
 		}
 		
