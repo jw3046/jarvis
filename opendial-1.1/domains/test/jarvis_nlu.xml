@@ -1042,39 +1042,7 @@
 			</case>
 		</rule>
 
-		<!-- If the last system action is a confirmation request and the user confirms the information, also update the corresponding slot-->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Confirm({Slot},{Value})" />
-					<if var="a_u" relation="contains" value="Confirm" />
-				</condition>
-				<effect>
-					<set var="{Slot}" value="{Value}" />
-				</effect>
-			</case>
-			<case>
-				<condition>
-					<if var="a_m" value="Confirm({Slot},{Value})" />
-					<if var="a_u" relation="contains" value="Disconfirm" />
-				</condition>
-				<effect>
-					<set var="{Slot}" value="None" />
-				</effect>
-			</case>
-		</rule>
-		
-		<!-- Once the information is grounded, we assume the value won't change-->
-		<rule>
-			<case>
-				<condition>
-					<if var="a_m" value="Ground({Slot},{Value})" />
-				</condition>
-				<effect>
-					<set var="{Slot}" value="{Value}" />
-				</effect>
-			</case>
-		</rule>
+
 
 		<!-- Catch-all rule that simply keeps the slots to their current value
 		in the absence of any other new information. -->
