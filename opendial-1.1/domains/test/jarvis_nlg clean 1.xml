@@ -100,7 +100,7 @@
 					<if var="current_step" value="Subject" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What is the subject/topic for the {EventType}?" />
+					<set var="u_m" value="What is the subject/topic/type of the {EventType}?" />
 				</effect>
 			</case>
 		</rule>
@@ -113,7 +113,7 @@
 					<if var="current_step" value="DressCode_Request" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="Do you want to wear anything special for {EventType}?" />
+					<set var="u_m" value="Is there any dresscode for {EventType}?" />
 				</effect>
 			</case>
 		</rule>
@@ -124,7 +124,7 @@
 					<if var="current_step" value="DressCode" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What is the dress code required for the {EventType}?" />
+					<set var="u_m" value="What is the dresscode for the {EventType}?" />
 				</effect>
 			</case>
 		</rule>
@@ -172,7 +172,7 @@
 					<if var="current_step" value="Confirm" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="Event has been added. Do you want to add more event?" />
+					<set var="u_m" value="Event has been added to the calendar. Do you want to add more event?" />
 				</effect>
 			</case>
 		</rule>
@@ -183,7 +183,7 @@
 					<if var="current_step" value="Confirm_Delete" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="Event has not been added. Do you want to add an event?" />
+					<set var="u_m" value="Event has not been added. Do you want to create a new event?" />
 				</effect>
 			</case>
 		</rule>	
