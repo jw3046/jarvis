@@ -155,20 +155,17 @@ public class CalendarManager
       StringBuffer description= new StringBuffer();
       //if(eventInfo[3]!=null)  event.setAttendees(eventInfo[3]);
       for(int i=3;i<eventInfo.length;i++){
-          if(eventInfo[i]!=null) description.append(eventInfo[i]);
+          if(eventInfo[i]!=null) description.append(eventInfo[i]+"\\n");
       }
       System.out.println("Calendar Manager: "+description.toString());
       event.setDescription(description.toString());
-    // check if time value has been filled
-    String WHEN = "(Date,";
-    String NULL = WHEN+"null";
-    //int startIndex = data.indexOf(WHEN);
-    //if (data.substring(startIndex,startIndex+NULL.length()).equals(NULL)){
-        
+
+        //event.setStart();
         Date startDate = new Date();
         Date endDate = new Date(startDate.getTime() + 3600000);
         DateTime start = new DateTime(startDate, TimeZone.getTimeZone("UTC"));
         event.setStart(new EventDateTime().setDateTime(start));
+
         DateTime end = new DateTime(endDate, TimeZone.getTimeZone("UTC"));
         event.setEnd(new EventDateTime().setDateTime(end));
     //}
