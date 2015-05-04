@@ -16,7 +16,7 @@
 					<if var="current_step" value="EventType" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What are you going to do?" />
+					<set var="u_m" value="What are you planning to do?" />
 					<set var="ET" value="NoEvent" />
 					<set var="a_m" value="Initial" />
 				</effect>

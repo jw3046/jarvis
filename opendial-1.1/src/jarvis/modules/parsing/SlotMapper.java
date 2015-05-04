@@ -55,27 +55,27 @@ public class SlotMapper {
 		if (ET.equals("NoEvent") && a_u.containsKey("Date")){
 			valueList = a_u.get("Date");
 			value = valueList.get(0);
-			returnMap.put("a_m", value);
+			returnMap.put("Date", value);
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("Person")){
 			valueList = a_u.get("Person");
 			value = valueList.get(0);
-			returnMap.put("a_m", value);
+			returnMap.put("Person", value);
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("Place")){
 			valueList = a_u.get("Place");
 			value = valueList.get(0);
-			returnMap.put("a_m", value);
+			returnMap.put("Place", value);
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("Type")){
 			valueList = a_u.get("Type");
 			value = valueList.get(0);
-			returnMap.put("a_m", value);
+			returnMap.put("Type", value);
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("EventType")){
 			valueList = a_u.get("EventType");
 			value = valueList.get(0);
-			returnMap.put("a_m", value);
+			returnMap.put("EventType", value);
 		}
 		
 		//BIRTHDAY EVENT 
