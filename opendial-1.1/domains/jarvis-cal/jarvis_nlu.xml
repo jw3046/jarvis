@@ -91,21 +91,7 @@
 		</rule>
 
 
-		<rule>
-			<case>
-				<condition operator="and">
-					<if var="ET" value="NoEvent" />
-
-					<if var="a_u" relation="contains" value="(Object,{Object})" />
-
-				</condition>
-				<effect>
-					<set var="a_m" value="CheckObject" />
-					<set var="Object" value="{Object}" />
-					<set var="Event" value="GuessObject" />
-				</effect>
-			</case>
-		</rule>		
+	
 
 		<!-- *************** after EVENT is updated ************* -->
 		
