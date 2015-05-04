@@ -1059,7 +1059,29 @@
 					
 				</effect>
 			</case>
+			
+			<!-- System Start Again -->
+			<case>
+				<condition>
+					<if var="a_m" value="Restart" />
 
+				</condition>
+				<effect prob="1">
+					<set var="a_m" value="Repeat"/>
+					<set var="Date" value="none"/>
+					<set var="Person" value="none"/>
+					<set var="Gift" value="none"/>
+					<set var="Place" value="none"/>
+					<set var="Note" value="none"/>
+					<set var="Subject" value="none"/>
+					<set var="DressCode" value="none"/>
+					<set var="EventType" value="none"/>
+					
+				</effect>
+			</case>
+			
+
+			
 			<!-- No more Event to add, System Exists-->
 			<case>
 				<condition>

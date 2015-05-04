@@ -51,6 +51,15 @@ public class SlotMapper {
 			}
 		}
 		
+		//Restart
+		if (a_u.containsKey("Confirm")) {
+			value = valueList.get(0);
+			if (value.equals("Restart")){
+				returnMap.put("a_m", "Restart");
+				return returnMap;
+			}
+		}
+		
 		//Basic information NoEvent
 		if (ET.equals("NoEvent") && a_u.containsKey("Date")){
 			valueList = a_u.get("Date");
@@ -70,14 +79,16 @@ public class SlotMapper {
 		if (ET.equals("NoEvent") && a_u.containsKey("Type")){
 			valueList = a_u.get("Type");
 			value = valueList.get(0);
-			returnMap.put("Type", value);
+			returnMap.put("Type",
+                                Character.toUpperCase(value.charAt(0))+value.substring(1));
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("EventType")){
 			valueList = a_u.get("EventType");
 			value = valueList.get(0);
                         valueList.remove(0);
                         a_u = removeNull(a_u);
-			returnMap.put("EventType", value);
+			returnMap.put("EventType",
+                                Character.toUpperCase(value.charAt(0))+value.substring(1));
                         ET = value;
 		}
 		
