@@ -2,6 +2,7 @@
 package jarvis.modules.parsing;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -18,9 +19,15 @@ public class SlotMapper {
 	}
 
 	private static HashMap<String,ArrayList<String>> removeNull(HashMap<String,ArrayList<String>> user_act){
-                for (String key: user_act.keySet()){
-                    user_act.remove(key);
+            
+            for (Iterator<Map.Entry<String,ArrayList<String>>> it =
+                    user_act.entrySet().iterator();
+                    it.hasNext();){
+                Map.Entry<String,ArrayList<String>> pair = it.next();
+                if (pair.getValue().isEmpty()){
+                    it.remove();
                 }
+            }
 		
 		return user_act;
 	}
