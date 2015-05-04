@@ -18,20 +18,9 @@ public class SlotMapper {
 	}
 
 	private static HashMap<String,ArrayList<String>> removeNull(HashMap<String,ArrayList<String>> user_act){
-		Set keys = user_act.keySet();
-		Iterator iterator = keys.iterator();
-		
-		while (iterator.hasNext()) {
-			String key = (String) iterator.next();
-			ArrayList<String> value = user_act.get(key);
-			if (value.isEmpty()) {
-				user_act.remove(key);
-			}
-			if (value.get(0).equals("null") || value.get(0).equals("none") ){
-				user_act.remove(key);
-			}
-		}
-	
+                for (String key: user_act.keySet()){
+                    user_act.remove(key);
+                }
 		
 		return user_act;
 	}
