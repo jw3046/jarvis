@@ -17,7 +17,7 @@
 		
 		<!-- Starting prompt -->
 		<variable id="u_m">
-			<value>Jarvis Initialized, Hello</value>
+			<value>Hello</value>
 		</variable>
 		
 		<!-- We start the dialogue by asking for the EventType -->
@@ -34,7 +34,8 @@
 	<import href="jarvis_dm.xml"/>
 
 	<!-- Natural language generation models -->
-	<import href="jarvis_nlg clean.xml"/>
+
+	<import href="jarvis_nlg clean 1.xml"/>
 
 
 	<!-- External module showing how to interface the dialogue system with an external 

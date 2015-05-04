@@ -16,7 +16,7 @@
 					<if var="current_step" value="EventType" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What are you going to do?" />
+					<set var="u_m" value="What is your event?" />
 					<set var="ET" value="NoEvent" />
 				</effect>
 			</case>
@@ -52,7 +52,7 @@
 					<if var="current_step" value="Gift" />
 				</condition>
 				<effect util="1">
-					<set var="u_m" value="What gift do you want for {Person}?" />
+					<set var="u_m" value="What gift do you want for {Person}? {current_step}" />
 				</effect>
 			</case>
 		</rule>
@@ -162,6 +162,17 @@
 				</condition>
 				<effect util="1">
 					<set var="u_m" value="Do you want to add {EventType} on {Date} to the calendar?" />
+				</effect>
+			</case>
+		</rule>
+		
+		<rule>
+			<case>
+				<condition>
+					<if var="current_step" value="Confirm_Adding" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="Event is been added..." />
 				</effect>
 			</case>
 		</rule>
@@ -319,6 +330,17 @@
 			</case>
 		</rule>
 
+
+		<rule>
+			<case>
+				<condition>
+					<if var="a_m" value="Confirm_Adding" />
+				</condition>
+				<effect util="1">
+					<set var="u_m" value="OK, You are adding {Person}'s {EventType} on {Date}. {a_u} {current_step}" />
+				</effect>
+			</case>
+		</rule>
 		<!-- Requsting the Gift -->
 		<rule>
 			<case>

@@ -84,9 +84,10 @@ public class GCalAddEvent implements Module {
 	public void trigger(DialogueState state, Collection<String> updatedVars) {
 		if (updatedVars.contains("a_m") && state.hasChanceNode("a_m")) {
 			String action = state.queryProb("a_m").toDiscrete().getBest().toString();
-            String current_event = state.queryProb("current_step").toDiscrete().getBest().toString();
-            System.out.println(current_event);
-			if (current_event.equals("Confirm_Adding")) {
+
+            //String current_event = state.queryProb("current_step").toDiscrete().getBest().toString();
+
+			if (action.equals("Confirm_Adding")) {
                 String[] eventData=new String[7];
                 //structure for eventData
                 //0:EventType
@@ -161,7 +162,7 @@ public class GCalAddEvent implements Module {
                 }catch(Exception e){
                     System.out.println(e.toString());
                 }
-                system.addContent(new Assignment("a_m","Confirm"));
+                system.addContent(new Assignment("current_step","Confirm"));
                 System.out.println("Event Added successfully!");
 
                 /*
