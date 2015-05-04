@@ -53,12 +53,14 @@ public class SlotFiller implements Module {
                 String system_act = 
                     state.queryProb("a_m").toDiscrete().getBest().toString();
 
+                /*
                 HashMap<String,String> newVars =
                     SlotMapper.map(user_act, ET, current_step, system_act);
 
                 for(String key: newVars.keySet()){
                     system.addContent(new Assignment(key, newVars.get(key)));
                 }
+                */
             }
 	}
 
