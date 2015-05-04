@@ -195,7 +195,7 @@ public class ParseInterpreter
         }
         else {
             if ((headPOS.contains("NN")&&deprel.contains("amod"))||
-                    // special case for time
+                // special case for time
                 (headPOS.contains("NN")&&deprel.contains("dep")&&
                 conll.get(current.getHEAD()).getDEPREL().contains("tmod"))
                 ){
@@ -231,7 +231,8 @@ public class ParseInterpreter
     }
 
 
-    public AcknowledgeUA extractAcknowledgeUA(ParseResult parseResult){
+
+    public String extractConfirm(ParseResult parseResult){
         // extracts whether the user acknowledges yes/no
         // returns null if neither
         
@@ -246,16 +247,20 @@ public class ParseInterpreter
         no.add("no");
         no.add("nope");
         no.add("wrong");
+        String quit = "quit";
 
         for (String word: parseResult.getTokens()){
             if (yes.contains(word.toLowerCase())){
-                return new AcknowledgeUA(true);
+                return "ConfirmY";
             }
             if (no.contains(word.toLowerCase())){
-                return new AcknowledgeUA(false);
+                return "ConfirmN";
+            }
+            if (quit.equals(word.toLowerCase())){
+                return "Quit";
             }
         }
-        return null;
+        return "";
     }
 }
 
