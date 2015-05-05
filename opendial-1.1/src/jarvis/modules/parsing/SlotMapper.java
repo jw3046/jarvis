@@ -87,13 +87,13 @@ public class SlotMapper {
 		if (ET.equals("NoEvent") && a_u.containsKey("EventType")){
 			valueList = a_u.get("EventType");
 			value = valueList.get(0);
-                        valueList.remove(0);
-                        a_u = removeNull(a_u);
+                        if (a_u.containsKey("Object")&&a_u.get("Object").get(0).contains(value)){
+                            a_u.get("Object").remove(0);
+                            a_u = removeNull(a_u);
+                        }
 			returnMap.put("EventType",
                                 Character.toUpperCase(value.charAt(0))+value.substring(1));
 			returnMap.put("Event",
-                                Character.toUpperCase(value.charAt(0))+value.substring(1));
-			returnMap.put("ET",
                                 Character.toUpperCase(value.charAt(0))+value.substring(1));
                         ET = value;
 		}
@@ -715,7 +715,7 @@ public class SlotMapper {
 		}		
 		//NO 
 		if (a_u.containsKey("Confirm")) {
-			if (current_step.equals("Gift_Request")){
+			/*if (current_step.equals("Gift_Request")){
 				valueList = a_u.get("Confirm");
 				value = valueList.get(0);
 				if (value.equals("ConfirmN")){
@@ -724,7 +724,7 @@ public class SlotMapper {
 
 				}
 			}
-			else if (current_step.equals("DressCode_Request")){
+			else*/ if (current_step.equals("DressCode_Request")){
 				valueList = a_u.get("Confirm");
 				value = valueList.get(0);
 				ArrayList<String> EventTypeList = new ArrayList<String> ();

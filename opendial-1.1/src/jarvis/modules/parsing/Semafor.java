@@ -88,7 +88,6 @@ public class Semafor implements Module
                     for (ParseFrame frame: parseResult.getFrames()){
                         event_clues += frame.getTarget().getName() + ",";
                     }
-                    event_clues = event_clues.substring(0,event_clues.length()-1);
 
                     if (actions.size()>0){
                         // join user acts into (key,value)
@@ -125,7 +124,7 @@ public class Semafor implements Module
                             this.user_acts.get("Confirm").add(confirm);
                         }
                         // for frame_u
-                        event_clues += "#"+"unknown)";
+                        event_clues += "#unknown)";
                     }
 
                     // set frame_u for EventType module
@@ -137,6 +136,7 @@ public class Semafor implements Module
                     system.addContent(new Assignment("_etcsvlist",eventTypes));
 
                     // DEBUG
+                    System.out.println("=======\nEntities Extracted");
                     System.out.println(ideas);
                     System.out.println(actions);
                     System.out.println(event_clues);

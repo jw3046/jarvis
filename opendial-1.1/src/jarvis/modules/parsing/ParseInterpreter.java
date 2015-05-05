@@ -243,6 +243,7 @@ public class ParseInterpreter
         // Uses simple string matching
         ArrayList<String> yes = new ArrayList<String>();
         yes.add("yes");
+        yes.add("yup");
         yes.add("correct");
         yes.add("exactly");
         yes.add("sure");
