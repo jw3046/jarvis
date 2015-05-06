@@ -104,6 +104,8 @@ public class SlotMapper {
 			returnMap.put("Event",
                                 Character.toUpperCase(value.charAt(0))+value.substring(1));
             ET = value;
+            returnMap.put("ET",
+                                Character.toUpperCase(value.charAt(0))+value.substring(1));
 			System.out.println("-------- 107 ");
 
 		}
@@ -718,6 +720,7 @@ public class SlotMapper {
 				value = valueList.get(0);
 				if (value.equals("ConfirmY")){
 					returnMap.put("Event", "ConfirmY");
+					System.out.println("------------ 729");
 					return returnMap;
 
 				}
@@ -744,6 +747,8 @@ public class SlotMapper {
 					returnMap.put("DressCode", "NoDressCode");
 					returnMap.put("Event", EventType);
 					returnMap.put("a_m", "CheckNoDressCode");
+					System.out.println("------------ 750");
+
 					return returnMap;
 
 				}
@@ -763,6 +768,8 @@ public class SlotMapper {
 				value = valueList.get(0);
 				if (value.equals("ConfirmN")){
 					returnMap.put("Event", "ConfirmN");
+					System.out.println("------------ 769");
+
 					return returnMap;
 
 				}
