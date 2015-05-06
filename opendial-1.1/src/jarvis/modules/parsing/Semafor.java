@@ -187,12 +187,12 @@ public class Semafor implements Module
             HashMap<String,String> newVars =
                 SlotMapper.map(this.user_acts,ET,CurrStep,system_act);
 
-            /*
+            
             for (String key: newVars.keySet()){
                 System.out.println(key + ":" + newVars.get(key));
                 system.addContent(new Assignment(key, newVars.get(key)));
             }
-            */
+        
 
 
             //DEBUG

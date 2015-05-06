@@ -44,7 +44,7 @@ public class SlotMapper {
 		
 		//Quit
 		if (a_u.containsKey("Confirm")) {
-                        valueList = a_u.get("Confirm");
+            valueList = a_u.get("Confirm");
 			value = valueList.get(0);
 			if (value.equals("Quit")){
 				returnMap.put("a_m", "Exit");
