@@ -253,6 +253,7 @@ public class ParseInterpreter
         no.add("nope");
         no.add("wrong");
         String quit = "quit";
+        String restart = "restart";
 
         for (String word: parseResult.getTokens()){
             if (yes.contains(word.toLowerCase())){
@@ -263,6 +264,9 @@ public class ParseInterpreter
             }
             if (quit.equals(word.toLowerCase())){
                 return "Quit";
+            }
+            if (restart.equals(word.toLowerCase())){
+                return "Restart";
             }
         }
         return "";
