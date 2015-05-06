@@ -67,21 +67,18 @@ public class SlotMapper {
 			valueList = a_u.get("Date");
 			value = valueList.get(0);
 			returnMap.put("Date", value);
-			System.out.println("-------- 70 ");
 
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("Person")){
 			valueList = a_u.get("Person");
 			value = valueList.get(0);
 			returnMap.put("Person", value);
-			System.out.println("-------- 77 ");
 
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("Place")){
 			valueList = a_u.get("Place");
 			value = valueList.get(0);
 			returnMap.put("Place", value);
-			System.out.println("-------- 84 ");
 
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("Type")){
@@ -89,7 +86,6 @@ public class SlotMapper {
 			value = valueList.get(0);
 			returnMap.put("Type",
             Character.toUpperCase(value.charAt(0))+value.substring(1));
-			System.out.println("-------- 92");
 
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("EventType")){
@@ -106,7 +102,6 @@ public class SlotMapper {
             ET = value;
             returnMap.put("ET",
                                 Character.toUpperCase(value.charAt(0))+value.substring(1));
-			System.out.println("-------- 107 ");
 
 		}
 		
@@ -720,7 +715,6 @@ public class SlotMapper {
 				value = valueList.get(0);
 				if (value.equals("ConfirmY")){
 					returnMap.put("Event", "ConfirmY");
-					System.out.println("------------ 729");
 					return returnMap;
 
 				}
@@ -729,25 +723,15 @@ public class SlotMapper {
 		}		
 		//NO 
 		if (a_u.containsKey("Confirm")) {
-			/*if (current_step.equals("Gift_Request")){
-				valueList = a_u.get("Confirm");
-				value = valueList.get(0);
-				if (value.equals("ConfirmN")){
-					returnMap.put("current_step", "Gift");
-					return returnMap;
 
-				}
-			}
-			else*/ if (current_step.equals("DressCode_Request")){
+			if (current_step.equals("DressCode_Request")){
+
 				valueList = a_u.get("Confirm");
 				value = valueList.get(0);
-				ArrayList<String> EventTypeList = new ArrayList<String> ();
-				String EventType = EventTypeList.get(0);
+				
 				if (value.equals("ConfirmN")){
 					returnMap.put("DressCode", "NoDressCode");
-					returnMap.put("Event", EventType);
 					returnMap.put("a_m", "CheckNoDressCode");
-					System.out.println("------------ 750");
 
 					return returnMap;
 
@@ -768,7 +752,6 @@ public class SlotMapper {
 				value = valueList.get(0);
 				if (value.equals("ConfirmN")){
 					returnMap.put("Event", "ConfirmN");
-					System.out.println("------------ 769");
 
 					return returnMap;
 
