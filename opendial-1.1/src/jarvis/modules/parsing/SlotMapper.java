@@ -67,22 +67,30 @@ public class SlotMapper {
 			valueList = a_u.get("Date");
 			value = valueList.get(0);
 			returnMap.put("Date", value);
+			System.out.println("-------- 70 ");
+
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("Person")){
 			valueList = a_u.get("Person");
 			value = valueList.get(0);
 			returnMap.put("Person", value);
+			System.out.println("-------- 77 ");
+
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("Place")){
 			valueList = a_u.get("Place");
 			value = valueList.get(0);
 			returnMap.put("Place", value);
+			System.out.println("-------- 84 ");
+
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("Type")){
 			valueList = a_u.get("Type");
 			value = valueList.get(0);
 			returnMap.put("Type",
-                                Character.toUpperCase(value.charAt(0))+value.substring(1));
+            Character.toUpperCase(value.charAt(0))+value.substring(1));
+			System.out.println("-------- 92");
+
 		}
 		if (ET.equals("NoEvent") && a_u.containsKey("EventType")){
 			valueList = a_u.get("EventType");
@@ -95,7 +103,9 @@ public class SlotMapper {
                                 Character.toUpperCase(value.charAt(0))+value.substring(1));
 			returnMap.put("Event",
                                 Character.toUpperCase(value.charAt(0))+value.substring(1));
-                        ET = value;
+            ET = value;
+			System.out.println("-------- 107 ");
+
 		}
 		
 		//BIRTHDAY EVENT 
@@ -105,6 +115,7 @@ public class SlotMapper {
 				value = valueList.get(0);
 				returnMap.put("Gift", value);
 				returnMap.put("a_m", "CheckGift");
+				System.out.println("-------- 118 ");
 				return returnMap;
 			}
 			else if (a_u.containsKey("Object") && current_step.equals("DressCode")){
