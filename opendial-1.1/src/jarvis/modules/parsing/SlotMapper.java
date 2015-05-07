@@ -32,6 +32,8 @@ public class SlotMapper {
 		return user_act;
 	}
 	
+
+
 	public static HashMap<String,String> map(HashMap<String,ArrayList<String>> user_act, String ET, String current_step, String system_act) {
 		
 		HashMap<String,String> returnMap = new HashMap<String,String>();
@@ -41,7 +43,29 @@ public class SlotMapper {
 		
 		HashMap<String, ArrayList<String>> a_u = removeNull(user_act);
 
+		System.out.println(ET + " -------- ");
 		
+		valueList = a_u.get("EventType");
+		value = valueList.get(0);
+
+		String[] possibleEvents = {"Birthday", "Anniversary", "Graduation", "Seminar", "Job", "Exams", "Party", "Chill", "Other"};
+		System.out.println(value);
+		System.out.println(possibleEvents[1].equalsIgnoreCase(value));
+
+		Integer isEvent = 0;
+
+        for (String event : possibleEvents) {
+	        if (event.equalsIgnoreCase(value)){
+	        	isEvent = 1;
+	        }
+	    }
+	    if (isEvent == 0 && ET.equals("NoEvent")) {
+	    	System.out.println("!!!!!!!!!!!!!!!!!!!!");
+			returnMap.put("Event", "null");
+        	return returnMap;
+	    }
+        
+
 		//Quit
 		if (a_u.containsKey("Confirm")) {
             valueList = a_u.get("Confirm");
@@ -88,6 +112,7 @@ public class SlotMapper {
             Character.toUpperCase(value.charAt(0))+value.substring(1));
 
 		}
+		
 		if (ET.equals("NoEvent") && a_u.containsKey("EventType")){
 			valueList = a_u.get("EventType");
 			value = valueList.get(0);
