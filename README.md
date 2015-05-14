@@ -1,5 +1,9 @@
 # jarvis
 
+USAGE (with ASR and TTS):
+./RUN_DEMO.sh
+or (without ASR and TTS):
+./DEMO.sh
 
 Our system uses SEMAFOR for frame-based parsing (NLU) and
 Opendial for NLU, DM and NLG.

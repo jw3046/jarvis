@@ -134,7 +134,7 @@ public class Semafor implements Module
                     String eventTypes = 
                         "anniversary;birthday;chill;graduation;job;party;seminar";
                     system.addContent(new Assignment("_etcsvlist",eventTypes));
-
+                    
                     // DEBUG
                     System.out.println("=======\nEntities Extracted");
                     System.out.println(ideas);

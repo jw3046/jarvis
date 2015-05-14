@@ -3,24 +3,25 @@ Edward Li
 el2724
 Spring 2015
 
+This package contains all the code responsible for parsing a user utterance.
 
-Module
+OpenDial Module
 Semafor.java
 
-Parsing
+SEMAFOR and TurboParser HTTP Request and Json Parsing
 APISemafor.java
-AnnotationSet.java
-ConllEntry.java
-FrameElement.java
-ParseFrame.java
 ParseResult.java
+ParseFrame.java
+AnnotationSet.java
+FrameElement.java
+Auxillary Data Structures for Parsing Results
+ConllParse.java
+ConllEntry.java
+UtteranceTheme.java
 
-Parse Interpretation
+Utterance Processing
+CalendarTimeUtil.java
 ParseInterpreter.java
-EventType.java
-SlotType.java
-UserAct.java
-TypeUA.java
-InformUA.java
-AcknowledgeUA.java
+SlotMapper.java
+
 
